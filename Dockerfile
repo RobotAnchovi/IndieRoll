@@ -3,11 +3,11 @@ FROM python:3.9.18-alpine3.18
 RUN apk update && apk add build-base postgresql-dev gcc python3-dev musl-dev
 
 
-ENV FLASK_APP=app
-ENV FLASK_ENV=production
-ENV DATABASE_URL=postgres://app_academy_projects_7wv5_user:c2V7Ujo7yPB9kmfhQI8sjdNlaOUU39KJ@dpg-cn80s4q1hbls73d85k5g-a.ohio-postgres.render.com/app_academy_projects_7wv5
-ENV SCHEMA=Indie_Roll
-ENV SECRET_KEY=a4ef0ddb6a3480b1aa854d6e846ddde6
+ARG FLASK_APP=app
+ARG FLASK_ENV=production
+ARG DATABASE_URL=postgres://app_academy_projects_7wv5_user:c2V7Ujo7yPB9kmfhQI8sjdNlaOUU39KJ@dpg-cn80s4q1hbls73d85k5g-a.ohio-postgres.render.com/app_academy_projects_7wv5
+ARG SCHEMA=Indie_Roll
+ARG SECRET_KEY=a4ef0ddb6a3480b1aa854d6e846ddde6
 
 WORKDIR /var/www
 
