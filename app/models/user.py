@@ -1,10 +1,11 @@
-from .db import db, environment, SCHEMA, add_prefix_for_prod
+from .db import db, environment, SCHEMA
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 
 class User(db.Model, UserMixin):
     __tablename__ = 'users'
 
+    # Conditionally apply schema for production environment
     if environment == "production":
         __table_args__ = {'schema': SCHEMA}
 
@@ -15,16 +16,20 @@ class User(db.Model, UserMixin):
 
     @property
     def password(self):
+        """Return the hashed password."""
         return self.hashed_password
 
     @password.setter
     def password(self, password):
+        """Generate and set the hashed password."""
         self.hashed_password = generate_password_hash(password)
 
     def check_password(self, password):
-        return check_password_hash(self.password, password)
+        """Check hashed password."""
+        return check_password_hash(self.hashed_password, password)
 
     def to_dict(self):
+        """Convert object properties to dictionary."""
         return {
             'id': self.id,
             'username': self.username,

@@ -19,7 +19,9 @@ RUN pip install psycopg2
 COPY . .
 
 RUN flask db downgrade base
+RUN flask seed undo
 RUN flask db migrate -m "Initial Migration"
 RUN flask db upgrade
 RUN flask seed all
+
 CMD gunicorn app:app
