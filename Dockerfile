@@ -6,6 +6,9 @@ WORKDIR /var/www
 
 COPY requirements.txt .
 
+RUN python -m venv venv
+ENV PATH="/var/www/venv/bin:$PATH"
+
 RUN pip install --no-cache-dir -r requirements.txt
 RUN pip install --no-cache-dir psycopg2
 
@@ -18,8 +21,7 @@ RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 # Set permissions if needed
 # RUN chown -R youruser:yourgroup /var/www
 
-# Expose any necessary ports
-EXPOSE 5000
+
 
 # Use CMD to start your application
 CMD ["docker-entrypoint.sh"]
