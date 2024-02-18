@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify, request, session
+from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user, login_user, logout_user
 from app.models import User, db
 from werkzeug.security import check_password_hash
