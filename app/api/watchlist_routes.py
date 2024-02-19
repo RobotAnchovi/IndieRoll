@@ -17,7 +17,7 @@ def add_to_watchlist():
     if not video:
         return jsonify({"error": "Video not found"}), 404
 
-    # Check if the video is already in the watchlist
+
     existing_watchlist_item = Watchlist.query.filter_by(user_id=user_id, video_id=video_id).first()
     if existing_watchlist_item:
         return jsonify({"error": "Video already in watchlist"}), 409
