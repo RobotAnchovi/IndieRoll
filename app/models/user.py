@@ -3,11 +3,12 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 from sqlalchemy.orm import relationship
 
+
 class User(db.Model, UserMixin):
-    __tablename__ = 'users'
+    __tablename__ = "users"
 
     if environment == "production":
-        __table_args__ = {'schema': SCHEMA}
+        __table_args__ = {"schema": SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(40), nullable=False, unique=True)
@@ -17,11 +18,9 @@ class User(db.Model, UserMixin):
     is_creator = db.Column(db.Boolean, default=False)
     user_intro = db.Column(db.Text)
 
-
-
     @property
     def password(self):
-        raise AttributeError('password is not a readable attribute')
+        raise AttributeError("password is not a readable attribute")
 
     @password.setter
     def password(self, password):
@@ -32,10 +31,10 @@ class User(db.Model, UserMixin):
 
     def to_dict(self):
         return {
-            'id': self.id,
-            'username': self.username,
-            'email': self.email,
-            'name': self.name,
-            'is_creator': self.is_creator,
-            'user_intro': self.user_intro
+            "id": self.id,
+            "username": self.username,
+            "email": self.email,
+            "name": self.name,
+            "is_creator": self.is_creator,
+            "user_intro": self.user_intro,
         }
