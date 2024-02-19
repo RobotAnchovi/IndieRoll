@@ -1,5 +1,5 @@
 from flask import Blueprint, request, jsonify
-from flask_login import login_required, current_user
+from flask_login import login_required, current_user, logout_user
 from app.models import db, Watchlist, Video
 from sqlalchemy.exc import IntegrityError
 

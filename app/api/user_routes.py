@@ -114,3 +114,24 @@ def get_profile():
 
     user_dict = current_user.to_dict() if current_user.is_authenticated else {}
     return jsonify(user_dict), 200
+
+@user_routes.route('/profile', methods=['DELETE'])
+@login_required
+def delete_profile():
+    """
+    Allows users to delete their account.
+    """
+    user_id = current_user.id
+    user = User.query.get(user_id)
+
+    if user:
+        db.session.delete(user)
+        try:
+            db.session.commit()
+            logout_user()
+            return jsonify({"message": "Account successfully deleted"}), 204
+        except Exception as e:
+            db.session.rollback()
+            return jsonify({"errors": str(e)}), 500
+    else:
+        return jsonify({"errors": "User not found"}), 404

@@ -1,6 +1,7 @@
 from .db import db, environment, SCHEMA
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
+from sqlalchemy.orm import relationship
 
 class User(db.Model, UserMixin):
     __tablename__ = 'users'
@@ -15,6 +16,8 @@ class User(db.Model, UserMixin):
     name = db.Column(db.String(255), nullable=True)
     is_creator = db.Column(db.Boolean, default=False)
     user_intro = db.Column(db.Text)
+
+    watchlist_items = relationship('Watchlist', backref='user', cascade='all, delete-orphan')
 
     @property
     def password(self):

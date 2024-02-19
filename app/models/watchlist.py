@@ -9,8 +9,12 @@ class Watchlist(db.Model):
     video_id = db.Column(db.Integer, ForeignKey('videos.id'), nullable=False)
 
 
-    user = db.relationship('User', backref=db.backref('watchlisted_videos', lazy=True))
-    video = db.relationship('Video', backref=db.backref('watchlisted_by_users', lazy=True))
+
+    user = db.relationship('User', backref=db.backref('watchlist_items', lazy=True))
+    video = db.relationship('Video', backref='watchlisted_by_users', lazy=True)
+
+
+
 
     def to_dict(self):
         return {
