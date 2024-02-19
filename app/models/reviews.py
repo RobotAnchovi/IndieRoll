@@ -1,4 +1,5 @@
 from .db import db, environment, SCHEMA
+from sqlalchemy.schema import ForeignKey
 
 class Review(db.Model):
     __tablename__ = 'reviews'
@@ -7,7 +8,7 @@ class Review(db.Model):
         __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
-    movie_id = db.Column(db.Integer, db.ForeignKey('movies.id'), nullable=False)
+    movie_id = db.Column(db.Integer, db.ForeignKey('videos.id'), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     rating = db.Column(db.Integer, nullable=False)
     review_text = db.Column(db.Text, nullable=True)
