@@ -14,8 +14,8 @@ class Review(db.Model):
 
 
     user = db.relationship('User', backref=db.backref('reviews', lazy=True))
-
     video = db.relationship('Video', backref=db.backref('reviews', lazy=True))
+
 
     def to_dict(self):
         return {
