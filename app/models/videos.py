@@ -11,7 +11,7 @@ class Video(db.Model):
     description = db.Column(db.Text, nullable=False)
     genre = db.Column(db.String(50), nullable=False)
     thumbnail_url = db.Column(db.String(255), nullable=False)
-    video_url = db.Column(db.String(255), nullable=False)  # Assuming video_file refers to a URL
+    video_url = db.Column(db.String(255), nullable=False)
 
     def to_dict(self):
         return {
