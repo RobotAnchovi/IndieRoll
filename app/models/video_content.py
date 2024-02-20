@@ -17,3 +17,14 @@ class VideoContent(db.Model):
     video_file = db.Column(db.String(50), nullable=False)
     thumbnail_url = db.Column(db.String(50), nullable=False)
     # rating to be talked about more? to compute average rating
+    reviews = db.relationship('Review', backref='video', lazy=True)
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'title': self.title,
+            'description': self.description,
+            'genre': self.genre,
+            'thumbnail_url': self.thumbnail_url,
+            'video_url': self.video_url
+        }

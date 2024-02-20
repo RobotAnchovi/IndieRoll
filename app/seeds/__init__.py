@@ -1,6 +1,8 @@
 from flask.cli import AppGroup
 from .users import seed_users, undo_users
+from .videos import seed_videos, undo_videos
 from .genres import seed_genres, undo_genres
+
 from app.models.db import db, environment, SCHEMA
 
 # Creates a seed group to hold our commands
@@ -17,8 +19,10 @@ def seed():
         # the schema name (see comment in users.py undo_users function).
         # Make sure to add all your other model's undo functions below
         undo_users()
+        undo_videos()
         undo_genres()  # Add undo_genres before seeding in production
     seed_users()
+    seed_videos()
     seed_genres()
     # Add other seed functions here
 
@@ -27,5 +31,6 @@ def seed():
 @seed_commands.command('undo')
 def undo():
     undo_users()
+    undo_videos()
     undo_genres()
     # Add other undo functions here
