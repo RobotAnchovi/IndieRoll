@@ -14,6 +14,10 @@ def create_review():
     """
     data = request.get_json()
 
+    #Error handling
+    if not data or 'video_id' not in data or 'rating' not in data:
+        return jsonify({"message": "Missing data for required fields"}), 400
+
     new_review = Review(
         user_id=current_user.id,
         video_id=data['video_id'],
@@ -46,6 +50,15 @@ def update_review(review_id):
     """
     review = Review.query.get(review_id)
 
+    #Error handling
+    if not review:
+        return jsonify({"message": "Review not found"}), 404
+    if review.user_id != current_user.id:
+        return jsonify({"message": "Unauthorized"}), 403
+    data = request.get_json()
+    if not data:
+        return jsonify({"message": "No update data provided"}), 400
+
     if review and review.user_id == current_user.id:
         data = request.get_json()
         review.rating = data.get('rating', review.rating)
@@ -64,6 +77,12 @@ def delete_review(review_id):
     Allows users to delete their review.
     """
     review = Review.query.get(review_id)
+
+    #Error Handling
+    if not review:
+        return jsonify({"message": "Review not found"}), 404
+    if review.user_id != current_user.id:
+        return jsonify({"message": "Unauthorized"}), 403
 
     if review and review.user_id == current_user.id:
         db.session.delete(review)
