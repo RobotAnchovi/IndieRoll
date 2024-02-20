@@ -1,0 +1,83 @@
+.signup-form-modal {
+    background-color: #fff;
+    padding: 20px;
+    width: 300px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    position: relative;
+  }
+
+  .signup-form-modal h1 {
+    font-size: 1.5em;
+    margin-bottom: 20px;
+  }
+
+  .signup-form {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .signup-form label {
+    font-size: 0.9em;
+    margin-bottom: 5px;
+  }
+
+  .signup-form input[type="text"],
+  .signup-form input[type="password"],
+  .signup-form input[type="email"] {
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+
+  .signup-form input[type="checkbox"] {
+    margin-right: 10px;
+  }
+
+  .signup-form .signup-button {
+    background-color: #000;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .signup-form .signup-button:hover {
+    background-color: #333;
+  }
+
+  .signup-form .error {
+    color: #d9534f;
+    margin-top: -10px;
+    margin-bottom: 10px;
+    font-size: 0.8em;
+  }
+
+  .signup-form-modal .close-modal-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-size: 1.2em;
+  }
+
+  .signup-form-modal .login-link {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 0.9em;
+  }
+
+  .signup-form-modal .login-link a {
+    color: #0066ee;
+    cursor: pointer;
+    text-decoration: none;
+  }
+
+  .signup-form-modal .login-link a:hover {
+    text-decoration: underline;
+  }
