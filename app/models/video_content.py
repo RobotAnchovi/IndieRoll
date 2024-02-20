@@ -12,8 +12,7 @@ class VideoContent(db.Model):
     description = db.Column(db.Text, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey(
         add_prefix_for_prod('users.id')), nullable=False)
-    genre_id = db.Column(db.Integer, db.ForeignKey(
-        add_prefix_for_prod('genres.id')), nullable=False)
+    genre = db.Column(db.String(50), nullable=False)
     video_file = db.Column(db.String(50), nullable=False)
     thumbnail_url = db.Column(db.String(50), nullable=False)
     # rating to be talked about more? to compute average rating

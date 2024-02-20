@@ -3,16 +3,20 @@ from flask_wtf.file import FileField, FileAllowed, FileRequired
 from wtforms import SelectField, StringField, SubmitField
 from wtforms.validators import DataRequired
 from app.api.AWS_helpers import ALLOWED_EXTENSIONS_IMAGE, ALLOWED_EXTENSIONS_VIDEO
-from app.models import Genre
+# from app.models import Genre
 
-def genre_choices():
-    genres = Genre.query.all()
-    return [(genre.id, genre.genre) for genre in genres]
+GENRE_CHOICES = [
+        ('Action', 'Action'),
+        ('Comedy', 'Comedy'),
+        ('Drama', 'Drama'),
+        ('Fantasy', 'Fantasy'),
+        ('Horror', 'Horror'),
+    ]
 
 class VideoForm(FlaskForm):
     title = StringField('Title', validators=[DataRequired()])
     description = StringField('Description', validators=[DataRequired()])
-    genre = SelectField('Genre', coerce=int, choices=genre_choices(), validators=[DataRequired()])
+    genre = SelectField('Genre', choices=GENRE_CHOICES, validators=[DataRequired()])
     thumbnail = FileField(
         'Thumbnail Image',
         validators=[

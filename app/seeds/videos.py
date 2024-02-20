@@ -6,7 +6,7 @@ def seed_videos():
         VideoContent(
         title="Bob Marley: One Love",
         description="This is an example video.",
-        genre_id= 3,
+        genre= "Drama",
         thumbnail_url="https://indieroll-bucket.s3.us-east-2.amazonaws.com/bob-marley-thumbnail.jpeg",
         video_url="https://indieroll-bucket.s3.us-east-2.amazonaws.com/bob+marley.mp4",
         user_id=1
@@ -15,7 +15,7 @@ def seed_videos():
         VideoContent(
         title="Godzilla and Kong",
         description="This is another example video.",
-        genre_id= 1,
+        genre= "Action",
         thumbnail_url="https://indieroll-bucket.s3.us-east-2.amazonaws.com/godzilla-kong-thumbnail.jpeg",
         video_url="https://indieroll-bucket.s3.us-east-2.amazonaws.com/godzilla+and+kong.mp4",
         user_id=2
@@ -24,7 +24,7 @@ def seed_videos():
         VideoContent(
         title="Moana",
         description="This is another example video.",
-        genre_id= 4,
+        genre= "Fantasy",
         thumbnail_url="https://indieroll-bucket.s3.us-east-2.amazonaws.com/moana-thumbnail.jpeg",
         video_url="https://indieroll-bucket.s3.us-east-2.amazonaws.com/moana.mp4",
         user_id=3
@@ -33,7 +33,7 @@ def seed_videos():
         VideoContent(
         title="Quiet Place",
         description="This is another example video.",
-        genre_id= 5,
+        genre= "Horror",
         thumbnail_url="https://indieroll-bucket.s3.us-east-2.amazonaws.com/quiet-place-thumbnail.jpeg",
         video_url="https://indieroll-bucket.s3.us-east-2.amazonaws.com/quiet+place.mp4",
         user_id=4
@@ -42,7 +42,7 @@ def seed_videos():
         VideoContent(
         title="Spaceman",
         description="This is another example video.",
-        genre_id= 2,
+        genre= "Comedy" ,
         thumbnail_url="https://indieroll-bucket.s3.us-east-2.amazonaws.com/spaceman-thumbnail.jpeg",
         video_url="https://indieroll-bucket.s3.us-east-2.amazonaws.com/spaceman.mp4",
         user_id=5

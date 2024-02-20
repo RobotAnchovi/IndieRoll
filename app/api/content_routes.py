@@ -36,7 +36,7 @@ def add_content():
         new_video = VideoContent(
             title=form.title.data,
             description=form.description.data,
-            genre_id=form.genre.data,
+            genre=form.genre.data,
             thumbnail_url=thumbnail_url["url"],
             video_url=video_url["url"],
             user_id=current_user.id,
@@ -128,7 +128,7 @@ def update_content(video_id):
 
         video.title = form.title.data if form.title.data else video.title
         video.description = form.description.data if form.description.data else video.description
-        video.genre_id = form.genre.data if form.genre.data else video.genre_id
+        video.genre = form.genre.data if form.genre.data else video.genre
 
         try:
             db.session.commit()

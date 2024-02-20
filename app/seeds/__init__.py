@@ -1,7 +1,8 @@
 from flask.cli import AppGroup
 from .users import seed_users, undo_users
 from .videos import seed_videos, undo_videos
-from .genres import seed_genres, undo_genres
+# from .genres import seed_genres, undo_genres
+from .reviews import seed_reviews, undo_reviews
 
 from app.models.db import db, environment, SCHEMA
 
@@ -22,10 +23,10 @@ def seed():
         undo_reviews()
         undo_users()
         undo_videos()
-        undo_genres()  # Add undo_genres before seeding in production
+        # undo_genres()
     seed_users()
     seed_videos()
-    seed_genres()
+    # seed_genres()
     seed_reviews()
     # Add other seed functions here
 
@@ -36,5 +37,5 @@ def undo():
     undo_reviews()
     undo_users()
     undo_videos()
-    undo_genres()
+    # undo_genres()
     # Add other undo functions here
