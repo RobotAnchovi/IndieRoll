@@ -3,8 +3,7 @@ from flask_login import login_required, current_user
 from app.models import db, VideoContent
 from sqlalchemy.exc import IntegrityError
 from .AWS_helpers import upload_file_to_s3, remove_file_from_s3, get_unique_filename
-from forms.AWS_media_form import VideoForm
-
+from app.forms import VideoForm
 content_routes = Blueprint("content", __name__)
 
 
