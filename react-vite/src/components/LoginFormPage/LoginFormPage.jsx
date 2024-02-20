@@ -32,34 +32,37 @@ function LoginFormPage() {
   };
 
   return (
-    <>
+    <div className="login-form-container">
       <h1>Log In</h1>
       {errors.length > 0 &&
         errors.map((message) => <p key={message}>{message}</p>)}
-      <form onSubmit={handleSubmit}>
-        <label>
-          Email
+      <form onSubmit={handleSubmit} className="login-form">
+        <div className="input-container">
           <input
             type="text"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            placeholder="Email"
             required
           />
-        </label>
-        {errors.email && <p>{errors.email}</p>}
-        <label>
-          Password
+          {errors.email && <p className="error">{errors.email}</p>}
+        </div>
+        <div className="input-container">
           <input
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            placeholder="Password"
             required
           />
-        </label>
-        {errors.password && <p>{errors.password}</p>}
-        <button type="submit">Log In</button>
+          {errors.password && <p className="error">{errors.password}</p>}
+        </div>
+        <button type="submit" className="login-button">Log In</button>
       </form>
-    </>
+      <div className="sign-up-link">
+        New to IndieRoll? <a href="/signup">Sign up now.</a>
+      </div>
+    </div>
   );
 }
 
