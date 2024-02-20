@@ -35,13 +35,14 @@ body {
 }
 
 .landing-footer {
-  background-color: rgb(18, 18, 18);
+  background-color: #fae80b;
   width: 100%;
-  color: white;
+  color: rgb(0, 0, 0);
   font-size: 20px;
   text-align: center;
   padding: 70px;
   font-family: Arial, Helvetica, sans-serif;
   position: relative;
   bottom: -160px;
+  font-weight: bolder;
 }

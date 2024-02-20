@@ -5,7 +5,7 @@ import "./Navigation.css";
 function Navigation() {
   return (
     <nav className="navigation">
-      <div className="logo">Logo</div>
+      <img className="logo" src="/indieroll-01.png" />
       <ul className="nav-links">
         <li>
           <NavLink to="/" exact activeClassName="active">
@@ -16,12 +16,12 @@ function Navigation() {
       </ul>
       <ul className="nav-buttons">
         <li>
-          <NavLink to="/login" activeClassName="active">
+          <NavLink className="log-in" to="/login" activeClassName="active">
             Login
           </NavLink>
         </li>
         <li>
-          <NavLink to="/signup" activeClassName="active">
+          <NavLink className="sign-up" to="/signup" activeClassName="active">
             Sign Up
           </NavLink>
         </li>
