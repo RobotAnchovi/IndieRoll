@@ -1,8 +1,8 @@
-"""generating migrations
+"""SCREAMING AT LOGAN
 
-Revision ID: 88839639b5f1
+Revision ID: ff9a50fb4669
 Revises: 
-Create Date: 2024-02-20 18:28:06.307086
+Create Date: 2024-02-20 18:38:20.159748
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '88839639b5f1'
+revision = 'ff9a50fb4669'
 down_revision = None
 branch_labels = None
 depends_on = None
