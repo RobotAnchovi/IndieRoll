@@ -1,3 +1,22 @@
-.profile-dropdown {
-  position: absolute;
+.navigation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: #000; /* Change as per your design */
+  color: #fff;
+}
+
+.nav-links li {
+  display: inline;
+  margin-right: 1rem;
+}
+
+.nav-links li .active {
+  border-bottom: 2px solid #fff; /* Active link underline */
+}
+
+.nav-buttons li {
+  display: inline;
+  margin-left: 1rem;
 }

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate, useNavigate } from "react-router-dom";
 import { thunkSignup } from "../../redux/session";
+import "./SignupForm.css"; // Make sure you have this CSS file
 
 function SignupFormPage() {
   const dispatch = useDispatch();
@@ -19,10 +20,11 @@ function SignupFormPage() {
     e.preventDefault();
 
     if (password !== confirmPassword) {
-      return setErrors({
-        confirmPassword:
-          "Confirm Password field must be the same as the Password field",
+      setErrors({
+        ...errors,
+        confirmPassword: "Confirm Password field must be the same as the Password field",
       });
+      return;
     }
 
     const serverResponse = await dispatch(
@@ -41,53 +43,56 @@ function SignupFormPage() {
   };
 
   return (
-    <>
+    <div className="signup-form-page">
       <h1>Sign Up</h1>
-      {errors.server && <p>{errors.server}</p>}
-      <form onSubmit={handleSubmit}>
-        <label>
-          Email
+      <form onSubmit={handleSubmit} className="signup-form">
+        <div className="form-field">
+          <label>Email</label>
           <input
             type="text"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
           />
-        </label>
-        {errors.email && <p>{errors.email}</p>}
-        <label>
-          Username
+          {errors.email && <p className="error">{errors.email}</p>}
+        </div>
+
+        <div className="form-field">
+          <label>Username</label>
           <input
             type="text"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             required
           />
-        </label>
-        {errors.username && <p>{errors.username}</p>}
-        <label>
-          Password
+          {errors.username && <p className="error">{errors.username}</p>}
+        </div>
+
+        <div className="form-field">
+          <label>Password</label>
           <input
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
           />
-        </label>
-        {errors.password && <p>{errors.password}</p>}
-        <label>
-          Confirm Password
+          {errors.password && <p className="error">{errors.password}</p>}
+        </div>
+
+        <div className="form-field">
+          <label>Confirm Password</label>
           <input
             type="password"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
             required
           />
-        </label>
-        {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
-        <button type="submit">Sign Up</button>
+          {errors.confirmPassword && <p className="error">{errors.confirmPassword}</p>}
+        </div>
+
+        <button type="submit" className="signup-button">Sign Up</button>
       </form>
-    </>
+    </div>
   );
 }
 

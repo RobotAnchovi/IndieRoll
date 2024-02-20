@@ -1,0 +1,39 @@
+.login-form-container {
+    max-width: 400px;
+    margin: auto;
+    padding: 2rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+  }
+
+  .login-form h1 {
+    text-align: center;
+  }
+
+  .input-container {
+    margin-bottom: 1rem;
+  }
+
+  .input-container input {
+    width: 100%;
+    padding: 0.5rem;
+    margin-top: 0.25rem;
+  }
+
+  .login-button {
+    width: 100%;
+    padding: 0.5rem;
+    background-color: #000;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+  }
+
+  .error {
+    color: red;
+  }
+
+  .sign-up-link {
+    text-align: center;
+    margin-top: 1rem;
+  }
