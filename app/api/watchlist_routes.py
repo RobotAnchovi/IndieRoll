@@ -1,6 +1,6 @@
 from flask import Blueprint, request, jsonify
 from flask_login import login_required, current_user, logout_user
-from app.models import db, Watchlist, Video
+from app.models import db, Watchlist, VideoContent
 from sqlalchemy.exc import IntegrityError
 
 watchlist_routes = Blueprint('watchlist', __name__)
@@ -13,7 +13,7 @@ def add_to_watchlist():
     video_id = data.get('video_id')
 
 
-    video = Video.query.get(video_id)
+    video = VideoContent.query.get(video_id)
     if not video:
         return jsonify({"error": "Video not found"}), 404
 
@@ -38,7 +38,7 @@ def view_watchlist():
     watchlist_items = Watchlist.query.filter_by(user_id=current_user.id).all()
     watchlist_videos = []
     for item in watchlist_items:
-        video = Video.query.get(item.video_id)
+        video = VideoContent.query.get(item.video_id)
         if video:
             watchlist_videos.append(video.to_dict())
 
