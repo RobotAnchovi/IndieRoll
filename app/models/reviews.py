@@ -1,9 +1,12 @@
-from .db import db
+from .db import db, environment, SCHEMA
 from sqlalchemy.schema import ForeignKey
 
 
 class Review(db.Model):
     __tablename__ = 'reviews'
+
+    if environment == "production":
+        __table_args__ = {"schema": SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
     video_id = db.Column(db.Integer, db.ForeignKey('video_content.id'), nullable=True)
