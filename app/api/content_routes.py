@@ -7,10 +7,17 @@ from app.forms import VideoForm
 content_routes = Blueprint("content", __name__)
 
 
-@content_routes.route("", methods=["GET"])
-def get_content():
-    videos = VideoContent.query.all()
-    return jsonify([video.to_dict() for video in videos]), 200
+@content_routes.route("", defaults={'contentId': None}, methods=["GET"])
+@content_routes.route("/<int:contentId>", methods=["GET"])
+def get_content(contentId):
+    if contentId is None:
+        videos = VideoContent.query.all()
+        return jsonify([video.to_dict() for video in videos]), 200
+    else:
+        video = VideoContent.query.get(contentId)
+        if video is None:
+            return jsonify({"error": "Content not found"}), 404
+        return jsonify(video.to_dict()), 200
 
 
 @content_routes.route("", methods=["POST"])
