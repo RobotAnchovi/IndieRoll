@@ -5,18 +5,9 @@ DB_URL="postgres://app_academy_projects_7wv5_user:c2V7Ujo7yPB9kmfhQI8sjdNlaOUU39
 # Example using PostgreSQL as an example
 echo "Waiting for PostgreSQL to start..."
 # Wait for a few seconds or implement a loop checking db connection
-echo "Dropping alembic_version table..."
-psql $DB_URL -c "DROP TABLE IF EXISTS alembic_version;"
 
-
-echo "Removing existing migrations directory and SQLite database..."
-rm -rf /var/www/migrations /var/www/instance/dev.db
-
-echo "Initializing new migrations..."
-flask db init
-
-echo "Generating initial migration..."
-flask db migrate -m "initial migration"
+echo "Generating migrations"
+flask db migrate
 
 echo "Marking the current database version..."
 flask db stamp head
