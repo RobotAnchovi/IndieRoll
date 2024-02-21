@@ -4,11 +4,15 @@ FROM python:3.9.18-alpine3.18
 RUN apk add --no-cache postgresql-dev gcc python3-dev musl-dev
 
 # Set environment variables
-ENV FLASK_APP=app.py \
-    FLASK_ENV=production \
-    DATABASE_URL=your_database_url \
-    SCHEMA=your_schema_name \
-    SECRET_KEY=your_secret_key
+ENV FLASK_APP=app \
+    FLASK_ENV=production
+
+# Use arguments for sensitive information (pass these at build-time or use Docker secrets/runtime environment variables)
+ARG DATABASE_URL
+ARG SECRET_KEY
+
+ENV DATABASE_URL=${DATABASE_URL} \
+    SECRET_KEY=${SECRET_KEY}
 
 # Set work directory
 WORKDIR /var/www
@@ -29,4 +33,4 @@ RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 ENTRYPOINT ["docker-entrypoint.sh"]
 
 # Command to run the Flask application with Gunicorn
-CMD ["gunicorn", "app:app"]
+CMD ["gunicorn", "--config", "gunicorn.conf.py", "app:app"]

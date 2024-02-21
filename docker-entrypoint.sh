@@ -7,11 +7,12 @@ echo "Waiting for PostgreSQL to start..."
 # Wait for a few seconds or implement a loop checking db connection
 
 echo "Marking the current database version..."
-flask db stamp 8028be1f3ce8
+flask db stamp 8028be1f3ce8 -v
+
 
 # Run database migrations
 echo "Running database migrations..."
-flask db upgrade
+flask db upgrade -v
 
 # Seed the database if needed
 echo "Seeding the database..."
