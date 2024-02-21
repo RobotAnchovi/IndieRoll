@@ -1,8 +1,8 @@
-"""Generate migrations
+"""migrate
 
-Revision ID:
-Revises:
-Create Date: 2024-02-20 19:12:53.421905
+Revision ID: a0513585859d
+Revises: 
+Create Date: 2024-02-20 20:53:18.261773
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = ''
+revision = 'a0513585859d'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -30,16 +30,6 @@ def upgrade():
     sa.UniqueConstraint('email'),
     sa.UniqueConstraint('username')
     )
-    op.create_table('reviews',
-    sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('video_id', sa.Integer(), nullable=True),
-    sa.Column('user_id', sa.Integer(), nullable=False),
-    sa.Column('rating', sa.Integer(), nullable=False),
-    sa.Column('review_text', sa.Text(), nullable=True),
-    sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
-    sa.ForeignKeyConstraint(['video_id'], ['video_content.id'], ),
-    sa.PrimaryKeyConstraint('id')
-    )
     op.create_table('video_content',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('title', sa.String(length=50), nullable=False),
@@ -49,6 +39,16 @@ def upgrade():
     sa.Column('video_url', sa.String(length=50), nullable=False),
     sa.Column('thumbnail_url', sa.String(length=50), nullable=False),
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
+    sa.PrimaryKeyConstraint('id')
+    )
+    op.create_table('reviews',
+    sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('video_id', sa.Integer(), nullable=True),
+    sa.Column('user_id', sa.Integer(), nullable=False),
+    sa.Column('rating', sa.Integer(), nullable=False),
+    sa.Column('review_text', sa.Text(), nullable=True),
+    sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
+    sa.ForeignKeyConstraint(['video_id'], ['video_content.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('watchlist',
