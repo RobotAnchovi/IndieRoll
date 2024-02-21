@@ -16,7 +16,7 @@ ul.nav-buttons {
 }
 
 .nav-links li .active {
-  border-bottom: 2px solid #fff; /* Active link underline */
+  border-bottom: 2px solid #fff;
 }
 
 .nav-buttons li {
@@ -26,7 +26,6 @@ ul.nav-buttons {
 .logo {
   height: 10%;
   width: 10%;
-
   margin-left: 100px;
 }
 
@@ -62,7 +61,7 @@ a.log-in {
   border: none;
   cursor: pointer;
   font-size: 34px; /* Adjust the size of the icon */
-  color: #333; /* Icon color */
+  color: #fae80b; /* Icon color */
 }
 
 .profile-button:hover,
