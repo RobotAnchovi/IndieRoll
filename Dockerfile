@@ -1,7 +1,7 @@
 FROM python:3.9.18-alpine3.18
 
 # Install system dependencies
-RUN apk add --no-cache postgresql-dev gcc python3-dev musl-dev
+RUN apk add --no-cache postgresql-dev gcc python3-dev musl-dev postgresql-client
 
 # Set environment variables
 ENV FLASK_APP=app \
