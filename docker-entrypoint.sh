@@ -6,6 +6,9 @@
 echo "Waiting for PostgreSQL to start..."
 # Wait for a few seconds or implement a loop checking db connection
 
+echo "Marking the current database version..."
+flask db stamp head
+
 # Run database migrations
 echo "Running database migrations..."
 flask db upgrade
