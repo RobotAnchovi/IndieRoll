@@ -3,6 +3,7 @@ body {
   height: 100%;
   margin: 0; /* Removes default margin */
   padding: 0; /* Removes default padding */
+  background-image: url(../../../public/background.jpg);
 }
 
 /* Ensure this class is correctly named as 'body' if it's meant to be an element class,
@@ -29,6 +30,7 @@ body {
   text-align: center;
   font-size: larger;
   font-family: Arial, Helvetica, sans-serif;
+  color: white;
 }
 .landing-header {
   font-size: 60px;

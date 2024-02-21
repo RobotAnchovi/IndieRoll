@@ -1,13 +1,13 @@
 import { useState } from "react";
-import { useDispatch } from 'react-redux';
-import { thunkLogin } from '../../redux/session';
-import { useModal } from '../../context/Modal';
-import './LoginForm.css';
+import { useDispatch } from "react-redux";
+import { thunkLogin } from "../../redux/session";
+import { useModal } from "../../context/Modal";
+import "./LoginForm.css";
 
 function LoginFormModal() {
   const dispatch = useDispatch();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({});
   const { closeModal } = useModal();
 
@@ -25,7 +25,7 @@ function LoginFormModal() {
     <div className="login-form-modal">
       <h1>Log In</h1>
       <form onSubmit={handleSubmit} className="login-form">
-        <label>
+        <label className="login-email">
           Email
           <input
             type="text"
@@ -35,7 +35,7 @@ function LoginFormModal() {
           />
         </label>
         {errors.email && <p className="error">{errors.email}</p>}
-        <label>
+        <label className="login-password">
           Password
           <input
             type="password"
@@ -45,9 +45,13 @@ function LoginFormModal() {
           />
         </label>
         {errors.password && <p className="error">{errors.password}</p>}
-        <button type="submit" className="login-button">Log In</button>
+        <button type="submit" className="login-button">
+          Log In
+        </button>
       </form>
-      <button onClick={closeModal} className="close-modal-button">Close</button>
+      <button onClick={closeModal} className="close-modal-button">
+        Close
+      </button>
     </div>
   );
 }
