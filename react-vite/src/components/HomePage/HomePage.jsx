@@ -1,16 +1,16 @@
-import { useEffect, useState } from 'react';
-import { useSelector, } from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
+import MovieSection from './MovieSection'; // Import the MovieSection component
+import FeaturedMovie from './FeaturedMovie'; // Import the FeaturedMovie component
 import './Homepage.css';
 
-
 function Homepage() {
-  const [movies, setMovies] = useState({
-    recentlyAdded: [],
-    topRated: [],
+  const [content, setContent] = useState({
+    featured: null,
+    fatasy: [],
     action: [],
     comedy: [],
-    horror: [],
   });
 
   const isAuthenticated = useSelector(state => state.session.user);
@@ -20,9 +20,19 @@ function Homepage() {
       const response = await fetch('/api/content');
       if (response.ok) {
         const data = await response.json();
-        setContent(data);
+
+        // Here you would sort the data into the categories you need
+        // For simplicity, I'm just assigning them directly
+
+        setContent({
+          ...content,
+          featured: data[0],
+          fatasy: data.filter(movie => movie.genre === 'Fantasy'),
+          action: data.filter(movie => movie.genre === 'Action'),
+          comedy: data.filter(movie => movie.genre === 'Comedy'),
+        });
       } else {
-        // Error handling goes here :^)
+        // Error handling goes here
       }
     };
 
@@ -31,16 +41,17 @@ function Homepage() {
     }
   }, [isAuthenticated]);
 
+  // Redirect if not authenticated
   if (!isAuthenticated) {
-    return <Navigate to="/" replace />;
-  }
-
-  if (!isAuthenticated) {
-    return <Navigate to="/LandingPage" replace />;
+    return <Navigate to="/login" replace />;
   }
 
   return (
     <div className="homepage">
+      {content.featured && <FeaturedMovie movie={content.featured} />}
+      <MovieSection title="Fantasy" movies={content.fatasy} />
+      <MovieSection title="Action" movies={content.action} />
+      <MovieSection title="Comedy" movies={content.comedy} />
     </div>
   );
 }

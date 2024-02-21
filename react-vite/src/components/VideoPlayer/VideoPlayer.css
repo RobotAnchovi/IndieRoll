@@ -1,0 +1,6 @@
+/* VideoPlayer.css */
+.video-player {
+    width: 100vw; /* Full width of the viewport */
+    height: 100vh; /* Full height of the viewport */
+    background-color: black; /* Background color for the video player */
+  }
