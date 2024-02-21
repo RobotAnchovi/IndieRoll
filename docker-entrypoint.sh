@@ -6,9 +6,17 @@
 echo "Waiting for PostgreSQL to start..."
 # Wait for a few seconds or implement a loop checking db connection
 
-echo "Marking the current database version..."
-flask db stamp 8028be1f3ce8
+echo "Removing existing migrations directory and SQLite database..."
+rm -rf /var/www/migrations /var/www/instance/dev.db
 
+echo "Initializing new migrations..."
+flask db init
+
+echo "Generating initial migration..."
+flask db migrate -m "initial migration"
+
+echo "Marking the current database version..."
+flask db stamp head
 
 # Run database migrations
 echo "Running database migrations..."
