@@ -14,8 +14,8 @@ class Review(db.Model):
     rating = db.Column(db.Integer, nullable=False)
     review_text = db.Column(db.Text, nullable=True)
 
-    user = db.relationship('User', backref=db.backref('reviews', lazy=True))
-    video = db.relationship('VideoContent', backref=db.backref('reviews', lazy=True))
+    user_reviews = db.relationship('User', backref=db.backref('reviews', lazy=True))
+    video_content = db.relationship('VideoContent', backref=db.backref('reviews', lazy=True))
 
     def to_dict(self):
         return {
