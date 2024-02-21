@@ -4,7 +4,7 @@ FROM python:3.9.18-alpine3.18
 RUN apk add --no-cache postgresql-dev gcc python3-dev musl-dev
 
 # Set environment variables
-ENV FLASK_APP=app \
+ENV FLASK_APP=app.py \
     FLASK_ENV=production
 
 # Use arguments for sensitive information (pass these at build-time or use Docker secrets/runtime environment variables)
@@ -33,4 +33,4 @@ RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 ENTRYPOINT ["docker-entrypoint.sh"]
 
 # Command to run the Flask application with Gunicorn
-CMD ["gunicorn", "--config", "gunicorn.conf.py", "app:app"]
+CMD ["gunicorn", "app:app"]
