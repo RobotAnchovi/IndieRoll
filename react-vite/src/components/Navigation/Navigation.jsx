@@ -4,31 +4,34 @@ import ProfileButton from "./ProfileButton";
 import "./Navigation.css";
 
 function Navigation() {
-  const sessionUser = useSelector(state => state.session.user);
+  const sessionUser = useSelector((state) => state.session.user);
   const isAuthenticated = Boolean(sessionUser);
   return (
     <nav className="navigation">
-      <div className="logo">Logo</div>
+      <img className="logo" src="/indieroll-01.png" />
       <ul className="nav-links">
         <li>
           {isAuthenticated && (
-          <NavLink to="/content" exact activeClassName="active">
-            Home
-          </NavLink>
+            <NavLink to="/content" exact activeClassName="active">
+              Home
+            </NavLink>
           )}
         </li>
         {/* Add additional nav items here */}
       </ul>
       <ul className="nav-buttons">
-      {!isAuthenticated && (
+        {!isAuthenticated && (
           <>
             <li>
-              <NavLink to="/login" activeClassName="active">
+              <NavLink className="log-in" to="/login" activeClassName="active">
                 Login
               </NavLink>
             </li>
             <li>
-              <NavLink to="/signup" activeClassName="active">
+              <NavLink
+                className="sign-up"
+                to="/signup"
+                activeClassName="active">
                 Sign Up
               </NavLink>
             </li>
