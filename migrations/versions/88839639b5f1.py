@@ -30,6 +30,16 @@ def upgrade():
     sa.UniqueConstraint('email'),
     sa.UniqueConstraint('username')
     )
+    op.create_table('reviews',
+    sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('video_id', sa.Integer(), nullable=True),
+    sa.Column('user_id', sa.Integer(), nullable=False),
+    sa.Column('rating', sa.Integer(), nullable=False),
+    sa.Column('review_text', sa.Text(), nullable=True),
+    sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
+    sa.ForeignKeyConstraint(['video_id'], ['video_content.id'], ),
+    sa.PrimaryKeyConstraint('id')
+    )
     op.create_table('video_content',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('title', sa.String(length=50), nullable=False),
@@ -39,16 +49,6 @@ def upgrade():
     sa.Column('video_url', sa.String(length=50), nullable=False),
     sa.Column('thumbnail_url', sa.String(length=50), nullable=False),
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
-    sa.PrimaryKeyConstraint('id')
-    )
-    op.create_table('reviews',
-    sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('video_id', sa.Integer(), nullable=True),
-    sa.Column('user_id', sa.Integer(), nullable=False),
-    sa.Column('rating', sa.Integer(), nullable=False),
-    sa.Column('review_text', sa.Text(), nullable=True),
-    sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
-    sa.ForeignKeyConstraint(['video_id'], ['video_content.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('watchlist',
