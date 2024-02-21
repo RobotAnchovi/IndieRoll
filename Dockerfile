@@ -1,5 +1,7 @@
 FROM python:3.9.18-alpine3.18
 
+RUN apk add build-base
+
 # Install system dependencies
 RUN apk add --no-cache postgresql-dev gcc python3-dev musl-dev postgresql-client
 
