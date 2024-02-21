@@ -11,7 +11,7 @@ function SignupFormModal() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errors, setErrors] = useState({});
-  const { closeModal } = useModal();
+  const { openModal, closeModal } = useModal();
   const [isCreator, setIsCreator] = useState(false);
 
   const handleSubmit = async (e) => {
@@ -45,7 +45,43 @@ function SignupFormModal() {
       <h1>Sign Up</h1>
       {errors.server && <p className="error">{errors.server}</p>}
       <form onSubmit={handleSubmit} className="signup-form">
-        <label className="iscreator-label">
+        <div>
+          <label>Email</label>
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+        </div>
+        <div>
+          <label>Username</label>
+          <input
+            type="text"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            required
+          />
+        </div>
+        <div>
+          <label>Password</label>
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+        </div>
+        <div>
+          <label>Confirm Password</label>
+          <input
+            type="password"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+            required
+          />
+        </div>
+        <label>
           Are you a creator?
           <input
             className="is-creator"
