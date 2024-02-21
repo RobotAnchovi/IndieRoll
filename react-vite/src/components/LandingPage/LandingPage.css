@@ -4,18 +4,12 @@ body {
   margin: 0; /* Removes default margin */
   padding: 0; /* Removes default padding */
   background-image: url(../../../public/background.jpg);
+  background-size: cover;
 }
 
 /* Ensure this class is correctly named as 'body' if it's meant to be an element class,
-   but it seems like it might be intended to target the <body> element itself.
-   If so, the '.body' selector should be removed, and the styles applied directly to 'body' as done above. */
-.body {
-  height: 100%;
-}
-
-.root {
-  height: 100%;
-}
+but it seems like it might be intended to target the <body> element itself.
+If so, the '.body' selector should be removed, and the styles applied directly to 'body' as done above. */
 
 .landing-page {
   display: flex;
@@ -26,14 +20,47 @@ body {
   height: 100vh; /* Viewport height: makes the div take up the whole viewport height */
 }
 
+.root {
+  height: 100%;
+}
+
 .heading-box {
   text-align: center;
   font-size: larger;
   font-family: Arial, Helvetica, sans-serif;
   color: white;
+  margin: auto;
 }
 .landing-header {
   font-size: 60px;
+}
+
+.description {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+.features {
+  width: 100%;
+  height: fit-content;
+  background-color: rgba(0, 0, 0, 0.9);
+}
+.feature {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+.feature-pic {
+  width: 50%;
+}
+.description h2 {
+  margin-left: 50px;
+}
+
+.description p {
+  text-align: start;
+  margin-left: 50px;
 }
 
 .landing-footer {
@@ -42,7 +69,7 @@ body {
   color: rgb(0, 0, 0);
   font-size: 20px;
   text-align: center;
-  padding: 70px;
+  padding: 50px;
   font-family: Arial, Helvetica, sans-serif;
   position: relative;
   bottom: -160px;

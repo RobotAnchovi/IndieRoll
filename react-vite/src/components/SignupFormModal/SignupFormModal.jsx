@@ -45,21 +45,30 @@ function SignupFormModal() {
       <h1>Sign Up</h1>
       {errors.server && <p className="error">{errors.server}</p>}
       <form onSubmit={handleSubmit} className="signup-form">
-        {/* Include all your form fields here */}
-        {/* ... */}
-        <label>
+        <label className="iscreator-label">
           Are you a creator?
           <input
+            className="is-creator"
             type="checkbox"
             checked={isCreator}
             onChange={(e) => setIsCreator(e.target.checked)}
           />
         </label>
-        <button type="submit" className="signup-button">Sign Up</button>
+        <button type="submit" className="signup-button">
+          Sign Up
+        </button>
       </form>
-      <button onClick={closeModal} className="close-modal-button">Close</button>
+      <button onClick={closeModal} className="close-modal-button">
+        Close
+      </button>
       <div className="login-link">
-        Already have an account? <a onClick={() => {/* Handle opening login modal here */}}>Log in</a>
+        Already have an account?{" "}
+        <a
+          onClick={() => {
+            /* Handle opening login modal here */
+          }}>
+          Log in
+        </a>
       </div>
     </div>
   );
