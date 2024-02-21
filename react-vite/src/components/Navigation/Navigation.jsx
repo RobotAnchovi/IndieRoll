@@ -8,17 +8,9 @@ function Navigation() {
   const isAuthenticated = Boolean(sessionUser);
   return (
     <nav className="navigation">
+     <a href="/content" className="logo-link">
       <img className="logo" src="/indieroll-01.png" />
-      <ul className="nav-links">
-        <li>
-          {isAuthenticated && (
-            <NavLink to="/content" exact activeClassName="active">
-              Home
-            </NavLink>
-          )}
-        </li>
-        {/* Add additional nav items here */}
-      </ul>
+      </a>
       <ul className="nav-buttons">
         {!isAuthenticated && (
           <>
