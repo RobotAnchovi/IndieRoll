@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import MovieCard from '../MovieCard';
 import './MovieSection.css';
 
@@ -46,15 +46,32 @@ const MovieSection = ({ title, movies }) => {
   return (
     <section>
       <h2>{title}</h2>
-      <button onClick={handleGoToWebsiteClick} className="viewall">View All</button>
-      <div className="movie-section">
-        <button onClick={handlePrevClick} className="arrow left" disabled={offset === 0}>&lt;</button>
-        <div className="movie-container" style={{ transform: `translateX(-${offset}px)` }}>
+      <button onClick={handleGoToWebsiteClick} className='viewall'>
+        View All
+      </button>
+      <div className='movie-section'>
+        <button
+          onClick={handlePrevClick}
+          className='arrow left'
+          disabled={offset === 0}
+        >
+          &lt;
+        </button>
+        <div
+          className='movie-container'
+          style={{ transform: `translateX(-${offset}px)` }}
+        >
           {movies.map((movie) => (
             <MovieCard key={movie.id} movie={movie} />
           ))}
         </div>
-        <button onClick={handleNextClick} className="arrow right" disabled={isRightArrowDisabled}>&gt;</button>
+        <button
+          onClick={handleNextClick}
+          className='arrow right'
+          disabled={isRightArrowDisabled}
+        >
+          &gt;
+        </button>
       </div>
     </section>
   );
@@ -62,12 +79,10 @@ const MovieSection = ({ title, movies }) => {
 
 export default MovieSection;
 
-
 // --- My backup code ---
 
 // import MovieCard from './MovieCard';
 // import './MovieSection.css';
-
 
 // const MovieSection = ({ title, movies }) => {
 //   return (
@@ -81,5 +96,3 @@ export default MovieSection;
 //     </section>
 //   );
 // };
-
-
