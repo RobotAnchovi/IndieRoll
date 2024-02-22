@@ -1,0 +1,50 @@
+.featured-movie {
+    padding: 0px;
+}
+
+.background {
+    /* background-color:blue; */
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    align-items: center;
+    padding: 10px;
+    display: flex;
+    justify-content: right;
+    height: 60vh;
+    min-height: 450px;
+}
+
+.right-side {
+    padding: 10px;
+    flex-basis: 50%;
+}
+
+.title {
+    background-color:coral;
+}
+
+
+.description {
+    background-color:gold;
+}
+
+
+.info {
+    background-color:lightcoral;
+}
+
+
+.buttons {
+    background-color:magenta;
+}
+
+
+.button {
+    background-color:wheat;
+    padding: 10px;
+}
+
+.list-button {
+    border: 1px solid #555;
+}

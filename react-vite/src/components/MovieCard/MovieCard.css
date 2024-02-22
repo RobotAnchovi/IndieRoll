@@ -1,0 +1,54 @@
+
+
+.movie-card-container {
+  position: relative; /* Container to position the watchlist icon */
+}
+
+.movie-card-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+
+.movie-card {
+  width: 200px;
+  overflow: hidden;
+  position: relative; /* Position relative for the overlay */
+  border-radius: 5px;
+}
+
+.movie-thumbnail img {
+  width: 100%;
+  display: block;
+  border-radius: 5px;
+}
+
+.movie-title {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+  color: white;
+  padding: 10px;
+  box-sizing: border-box;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.watchlist-icon {
+  position: absolute;
+  top: 10px; /* Adjust as needed */
+  right: 10px; /* Adjust as needed */
+  background: none; /* Remove default button background */
+  border: none; /* Remove default button border */
+  cursor: pointer;
+  opacity: 0; /* Icon is initially invisible */
+  transition: opacity 0.3s ease;
+}
+
+.movie-card:hover .movie-title,
+.movie-card:hover .watchlist-icon {
+  opacity: 1; /* Show the title and icon on hover */
+}
+
+/* Add additional styles for the AddIcon if needed */
