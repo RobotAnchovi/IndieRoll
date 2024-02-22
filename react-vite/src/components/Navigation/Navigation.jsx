@@ -1,42 +1,54 @@
-import { NavLink } from "react-router-dom";
-import { useSelector } from "react-redux";
-import ProfileButton from "./ProfileButton";
+import { NavLink, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { thunkLogout } from "../../redux/session";
 import "./Navigation.css";
 
 function Navigation() {
-  const sessionUser = useSelector((state) => state.session.user);
-  const isAuthenticated = Boolean(sessionUser);
-  return (
-    <nav className="navigation">
-     <a href="/content" className="logo-link">
-      <img className="logo" src="/indieroll-01.png" />
-      </a>
-      <ul className="nav-buttons">
-        {!isAuthenticated && (
-          <>
-            <li>
-              <NavLink className="log-in" to="/login" activeClassName="active">
-                Login
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                className="sign-up"
-                to="/signup"
-                activeClassName="active">
-                Sign Up
-              </NavLink>
-            </li>
-          </>
-        )}
-        {isAuthenticated && (
-          <li>
-            <ProfileButton />
-          </li>
-        )}
-      </ul>
-    </nav>
-  );
-}
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const sessionUser = useSelector((state) => state.session.user);
+    const isAuthenticated = Boolean(sessionUser);
 
-export default Navigation;
+    const handleLogout = () => {
+      dispatch(thunkLogout());
+      navigate('/');
+    };
+
+    return (
+      <nav className="navigation">
+        <a href="/content" className="logo-link">
+          <img className="logo" src="/indieroll-01.png" alt="IndieRoll Logo" />
+        </a>
+        <ul className="nav-links">
+          <li>
+            <NavLink to="/content" activeClassName="active">Home</NavLink>
+          </li>
+          {isAuthenticated && (
+            <>
+              <li>
+                <NavLink to="/watchlist" activeClassName="active">Watchlist</NavLink>
+              </li>
+              <li>
+                <NavLink to="/profile" activeClassName="active">Profile</NavLink>
+              </li>
+              <li>
+                <button onClick={handleLogout} className="logout-button">Logout</button>
+              </li>
+            </>
+          )}
+          {!isAuthenticated && (
+            <>
+              <li>
+                <NavLink className="log-in" to="/login" activeClassName="active">Login</NavLink>
+              </li>
+              <li>
+                <NavLink className="sign-up" to="/signup" activeClassName="active">Sign Up</NavLink>
+              </li>
+            </>
+          )}
+        </ul>
+      </nav>
+    );
+  }
+
+  export default Navigation;

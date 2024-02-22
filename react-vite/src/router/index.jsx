@@ -6,6 +6,7 @@ import HomePage from "../components/HomePage";
 import UserProfilePage from "../components/UserProfilePage";
 import Layout from "./Layout";
 import SubmitFilmPage from "../components/SubmitFilmPage";
+import WatchlistPage from "../components/WatchlistPage";
 
 export const router = createBrowserRouter([
   {
@@ -35,6 +36,10 @@ export const router = createBrowserRouter([
         path: "signup",
         element: <SignupFormPage />,
       },
+      {
+        path: "watchlist",
+        element: <WatchlistPage />,
+      }
     ],
   },
 ]);
