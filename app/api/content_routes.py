@@ -4,10 +4,12 @@ from app.models import db, VideoContent
 from sqlalchemy.exc import IntegrityError
 from .AWS_helpers import upload_file_to_s3, remove_file_from_s3, get_unique_filename
 from app.forms import VideoForm
+
 content_routes = Blueprint("content", __name__)
 
 
-@content_routes.route("", defaults={'contentId': None}, methods=["GET"])
+# *====> FETCH <====
+@content_routes.route("", defaults={"contentId": None}, methods=["GET"])
 @content_routes.route("/<int:contentId>", methods=["GET"])
 def get_content(contentId):
     if contentId is None:
@@ -20,12 +22,10 @@ def get_content(contentId):
         return jsonify(video.to_dict()), 200
 
 
+# *====> CREATE <====
 @content_routes.route("", methods=["POST"])
 @login_required
 def add_content():
-
-    if not current_user.is_creator:
-        return jsonify({"error": "You must be a creator to add content"}), 403
     form = VideoForm()
     # form["csrf_token"].data = request.cookies["csrf_token"]
     if form.validate_on_submit():
@@ -58,14 +58,11 @@ def add_content():
             return jsonify({"error": "Could not add new content"}), 500
 
 
-
+# *====> UPDATE <====
 @content_routes.route("/<int:contentId>", methods=["PUT"])
 @login_required
-def update_content(video_id):
-    if not current_user.is_creator:
-        return jsonify({"error": "You must be a creator to update content"}), 403
-
-    video = VideoContent.query.get(video_id)
+def update_content(contentId):
+    video = VideoContent.query.get(contentId)
     if not video or video.user_id != current_user.id:
         return jsonify({"error": "Content not found or unauthorized"}), 404
 
@@ -88,7 +85,9 @@ def update_content(video_id):
             video.video_url = video_url["url"]
 
         video.title = form.title.data if form.title.data else video.title
-        video.description = form.description.data if form.description.data else video.description
+        video.description = (
+            form.description.data if form.description.data else video.description
+        )
         video.genre = form.genre.data if form.genre.data else video.genre
 
         try:
@@ -99,12 +98,11 @@ def update_content(video_id):
             return jsonify({"error": "Could not update content"}), 500
     return jsonify({"error": "Invalid form data"}), 400
 
-@content_routes.route("/<int:contentId>", methods=["DELETE"])
+
+# *====> DELETE <====
+@content_routes.route("/<int:video_id>", methods=["DELETE"])
 @login_required
 def delete_content(video_id):
-    if not current_user.is_creator:
-        return jsonify({"error": "You must be a creator to delete content"}), 403
-
     video = VideoContent.query.get(video_id)
     if not video or video.user_id != current_user.id:
         return jsonify({"error": "Content not found or unauthorized"}), 404
@@ -113,9 +111,23 @@ def delete_content(video_id):
     video_remove_result = remove_file_from_s3(video.video_url)
 
     if thumbnail_remove_result != True:
-        return jsonify({"error": f"Failed to delete thumbnail: {thumbnail_remove_result['errors']}"}), 500
+        return (
+            jsonify(
+                {
+                    "error": f"Failed to delete thumbnail: {thumbnail_remove_result['errors']}"
+                }
+            ),
+            500,
+        )
     if video_remove_result != True:
-        return jsonify({"error": f"Failed to delete video file: {video_remove_result['errors']}"}), 500
+        return (
+            jsonify(
+                {
+                    "error": f"Failed to delete video file: {video_remove_result['errors']}"
+                }
+            ),
+            500,
+        )
 
     try:
         db.session.delete(video)
