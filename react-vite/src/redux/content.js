@@ -1,6 +1,7 @@
 //*====> Action Types <====
 const ADD_CONTENT = 'content/addContent';
 const FETCH_CONTENT = 'content/fetchContent';
+const FETCH_USER_CONTENTS = 'content/fetchUserContent'
 const UPDATE_CONTENT = 'content/updateContent';
 const DELETE_CONTENT = 'content/deleteContent';
 
@@ -14,6 +15,12 @@ const fetchContentAction = (contents) => ({
   type: FETCH_CONTENT,
   payload: contents,
 });
+const fetchUserContentsAction = (contents) => ({
+  type: FETCH_USER_CONTENTS,
+  payload: contents,
+});
+
+
 
 const updateContentAction = (content) => ({
   type: UPDATE_CONTENT,
@@ -47,6 +54,17 @@ export const fetchVideoContent = () => async (dispatch) => {
   }
 };
 
+export const fetchUserContents = (userId) => async (dispatch) => {
+    const response = await fetch(`/api/content/user/${userId}`);
+
+    if (response.ok) {
+      const contents = await response.json();
+      dispatch(fetchUserContentsAction(contents));
+    } else {
+      throw response;
+    }
+};
+
 export const updateContent = (contentId, updateData) => async (dispatch) => {
   const response = await fetch(`/api/content/${contentId}`, {
     method: 'PUT',
@@ -77,6 +95,8 @@ const contentReducer = (state = { contents: [] }, action) => {
       return { ...state, contents: [...state.contents, action.payload] };
     case FETCH_CONTENT:
       return { ...state, contents: action.payload };
+      case FETCH_USER_CONTENTS:
+        return { ...state, contents: action.payload };
     case UPDATE_CONTENT:
       return {
         ...state,

@@ -5,7 +5,7 @@ import './Homepage.css';
 
 
 function Homepage() {
-  const [movies, setMovies] = useState({
+  const [ content, setContent ] = useState({
     recentlyAdded: [],
     topRated: [],
     action: [],
