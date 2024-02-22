@@ -1,5 +1,4 @@
 // In your component where you want to display the video
-import React from 'react';
 import VideoPlayer from '../VideoPlayer';
 
 const SomeComponent = () => {

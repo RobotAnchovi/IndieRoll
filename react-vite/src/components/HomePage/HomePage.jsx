@@ -1,45 +1,32 @@
-import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
-import MovieSection from './MovieSection'; // Import the MovieSection component
-import FeaturedMovie from './FeaturedMovie'; // Import the FeaturedMovie component
+import { fetchVideoContent } from '../../redux/content'; // Import the fetchVideoContent action
 import './Homepage.css';
+import MovieSection from '../MovieSection';
+import FeaturedMovie from '../FeaturedMovie';
 
 function Homepage() {
-  const [content, setContent] = useState({
-    featured: null,
-    fatasy: [],
-    action: [],
-    comedy: [],
-  });
 
+  const state = useSelector(state => state);
+  console.log("🚀 ~ Homepage ~ state:", state)
+
+  const dispatch = useDispatch();
   const isAuthenticated = useSelector(state => state.session.user);
+  const content = useSelector(state => state.content.contents);
+  console.log("🚀 ~ Homepage ~ content:", content)
+
 
   useEffect(() => {
-    const fetchContent = async () => {
-      const response = await fetch('/api/content');
-      if (response.ok) {
-        const data = await response.json();
-
-        // Here you would sort the data into the categories you need
-        // For simplicity, I'm just assigning them directly
-
-        setContent({
-          ...content,
-          featured: data[0],
-          fatasy: data.filter(movie => movie.genre === 'Fantasy'),
-          action: data.filter(movie => movie.genre === 'Action'),
-          comedy: data.filter(movie => movie.genre === 'Comedy'),
-        });
-      } else {
-        // Error handling goes here
-      }
-    };
-
     if (isAuthenticated) {
-      fetchContent();
+      dispatch(fetchVideoContent());
     }
-  }, [isAuthenticated]);
+  }, [dispatch, isAuthenticated]);
+
+  const featured = content[0];
+  const fantasyMovies = content.filter(movie => movie.genre === 'Fantasy');
+  const actionMovies = content.filter(movie => movie.genre === 'Action');
+  const comedyMovies = content.filter(movie => movie.genre === 'Comedy');
 
   // Redirect if not authenticated
   if (!isAuthenticated) {
@@ -48,10 +35,10 @@ function Homepage() {
 
   return (
     <div className="homepage">
-      {content.featured && <FeaturedMovie movie={content.featured} />}
-      <MovieSection title="Fantasy" movies={content.fatasy} />
-      <MovieSection title="Action" movies={content.action} />
-      <MovieSection title="Comedy" movies={content.comedy} />
+      {featured && <FeaturedMovie movie={featured} />}
+      <MovieSection title="Fantasy" movies={fantasyMovies} />
+      <MovieSection title="Action" movies={actionMovies} />
+      <MovieSection title="Comedy" movies={comedyMovies} />
     </div>
   );
 }

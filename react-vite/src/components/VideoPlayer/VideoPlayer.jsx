@@ -1,6 +1,4 @@
-// VideoPlayer.js
-import React from 'react';
-import './VideoPlayer.css'; // Import the CSS for styling
+import './VideoPlayer.css';
 
 const VideoPlayer = ({ src }) => {
   // Function to request full-screen mode
