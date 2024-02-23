@@ -1,9 +1,11 @@
+import Cookies from "js-cookie";
 //*====> Action Types <====
 const ADD_CONTENT = 'content/addContent';
 const FETCH_CONTENT = 'content/fetchContent';
 const FETCH_USER_CONTENTS = 'content/fetchUserContent';
 const UPDATE_CONTENT = 'content/updateContent';
 const DELETE_CONTENT = 'content/deleteContent';
+const FETCH_CONTENT_BY_GENRE = 'content/fetchContentByGenre';
 const FETCH_CONTENT_BY_ID = 'content/fetchContentById';
 const FETCH_CONTENT_REQUEST = 'FETCH_CONTENT_REQUEST';
 const FETCH_CONTENT_SUCCESS = 'FETCH_CONTENT_SUCCESS';
@@ -23,6 +25,11 @@ const fetchContentAction = (contents) => ({
 const fetchUserContentsAction = (contents) => ({
   type: FETCH_USER_CONTENTS,
   payload: contents,
+});
+
+const fetchContentByGenreAction = (genre, contents) => ({
+  type: FETCH_CONTENT_BY_GENRE,
+  payload: { genre, contents },
 });
 
 const updateContentAction = (content) => ({
@@ -79,16 +86,31 @@ export const fetchVideoContent = () => async (dispatch) => {
     const data = await response.json();
     dispatch(fetchContentAction(data));
   }
+
 };
 
 export const fetchUserContents = (userId) => async (dispatch) => {
   const response = await fetch(`/api/content/user/${userId}`);
 
-  if (response.ok) {
-    const contents = await response.json();
-    dispatch(fetchUserContentsAction(contents));
-  } else {
-    throw response;
+    if (response.ok) {
+      const contents = await response.json();
+      dispatch(fetchUserContentsAction(contents));
+    } else {
+      throw response;
+    }
+};
+
+export const fetchContentByGenre = (genreName) => async (dispatch) => {
+  try {
+    const response = await fetch(`/api/content/genres/${genreName}`);
+    if (response.ok) {
+      const contents = await response.json();
+      dispatch(fetchContentByGenreAction(genreName, contents));
+    } else {
+      throw new Error('Failed to fetch genre-specific content');
+    }
+  } catch (error) {
+    console.error('Error fetching content by genre:', error);
   }
 };
 
@@ -177,6 +199,14 @@ const contentReducer = (state = initialState, action) => {
       return { ...state, contents: action.payload };
     case FETCH_USER_CONTENTS:
       return { ...state, contents: action.payload };
+        case FETCH_CONTENT_BY_GENRE:
+      return {
+        ...state,
+        genreContents: {
+          ...state.genreContents,
+          [action.payload.genre]: action.payload.contents,
+        },
+      };
     case FETCH_CONTENT_BY_ID:
       return { ...state, currentContent: action.payload };
     case UPDATE_CONTENT:
