@@ -4,14 +4,11 @@ FROM python:3.9.18-alpine3.18
 RUN apk add --no-cache postgresql-dev gcc python3-dev musl-dev
 
 # Set environment variables
-ENV FLASK_APP=app \
+ENV FLASK_APP=app.py \
     FLASK_ENV=production \
-    DATABASE_URL=postgres://app_academy_projects_7wv5_user:c2V7Ujo7yPB9kmfhQI8sjdNlaOUU39KJ@dpg-cn80s4q1hbls73d85k5g-a.ohio-postgres.render.com/app_academy_projects_7wv5 \
-    SCHEMA=logan_indie_roll \
-    SECRET_KEY=SECRET_KEY \
-    S3_KEY=AKIAXYKJTCTBTRSZUPAJ \
-    S3_SECRET=atD6U7vrdDxfMYUBZBEAMk/8RMZ1A6+F4J8gIW1s \
-    S3_BUCKET=indieroll-bucket
+    DATABASE_URL=your_database_url \
+    SCHEMA=your_schema_name \
+    SECRET_KEY=your_secret_key
 
 # Set work directory
 WORKDIR /var/www

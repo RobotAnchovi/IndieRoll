@@ -6,8 +6,6 @@
 echo "Waiting for PostgreSQL to start..."
 # Wait for a few seconds or implement a loop checking db connection
 
-CREATE SCHEMA "logan_indie_roll";
-
 
 echo "Generating Database Tables..."
 flask db migrate
