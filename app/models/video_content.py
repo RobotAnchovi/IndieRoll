@@ -8,14 +8,14 @@ class VideoContent(db.Model):
         __table_args__ = {"schema": SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(50), nullable=False)
+    title = db.Column(db.String(500), nullable=False)
     description = db.Column(db.Text, nullable=False)
     user_id = db.Column(
         db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")), nullable=False
     )
-    genre = db.Column(db.String(50), nullable=False)
-    video_url = db.Column(db.String(50), nullable=False)
-    thumbnail_url = db.Column(db.String(50), nullable=False)
+    genre = db.Column(db.String(500), nullable=False)
+    video_url = db.Column(db.String(500), nullable=False)
+    thumbnail_url = db.Column(db.String(500), nullable=False)
     # rating to be talked about more? to compute average rating
     reviews = db.relationship("Review", backref="video", lazy=True)
     watchlists = db.relationship('Watchlist', back_populates='video_content', cascade="all, delete", passive_deletes=True)
