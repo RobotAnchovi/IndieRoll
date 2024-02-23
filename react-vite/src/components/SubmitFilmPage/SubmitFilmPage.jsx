@@ -34,8 +34,8 @@ const SubmitFilmPage = () => {
         genre.slice(1).charAt(0).toUpperCase() +
         genre.slice(1)
     );
-    formData.append('thumbnail', thumbnail_url_url);
-    formData.append('video', video_url_url);
+    formData.append('thumbnail', thumbnail_url);
+    formData.append('video', video_url);
 
     // Dispatch the thunk action to add new content
     dispatch(addNewContent(formData));
