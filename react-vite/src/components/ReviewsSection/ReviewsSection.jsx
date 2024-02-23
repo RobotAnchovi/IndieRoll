@@ -6,13 +6,12 @@ import './ReviewsSection.css';
 
 const ReviewsSection = () => {
   const { id } = useParams();
-//   console.log("🚀 ~ ReviewsSection ~ id:", id);
+
+  const state = useSelector(state => state);
 
   const dispatch = useDispatch();
 
-  // Directly using reviews from the store, eliminating local state.
-  const reviews = useSelector(state =>
-    state.reviews.reviews.filter(review => review.id.toString() === id));
+  const reviews = useSelector(state => state.reviews.reviews);
 
   useEffect(() => {
     // Only fetch reviews if they are not already present for the current id.
@@ -22,7 +21,6 @@ const ReviewsSection = () => {
     // This effect should only run when `id` changes, or the length of reviews for the current id changes.
   }, [id, reviews.length, dispatch]);
 
-//   console.log("🚀 ~ ReviewsSection ~ reviews:", reviews)
 
   return (
     <div>

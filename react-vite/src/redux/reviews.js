@@ -65,7 +65,6 @@ export const fetchReviews = videoId => {
       const response = await fetch(`/api/reviews/${videoId}`);
       if (response.ok) {
         const data = await response.json(); // Parse JSON body of the response
-        console.log('Fetched reviews:', data);
         dispatch(fetchReviewsSuccess(data)); // Dispatch success action with the parsed data
       } else {
         throw new Error('Failed to fetch reviews');

@@ -96,16 +96,11 @@ export const deleteContent = (contentId) => async (dispatch) => {
 };
 
 // export const fetchContentById = (contentId) => async (dispatch) => {
-
 //   console.log('fetchContentById:', contentId);
-
 //   const response = await fetch(`/api/content/${contentId}`);
-
 //   console.log('fetchContentById response:', response);
-
 //   if (response.ok) {
 //     const data = await response.json();
-
 //     console.log('Fetched content:', data);
 //     dispatch(fetchContentByIdAction(data));
 //   }
@@ -131,7 +126,7 @@ const initialState = {
   loading: false,
   currentContent: null,
   error: '',
-  contents: [], // Assuming you still have an array to store multiple contents
+  contents: [],
 };
 
 const contentReducer = (state = initialState, action) => {
