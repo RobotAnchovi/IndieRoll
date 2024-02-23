@@ -38,7 +38,7 @@
   color: white;
 }
 
-/* .login-button {
+.login-button {
   width: 101%;
   padding: 0.9rem;
   background-color: #fae80b;
@@ -46,7 +46,7 @@
   border: none;
   border-radius: 6px;
   cursor: pointer;
-} */
+}
 
 .error {
   color: red;

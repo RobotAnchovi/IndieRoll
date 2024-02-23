@@ -9,10 +9,10 @@ const FETCH_REVIEWS_SUCCESS = 'FETCH_REVIEWS_SUCCESS';
 const FETCH_REVIEWS_FAILURE = 'FETCH_REVIEWS_FAILURE';
 
 //*====> Action Creators <====
-const setReviews = (reviews) => ({
-  type: SET_REVIEWS,
-  payload: reviews,
-});
+// const setReviews = (reviews) => ({
+//   type: SET_REVIEWS,
+//   payload: reviews,
+// });
 
 const addReviewSuccess = (review) => ({
   type: ADD_REVIEW_SUCCESS,

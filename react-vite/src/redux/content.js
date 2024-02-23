@@ -1,4 +1,4 @@
-import Cookies from "js-cookie";
+
 //*====> Action Types <====
 const ADD_CONTENT = 'content/addContent';
 const FETCH_CONTENT = 'content/fetchContent';
@@ -42,10 +42,10 @@ const deleteContentAction = (contentId) => ({
   payload: contentId,
 });
 
-const fetchContentByIdAction = (content) => ({
-  type: FETCH_CONTENT_BY_ID,
-  payload: content,
-});
+// const fetchContentByIdAction = (content) => ({
+//   type: FETCH_CONTENT_BY_ID,
+//   payload: content,
+// });
 
 const fetchContentRequest = () => ({
   type: FETCH_CONTENT_REQUEST,

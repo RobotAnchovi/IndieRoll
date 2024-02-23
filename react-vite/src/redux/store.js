@@ -10,12 +10,13 @@ import contentReducer from "./content";
 import reviewsReducer from "./reviews";
 import watchlistReducer from "./watchList";
 
+
 const rootReducer = combineReducers({
   session: sessionReducer,
   content: contentReducer,
   reviews: reviewsReducer,
   watchlist: watchlistReducer,
-  reviews: reviewsReducer
+
 });
 
 let enhancer;

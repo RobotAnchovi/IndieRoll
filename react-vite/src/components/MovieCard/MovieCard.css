@@ -9,7 +9,7 @@
 }
 
 .movie-card {
-  width: 400px;
+  width: 300px;
   overflow: hidden;
   position: relative; /* Position relative for the overlay */
   /* border-radius: 5px; */
