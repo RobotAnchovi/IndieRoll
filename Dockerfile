@@ -4,11 +4,11 @@ FROM python:3.9.18-alpine3.18
 RUN apk add --no-cache postgresql-dev gcc python3-dev musl-dev
 
 # Set environment variables
-ENV FLASK_APP=app.py \
-    FLASK_ENV=production \
-    DATABASE_URL=your_database_url \
-    SCHEMA=your_schema_name \
-    SECRET_KEY=your_secret_key
+# ENV FLASK_APP=app.py \
+#     FLASK_ENV=production \
+#     DATABASE_URL=your_database_url \
+#     SCHEMA=your_schema_name \
+#     SECRET_KEY=your_secret_key
 
 # Set work directory
 WORKDIR /var/www
