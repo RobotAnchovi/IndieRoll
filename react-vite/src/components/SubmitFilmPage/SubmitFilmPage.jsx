@@ -39,7 +39,7 @@ const SubmitFilmPage = () => {
   return (
     <div className='submit-film-page'>
       <h1>Add a New Film</h1>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} encType='multipart/form-data'>
         <label>
           Title:
           <input

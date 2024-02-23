@@ -7,6 +7,7 @@ import uuid
 import logging
 import mimetypes
 
+logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 BUCKET_NAME = os.environ.get("S3_BUCKET")
@@ -28,7 +29,7 @@ def get_unique_filename(filename):
     return f"{unique_filename}.{ext}"
 
 
-def upload_file_to_s3(file, acl="public-read"):
+def upload_file_to_s3(file, filename, acl="public-read"):
     content_type = mimetypes.guess_type(file.filename)[0] or "application/octet-stream"
     filename = get_unique_filename(file.filename)
     try:
@@ -48,13 +49,13 @@ def upload_file_to_s3(file, acl="public-read"):
         # ClientError is thrown for client-side issues or problems with AWS service
         error_code = e.response["Error"]["Code"]
         error_msg = f"S3 Error [{error_code}]: {str(e)}"
-        print(f"Error uploading file to S3: {error_msg}")
+        logger.error(f"Error uploading file to S3: {error_msg}")
         return {"errors": error_msg}
 
     except Exception as e:
         # Generic catch-all for any other unexpected errors
         error_msg = f"Unknown error: {str(e)}"
-        print(f"Error uploading file to S3: {error_msg}")
+        logger.error(f"Error uploading file to S3: {error_msg}")
         return {"errors": error_msg}
 
 
