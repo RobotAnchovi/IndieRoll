@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import MovieCard from '../MovieCard';
 import './MovieSection.css';
 
@@ -7,6 +8,7 @@ const CARD_WIDTH = 200; // Adjust this to the actual width of the MovieCard with
 const MovieSection = ({ title, movies }) => {
   const [viewportWidth, setViewportWidth] = useState(window.innerWidth);
   const [offset, setOffset] = useState(0);
+  const navigate = useNavigate();
 
   useEffect(() => {
     // Handler to call on window resize
@@ -38,15 +40,14 @@ const MovieSection = ({ title, movies }) => {
   const isRightArrowDisabled = offset >= maxOffset;
 
   // view all button link
-  const handleGoToWebsiteClick = () => {
-    const formattedTitle = title.toLowerCase().replace(/\s+/g, '-');
-    window.location.href = `/content/${formattedTitle}`;
-  };
+  const handleViewAllClick = () => {
+    navigate(`/content/${title.toLowerCase().replace(/\s+/g, '-')}`);
+};
 
   return (
     <section>
       <h2>{title}</h2>
-      <button onClick={handleGoToWebsiteClick} className='viewall'>
+      <button onClick={handleViewAllClick} className='viewall'>
         View All
       </button>
       <div className='movie-section'>
