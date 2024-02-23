@@ -1,7 +1,7 @@
 //*====> Action Types <====
 const ADD_CONTENT = 'content/addContent';
 const FETCH_CONTENT = 'content/fetchContent';
-const FETCH_USER_CONTENTS = 'content/fetchUserContent'
+const FETCH_USER_CONTENTS = 'content/fetchUserContent';
 const UPDATE_CONTENT = 'content/updateContent';
 const DELETE_CONTENT = 'content/deleteContent';
 
@@ -20,8 +20,6 @@ const fetchUserContentsAction = (contents) => ({
   payload: contents,
 });
 
-
-
 const updateContentAction = (content) => ({
   type: UPDATE_CONTENT,
   payload: content,
@@ -33,16 +31,20 @@ const deleteContentAction = (contentId) => ({
 });
 
 //*====> Thunks <====
-export const addNewContent = (contentData) => async (dispatch) => {
+export const addNewContent = (formData) => async (dispatch) => {
   const response = await fetch('/api/content', {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(contentData),
+    body: formData, // Directly use the FormData passed from the form
+    // Do not explicitly set 'Content-Type'. Let the browser handle it to properly set the multipart boundary.
   });
 
   if (response.ok) {
     const data = await response.json();
     dispatch(addContentAction(data));
+  } else {
+    // Handle errors or invalid responses. Consider enhancing error handling based on your app's needs.
+    const error = await response.json();
+    console.error('Failed to upload content:', error);
   }
 };
 
@@ -55,14 +57,14 @@ export const fetchVideoContent = () => async (dispatch) => {
 };
 
 export const fetchUserContents = (userId) => async (dispatch) => {
-    const response = await fetch(`/api/content/user/${userId}`);
+  const response = await fetch(`/api/content/user/${userId}`);
 
-    if (response.ok) {
-      const contents = await response.json();
-      dispatch(fetchUserContentsAction(contents));
-    } else {
-      throw response;
-    }
+  if (response.ok) {
+    const contents = await response.json();
+    dispatch(fetchUserContentsAction(contents));
+  } else {
+    throw response;
+  }
 };
 
 export const updateContent = (contentId, updateData) => async (dispatch) => {
@@ -95,8 +97,8 @@ const contentReducer = (state = { contents: [] }, action) => {
       return { ...state, contents: [...state.contents, action.payload] };
     case FETCH_CONTENT:
       return { ...state, contents: action.payload };
-      case FETCH_USER_CONTENTS:
-        return { ...state, contents: action.payload };
+    case FETCH_USER_CONTENTS:
+      return { ...state, contents: action.payload };
     case UPDATE_CONTENT:
       return {
         ...state,

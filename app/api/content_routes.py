@@ -23,6 +23,12 @@ def get_content(contentId):
 
 
 # *====> CREATE <====
+
+
+def is_allowed_file(filename, allowed_extensions):
+    return "." in filename and filename.rsplit(".", 1)[1].lower() in allowed_extensions
+
+
 @content_routes.route("", methods=["POST"])
 @login_required
 def add_content():
@@ -31,21 +37,38 @@ def add_content():
     if form.validate_on_submit():
         thumbnail = form.thumbnail.data
         video = form.video.data
+
+        allowed_extensions = set(["png", "jpg", "jpeg", "gif", "mov", "mp4"])
+        if not is_allowed_file(
+            thumbnail.filename, allowed_extensions
+        ) or not is_allowed_file(video.filename, allowed_extensions):
+            return jsonify({"error": "File type not allowed"}), 400
+
         thumbnail_file = get_unique_filename(thumbnail.filename)
         video_file = get_unique_filename(video.filename)
 
-        thumbnail_url = upload_file_to_s3(thumbnail, thumbnail_file)
-        video_url = upload_file_to_s3(video, video_file)
+        thumbnail_url_response = upload_file_to_s3(thumbnail, thumbnail_file)
+        video_url_response = upload_file_to_s3(video, video_file)
 
-        if "errors" in thumbnail_url or "errors" in video_url:
-            return jsonify({"errors": "Could not upload files"}), 500
+        # Check for errors in the responses
+        if "errors" in thumbnail_url_response:
+            error_message = thumbnail_url_response.get(
+                "errors", "Unknown error during thumbnail upload."
+            )
+            return jsonify({"errors": f"Thumbnail upload failed: {error_message}"}), 500
+
+        if "errors" in video_url_response:
+            error_message = video_url_response.get(
+                "errors", "Unknown error during video upload."
+            )
+            return jsonify({"errors": f"Video upload failed: {error_message}"}), 500
 
         new_video = VideoContent(
             title=form.title.data,
             description=form.description.data,
             genre=form.genre.data,
-            thumbnail_url=thumbnail_url["url"],
-            video_url=video_url["url"],
+            thumbnail_url=thumbnail_url_response["url"],
+            video_url=video_url_response["url"],
             user_id=current_user.id,
         )
 
@@ -56,6 +79,15 @@ def add_content():
         except IntegrityError:
             db.session.rollback()
             return jsonify({"error": "Could not add new content"}), 500
+        except:
+            # Catch-all return in case of unexpected issues
+            return jsonify({"error": "An unexpected error occurred"}), 500
+    else:
+        # Handle form validation failure
+        return (
+            jsonify({"error": "Form validation failed", "form_errors": form.errors}),
+            400,
+        )
 
 
 # *====> UPDATE <====
