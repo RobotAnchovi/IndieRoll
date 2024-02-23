@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import MovieCard from '../MovieCard';
-import './MovieSection.css';
+import React, { useState, useEffect } from "react";
+import MovieCard from "../MovieCard";
+import "./MovieSection.css";
 
 const CARD_WIDTH = 200; // Adjust this to the actual width of the MovieCard with margins
 
@@ -15,13 +15,13 @@ const MovieSection = ({ title, movies }) => {
     }
 
     // Add event listener
-    window.addEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
 
     // Call handler right away so state gets updated with initial window size
     handleResize();
 
     // Remove event listener on cleanup
-    return () => window.removeEventListener('resize', handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   const MOVIES_PER_ROW = Math.floor(viewportWidth / CARD_WIDTH);
@@ -39,22 +39,38 @@ const MovieSection = ({ title, movies }) => {
 
   // view all button link
   const handleGoToWebsiteClick = () => {
-    const formattedTitle = title.toLowerCase().replace(/\s+/g, '-');
+    const formattedTitle = title.toLowerCase().replace(/\s+/g, "-");
     window.location.href = `/content/${formattedTitle}`;
   };
 
   return (
     <section>
-      <h2>{title}</h2>
-      <button onClick={handleGoToWebsiteClick} className="viewall">View All</button>
+      <div className="title-button">
+        <h2>{title}</h2>
+        <button onClick={handleGoToWebsiteClick} className="viewall">
+          View All
+        </button>
+      </div>
       <div className="movie-section">
-        <button onClick={handlePrevClick} className="arrow left" disabled={offset === 0}>&lt;</button>
-        <div className="movie-container" style={{ transform: `translateX(-${offset}px)` }}>
+        <button
+          onClick={handlePrevClick}
+          className="arrow left"
+          disabled={offset === 0}>
+          &lt;
+        </button>
+        <div
+          className="movie-container"
+          style={{ transform: `translateX(-${offset}px)` }}>
           {movies.map((movie) => (
             <MovieCard key={movie.id} movie={movie} />
           ))}
         </div>
-        <button onClick={handleNextClick} className="arrow right" disabled={isRightArrowDisabled}>&gt;</button>
+        <button
+          onClick={handleNextClick}
+          className="arrow right"
+          disabled={isRightArrowDisabled}>
+          &gt;
+        </button>
       </div>
     </section>
   );
@@ -62,12 +78,10 @@ const MovieSection = ({ title, movies }) => {
 
 export default MovieSection;
 
-
 // --- My backup code ---
 
 // import MovieCard from './MovieCard';
 // import './MovieSection.css';
-
 
 // const MovieSection = ({ title, movies }) => {
 //   return (
@@ -81,5 +95,3 @@ export default MovieSection;
 //     </section>
 //   );
 // };
-
-
