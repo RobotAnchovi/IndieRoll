@@ -3,6 +3,7 @@ from .users import seed_users, undo_users
 from .videos import seed_videos, undo_videos
 # from .genres import seed_genres, undo_genres
 from .reviews import seed_reviews, undo_reviews
+from .watchlists import seed_watchlists, undo_watchlists
 
 from app.models.db import db, environment, SCHEMA
 
@@ -23,19 +24,18 @@ def seed():
         undo_reviews()
         undo_users()
         undo_videos()
-        # undo_genres()
+        undo_watchlists()
     seed_users()
     seed_videos()
-    # seed_genres()
+    seed_watchlists()
     seed_reviews()
-    # Add other seed functions here
 
 
-# Creates the `flask seed undo` command
+
+
 @seed_commands.command('undo')
 def undo():
     undo_reviews()
     undo_users()
     undo_videos()
-    # undo_genres()
-    # Add other undo functions here
+    undo_watchlists()

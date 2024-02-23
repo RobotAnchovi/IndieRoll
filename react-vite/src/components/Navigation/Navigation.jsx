@@ -1,17 +1,51 @@
-import { NavLink } from "react-router-dom";
-import { useSelector } from "react-redux";
-import ProfileButton from "./ProfileButton";
+import { NavLink, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { thunkLogout } from "../../redux/session";
 import "./Navigation.css";
 
 function Navigation() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const sessionUser = useSelector((state) => state.session.user);
   const isAuthenticated = Boolean(sessionUser);
+
+  const handleLogout = () => {
+    dispatch(thunkLogout());
+    navigate("/");
+  };
+
   return (
     <nav className="navigation">
-     <a href="/content" className="logo-link">
-      <img className="logo" src="/indieroll-01.png" />
+      <a href="/content" className="logo-link">
+        <img className="logo" src="/indieroll-01.png" alt="IndieRoll Logo" />
       </a>
-      <ul className="nav-buttons">
+      <ul className="nav-links">
+        {isAuthenticated && (
+          <>
+            <div className="content-nav">
+              <li>
+                <NavLink to="/content" activeClassName="active">
+                  Home
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/watchlist" activeClassName="active">
+                  Watchlist
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/profile" activeClassName="active">
+                  Profile
+                </NavLink>
+              </li>
+              <li>
+                <button onClick={handleLogout} className="logout-button">
+                  Logout
+                </button>
+              </li>
+            </div>
+          </>
+        )}
         {!isAuthenticated && (
           <>
             <li>
@@ -28,11 +62,6 @@ function Navigation() {
               </NavLink>
             </li>
           </>
-        )}
-        {isAuthenticated && (
-          <li>
-            <ProfileButton />
-          </li>
         )}
       </ul>
     </nav>

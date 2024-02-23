@@ -1,21 +1,16 @@
 .navigation {
-  padding: 1rem 2rem;
+  padding: 0.5rem 2rem;
   display: flex;
   align-items: flex-end;
+  background-color: black;
 }
-*/
-/* .nav-links li {
+
+.nav-links li {
   display: inline;
   margin-right: 1rem;
-} */
-
-.nav-links li .active {
-  border-bottom: 2px solid #fff;
 }
 
 .nav-buttons li {
-  display: inline;
-
   margin-left: 1rem;
 }
 .logo {
@@ -60,7 +55,30 @@ a.log-in {
   color: #fae80b; /* Icon color */
 }
 
-.profile-button:hover,
-.profile-button:focus {
-  color: #ffffff; /* Change color on hover/focus */
+.content-nav {
+  display: flex;
+  gap: 20px;
+  font-size: 18px;
+}
+.content-nav a {
+  color: #797979;
+  text-decoration: none;
+}
+
+.content-nav button {
+  border: none;
+  font-size: 18px;
+  background: none;
+  color: #797979;
+}
+.content-nav a,
+.content-nav button {
+  border-bottom: 3px solid transparent; /* Reserve space for the border */
+  padding-bottom: 5px; /* Adjust if needed */
+}
+
+.content-nav a:hover,
+.content-nav button:hover {
+  color: #fae80b;
+  border-bottom: 3px solid #fae80b; /* Change color without changing dimensions */
 }

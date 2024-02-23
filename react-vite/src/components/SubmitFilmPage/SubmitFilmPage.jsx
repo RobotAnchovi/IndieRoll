@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { addNewContent } from '../../redux/content';
-
+import './SubmitFilm.css';
 const SubmitFilmPage = () => {
   const dispatch = useDispatch();
   const [title, setTitle] = useState('');
@@ -28,9 +28,14 @@ const SubmitFilmPage = () => {
     const formData = new FormData();
     formData.append('title', title);
     formData.append('description', description);
-    formData.append('genre', genre.charAt(0).toUpperCase() + genre.slice(1));
-    formData.append('thumbnail', thumbnail_url);
-    formData.append('video', video_url);
+    formData.append(
+      'genre',
+      genre.charAt(0).toUpperCase() +
+        genre.slice(1).charAt(0).toUpperCase() +
+        genre.slice(1)
+    );
+    formData.append('thumbnail', thumbnail_url_url);
+    formData.append('video', video_url_url);
 
     // Dispatch the thunk action to add new content
     dispatch(addNewContent(formData));
@@ -39,48 +44,55 @@ const SubmitFilmPage = () => {
   return (
     <div className='submit-film-page'>
       <h1>Add a New Film</h1>
-      <form onSubmit={handleSubmit} encType='multipart/form-data'>
-        <label>
-          Title:
-          <input
-            type='text'
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            required
-          />
-        </label>
-        <label>
-          Description:
-          <textarea
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-            required
-          />
-        </label>
-        <label>
-          Genre:
-          <select
-            value={genre}
-            onChange={(e) => setGenre(e.target.value)}
-            required
-          >
-            <option value=''>Select a genre</option>
-            {/* Add more genres as needed */}
-            <option value='action'>Action</option>
-            <option value='drama'>Drama</option>
-            <option value='comedy'>Comedy</option>
-            <option value='horror'>Horror</option>
-          </select>
-        </label>
-        <label>
-          Thumbnail:
-          <input type='file' onChange={handleThumbnailChange} required />
-        </label>
-        <label>
-          Video File:
-          <input type='file' onChange={handleVideoChange} required />
-        </label>
-        <button type='submit'>Submit Film</button>
+      <form
+        className='video-form'
+        onSubmit={handleSubmit}
+        encType='multipart/form-data'
+      >
+        <input
+          type='text'
+          placeholder='Title'
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          required
+        />
+        <textarea
+          className='video-description'
+          placeholder='Description'
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+          required
+        />
+        <select
+          value={genre}
+          onChange={(e) => setGenre(e.target.value)}
+          required
+        >
+          <option value=''>Select a genre</option>
+          <option value='action'>Action</option>
+          <option value='drama'>Drama</option>
+          <option value='comedy'>Comedy</option>
+          <option value='horror'>Horror</option>
+        </select>
+        <label htmlFor='thumbnail'>Thumbnail</label>
+        <input
+          id='thumbnail'
+          type='file'
+          onChange={handleThumbnailChange}
+          required
+        />
+
+        <label htmlFor='videoFile'>Video File</label>
+        <input
+          id='videoFile'
+          type='file'
+          label='Video File'
+          onChange={handleVideoChange}
+          required
+        />
+        <button className='video-submit' type='submit'>
+          Submit Film
+        </button>
       </form>
     </div>
   );

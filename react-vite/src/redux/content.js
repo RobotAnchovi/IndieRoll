@@ -4,6 +4,11 @@ const FETCH_CONTENT = 'content/fetchContent';
 const FETCH_USER_CONTENTS = 'content/fetchUserContent';
 const UPDATE_CONTENT = 'content/updateContent';
 const DELETE_CONTENT = 'content/deleteContent';
+const FETCH_CONTENT_BY_GENRE = 'content/fetchContentByGenre';
+const FETCH_CONTENT_BY_ID = 'content/fetchContentById';
+const FETCH_CONTENT_REQUEST = 'FETCH_CONTENT_REQUEST';
+const FETCH_CONTENT_SUCCESS = 'FETCH_CONTENT_SUCCESS';
+const FETCH_CONTENT_FAILURE = 'FETCH_CONTENT_FAILURE';
 
 //*====> Action Creators <====
 const addContentAction = (content) => ({
@@ -20,6 +25,11 @@ const fetchUserContentsAction = (contents) => ({
   payload: contents,
 });
 
+const fetchContentByGenreAction = (genre, contents) => ({
+  type: FETCH_CONTENT_BY_GENRE,
+  payload: { genre, contents },
+});
+
 const updateContentAction = (content) => ({
   type: UPDATE_CONTENT,
   payload: content,
@@ -28,6 +38,25 @@ const updateContentAction = (content) => ({
 const deleteContentAction = (contentId) => ({
   type: DELETE_CONTENT,
   payload: contentId,
+});
+
+// const fetchContentByIdAction = (content) => ({
+//   type: FETCH_CONTENT_BY_ID,
+//   payload: content,
+// });
+
+const fetchContentRequest = () => ({
+  type: FETCH_CONTENT_REQUEST,
+});
+
+const fetchContentSuccess = (content) => ({
+  type: FETCH_CONTENT_SUCCESS,
+  payload: content,
+});
+
+const fetchContentFailure = (error) => ({
+  type: FETCH_CONTENT_FAILURE,
+  payload: error,
 });
 
 //*====> Thunks <====
@@ -65,6 +94,26 @@ export const fetchUserContents = (userId) => async (dispatch) => {
   } else {
     throw response;
   }
+  if (response.ok) {
+    const contents = await response.json();
+    dispatch(fetchUserContentsAction(contents));
+  } else {
+    throw response;
+  }
+};
+
+export const fetchContentByGenre = (genreName) => async (dispatch) => {
+  try {
+    const response = await fetch(`/api/content/genres/${genreName}`);
+    if (response.ok) {
+      const contents = await response.json();
+      dispatch(fetchContentByGenreAction(genreName, contents));
+    } else {
+      throw new Error('Failed to fetch genre-specific content');
+    }
+  } catch (error) {
+    console.error('Error fetching content by genre:', error);
+  }
 };
 
 export const updateContent = (contentId, updateData) => async (dispatch) => {
@@ -90,15 +139,80 @@ export const deleteContent = (contentId) => async (dispatch) => {
   }
 };
 
+// export const fetchContentById = (contentId) => async (dispatch) => {
+//   console.log('fetchContentById:', contentId);
+//   const response = await fetch(`/api/content/${contentId}`);
+//   console.log('fetchContentById response:', response);
+//   if (response.ok) {
+//     const data = await response.json();
+//     console.log('Fetched content:', data);
+//     dispatch(fetchContentByIdAction(data));
+//   }
+// };
+
+export const fetchContentById = (contentId) => async (dispatch) => {
+  dispatch(fetchContentRequest());
+  try {
+    const response = await fetch(`/api/content/${contentId}`);
+    if (response.ok) {
+      const data = await response.json();
+      dispatch(fetchContentSuccess(data));
+    } else {
+      throw new Error('Failed to fetch content');
+    }
+  } catch (error) {
+    dispatch(fetchContentFailure(error.toString()));
+  }
+};
+
 //*====> Reducers <====
-const contentReducer = (state = { contents: [] }, action) => {
+const initialState = {
+  loading: false,
+  currentContent: null,
+  error: '',
+  contents: [],
+};
+
+const contentReducer = (state = initialState, action) => {
   switch (action.type) {
+    case FETCH_CONTENT_REQUEST:
+      return {
+        ...state,
+        loading: true,
+        error: '',
+      };
+    case FETCH_CONTENT_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        currentContent: action.payload,
+        error: '',
+      };
+    case FETCH_CONTENT_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
+        currentContent: null,
+      };
     case ADD_CONTENT:
       return { ...state, contents: [...state.contents, action.payload] };
     case FETCH_CONTENT:
       return { ...state, contents: action.payload };
     case FETCH_USER_CONTENTS:
       return { ...state, contents: action.payload };
+    case FETCH_USER_CONTENTS:
+      return { ...state, contents: action.payload };
+    case FETCH_CONTENT_BY_GENRE:
+      return {
+        ...state,
+        genreContents: {
+          ...state.genreContents,
+          [action.payload.genre]: action.payload.contents,
+        },
+      };
+    case FETCH_CONTENT_BY_ID:
+      return { ...state, currentContent: action.payload };
     case UPDATE_CONTENT:
       return {
         ...state,
