@@ -1,0 +1,18 @@
+.watchlist-page h1 {
+  color: #fae80b;
+}
+.watchlist-page {
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-weight: bolder;
+}
+.watchlist-page a {
+  color: #fae80b;
+  text-decoration: none;
+}
+
+.watchlist-page a:hover {
+  text-decoration: underline;
+}

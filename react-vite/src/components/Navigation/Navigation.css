@@ -54,3 +54,31 @@ a.log-in {
   font-size: 34px; /* Adjust the size of the icon */
   color: #fae80b; /* Icon color */
 }
+
+.content-nav {
+  display: flex;
+  gap: 20px;
+  font-size: 18px;
+}
+.content-nav a {
+  color: #797979;
+  text-decoration: none;
+}
+
+.content-nav button {
+  border: none;
+  font-size: 18px;
+  background: none;
+  color: #797979;
+}
+.content-nav a,
+.content-nav button {
+  border-bottom: 3px solid transparent; /* Reserve space for the border */
+  padding-bottom: 5px; /* Adjust if needed */
+}
+
+.content-nav a:hover,
+.content-nav button:hover {
+  color: #fae80b;
+  border-bottom: 3px solid #fae80b; /* Change color without changing dimensions */
+}

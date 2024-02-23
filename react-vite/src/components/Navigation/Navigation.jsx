@@ -20,28 +20,30 @@ function Navigation() {
         <img className="logo" src="/indieroll-01.png" alt="IndieRoll Logo" />
       </a>
       <ul className="nav-links">
-        <li>
-          <NavLink to="/content" activeClassName="active">
-            Home
-          </NavLink>
-        </li>
         {isAuthenticated && (
           <>
-            <li>
-              <NavLink to="/watchlist" activeClassName="active">
-                Watchlist
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to="/profile" activeClassName="active">
-                Profile
-              </NavLink>
-            </li>
-            <li>
-              <button onClick={handleLogout} className="logout-button">
-                Logout
-              </button>
-            </li>
+            <div className="content-nav">
+              <li>
+                <NavLink to="/content" activeClassName="active">
+                  Home
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/watchlist" activeClassName="active">
+                  Watchlist
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/profile" activeClassName="active">
+                  Profile
+                </NavLink>
+              </li>
+              <li>
+                <button onClick={handleLogout} className="logout-button">
+                  Logout
+                </button>
+              </li>
+            </div>
           </>
         )}
         {!isAuthenticated && (

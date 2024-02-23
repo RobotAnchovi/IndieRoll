@@ -1,8 +1,8 @@
-import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchUserContents } from '../../redux/content';
-
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchUserContents } from "../../redux/content";
+import "./UserProfile.css";
 const UserProfilePage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -16,11 +16,11 @@ const UserProfilePage = () => {
   }, [dispatch, user]);
 
   const handleAddNewFilm = () => {
-    navigate('/submit-film');
+    navigate("/submit-film");
   };
 
   return (
-    <div>
+    <div className="profile-page">
       {/* Display user information */}
       <h1>{user?.username}</h1>
       <p>{user?.user_intro}</p>
