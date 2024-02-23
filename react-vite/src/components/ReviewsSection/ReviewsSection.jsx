@@ -1,18 +1,23 @@
-import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchReviews, addReview, deleteReview, updateReview } from '../../redux/reviews';
-import './ReviewsSection.css';
+import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  fetchReviews,
+  addReview,
+  deleteReview,
+  updateReview,
+} from "../../redux/reviews";
+import "./ReviewsSection.css";
 
 const ReviewsSection = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
-  const reviews = useSelector(state => state.reviews.reviews);
-  const currentUserId = useSelector(state => state.session.user.id);
+  const reviews = useSelector((state) => state.reviews.reviews);
+  const currentUserId = useSelector((state) => state.session.user.id);
 
   // Form state
-  const [rating, setRating] = useState('');
-  const [reviewText, setReviewText] = useState('');
+  const [rating, setRating] = useState("");
+  const [reviewText, setReviewText] = useState("");
   const [editingReviewId, setEditingReviewId] = useState(null);
 
   useEffect(() => {
@@ -35,8 +40,8 @@ const ReviewsSection = () => {
       dispatch(addReview(reviewData)); // Add new review
     }
     // Reset form fields and exit editing mode
-    setRating('');
-    setReviewText('');
+    setRating("");
+    setReviewText("");
     setEditingReviewId(null); // Exit editing mode
   };
 
@@ -62,13 +67,12 @@ const ReviewsSection = () => {
             value={rating}
             onChange={(e) => {
               const newRating = parseInt(e.target.value, 10);
-              setRating(newRating > 5 ? '5' : e.target.value);
+              setRating(newRating > 5 ? "5" : e.target.value);
             }}
             min="1"
             max="5"
             required
           />
-
         </div>
         <div>
           <label htmlFor="reviewText">Review:</label>
@@ -76,14 +80,17 @@ const ReviewsSection = () => {
             id="reviewText"
             value={reviewText}
             onChange={(e) => setReviewText(e.target.value)}
-            required
-          ></textarea>
+            required></textarea>
         </div>
-        <button type="submit">{editingReviewId ? 'Update Review' : 'Submit Review'}</button>
+        <button type="submit">
+          {editingReviewId ? "Update Review" : "Submit Review"}
+        </button>
       </form>
       {reviews.map((review) => (
         <li key={review.id}>
-          <p>{review.rating}: {review.review_text}</p>
+          <p>
+            {review.rating}: {review.review_text}
+          </p>
           {review.user_id === currentUserId && (
             <>
               <button onClick={() => handleEdit(review)}>Edit</button>
