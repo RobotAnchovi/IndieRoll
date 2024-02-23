@@ -27,7 +27,7 @@ def get_content(contentId):
 @login_required
 def add_content():
     form = VideoForm()
-    # form["csrf_token"].data = request.cookies["csrf_token"]
+    form["csrf_token"].data = request.cookies["csrf_token"]
     if form.validate_on_submit():
         thumbnail = form.thumbnail.data
         video = form.video.data
