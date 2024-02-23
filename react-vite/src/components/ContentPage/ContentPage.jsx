@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useParams, Navigate } from 'react-router-dom';
+import { useParams, Navigate, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchContentById } from '../../redux/content';
 import FeaturedMovie from '../FeaturedMovie';
@@ -8,15 +8,24 @@ import ReviewsSection from '../ReviewsSection/ReviewsSection';
 const ContentPage = () => {
   let { id } = useParams();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const isAuthenticated = useSelector(state => state.session.user);
-
   const loading = useSelector(state => state.content.loading);
-//   console.log("🚀 ~ ContentPage ~ loading:", loading)
-
   const movie = useSelector(state => state.content.currentContent);
-    // console.log("🚀 ~ ContentPage ~ movie:", movie)
 
+  useEffect(() => {
+    if (isAuthenticated) {
+      if (!movie || movie.id.toString() !== id) {
+        dispatch(fetchContentById(id));
+      }
+    }
+  }, [id, movie, dispatch, isAuthenticated]);
+  const isOwner = movie?.user_id === isAuthenticated?.id;
+
+  const handleUpdateClick = () => {
+    navigate('/submit-film', { state: { content: movie } });
+  };
   useEffect(() => {
     if (isAuthenticated) {
         if (!movie || movie.id.toString() !== id) {
@@ -42,6 +51,9 @@ const ContentPage = () => {
   return (
     <div>
       <FeaturedMovie movie={movie} />
+      {isOwner && (
+        <button onClick={handleUpdateClick}>Update</button>
+      )}
       <ReviewsSection movie={movie} />
     </div>
   );

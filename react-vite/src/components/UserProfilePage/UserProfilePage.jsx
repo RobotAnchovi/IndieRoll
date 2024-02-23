@@ -1,19 +1,22 @@
-import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useMemo } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchUserContents } from "../../redux/content";
+import { fetchVideoContent } from "../../redux/content";
 import "./UserProfile.css";
+
 const UserProfilePage = () => {
   const dispatch = useDispatch();
+  const contents = useSelector((state) => state.content.contents);
+  const user  = useSelector((state) => state.session.user);
   const navigate = useNavigate();
-  const { contents } = useSelector((state) => state.content);
-  const { user } = useSelector((state) => state.session);
 
   useEffect(() => {
     if (user) {
-      dispatch(fetchUserContents(user.id));
+      dispatch(fetchVideoContent());
     }
   }, [dispatch, user]);
+
+  const userOwnedContent = useMemo(() => contents.filter(content => content.user_id === user?.id), [contents, user]);
 
   const handleAddNewFilm = () => {
     navigate("/submit-film");
@@ -29,12 +32,19 @@ const UserProfilePage = () => {
 
       {/* List of current user's films */}
       <h2>My Films</h2>
-      {contents.map((content) => (
-        <div key={content.id}>
-          <h3>{content.title}</h3>
-          {/* ... other content details */}
+      {userOwnedContent.length > 0 ? (
+        userOwnedContent.map((content) => (
+          <div key={content.id} className="movie-item">
+          <NavLink to={`/content/${content.id}`}>
+            <h3>{content.title}</h3>
+            <img src={content.thumbnail_url} alt={`${content.title} thumbnail`} className="movie-thumbnail" />
+            {/* You might want to display a thumbnail or other details here */}
+          </NavLink>
         </div>
-      ))}
+        ))
+      ) : (
+        <p>You have not uploaded any films.</p>
+      )}
     </div>
   );
 };

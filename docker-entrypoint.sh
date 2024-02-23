@@ -10,6 +10,8 @@ echo "Waiting for PostgreSQL to start..."
 echo "Migrating Database..."
 flask db upgrade
 
+flask db migrate
+
 
 # Seed the database if needed
 echo "Seeding the database..."

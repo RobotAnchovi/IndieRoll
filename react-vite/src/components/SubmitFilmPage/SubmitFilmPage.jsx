@@ -1,23 +1,43 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { addNewContent } from "../../redux/content";
+import { useNavigate, useLocation } from "react-router-dom";
+import { addNewContent, deleteContent, updateContent } from "../../redux/content";
 import "./SubmitFilm.css";
+
 const SubmitFilmPage = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
   const dispatch = useDispatch();
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [genre, setGenre] = useState("");
+
+
+  const contentToUpdate = location.state?.content;
+
+
+  const [title, setTitle] = useState(contentToUpdate?.title || '');
+  const [description, setDescription] = useState(contentToUpdate?.description || '');
+  const [genre, setGenre] = useState(contentToUpdate?.genre.toLowerCase() || '');
   const [thumbnail_url, setThumbnail] = useState(null);
   const [video_url, setVideo] = useState(null);
+  const [thumbnailPreview, setThumbnailPreview] = useState(contentToUpdate?.thumbnail_url || '');
+  const [videoPreview, setVideoPreview] = useState(contentToUpdate?.video_url || '');
 
   const handleThumbnailChange = (e) => {
-    // Implement file handling logic
-    setThumbnail(e.target.files[0]);
+    const file = e.target.files[0];
+    if (file) {
+      setThumbnail(file);
+      const previewUrl = URL.createObjectURL(file);
+      setThumbnailPreview(previewUrl);
+    }
   };
 
+
   const handleVideoChange = (e) => {
-    // Implement file handling logic
-    setVideo(e.target.files[0]);
+    const file = e.target.files[0];
+    if (file) {
+      setVideo(file);
+      const previewUrl = URL.createObjectURL(file);
+      setVideoPreview(previewUrl);
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -32,17 +52,35 @@ const SubmitFilmPage = () => {
     formData.append("thumbnail", thumbnail_url);
     formData.append("video", video_url);
 
-    // Dispatch the thunk action to add new content
-    dispatch(addNewContent(formData));
+    if (contentToUpdate) {
+      await dispatch(updateContent(contentToUpdate.id, formData));
+      navigate(`/content/${contentToUpdate.id}`);
+      // Dispatch the thunk action to add new content
+    } else {
+
+      const actionResult = await dispatch(addNewContent(formData));
+      const contentId = actionResult.payload;
+   if (contentId) {
+      navigate(`/content/${contentId}`); // Navigate to the content's details page
+    }
+  }
+  };
+
+  const handleDelete = async () => {
+    if (location.state?.content) {
+      await dispatch(deleteContent(location.state.content.id));
+      navigate('/profile');
+    }
   };
 
   return (
     <div className="submit-film-page">
-      <h1>Add a New Film</h1>
+       <h1>{contentToUpdate ? "Update Film" : "Add a New Film"}</h1>
       <form
         className="video-form"
         onSubmit={handleSubmit}
         encType="multipart/form-data">
+
         <input
           type="text"
           placeholder="Title"
@@ -67,28 +105,55 @@ const SubmitFilmPage = () => {
           <option value="comedy">Comedy</option>
           <option value="horror">Horror</option>
         </select>
-        <label htmlFor="thumbnail">Thumbnail</label>
+        {thumbnailPreview && (
+          <div className="thumbnail-preview">
+            <label>Current Thumbnail:</label>
+            <img src={thumbnailPreview} alt="Thumbnail Preview" style={{ width: '100%', maxHeight: '300px', objectFit: 'cover' }} />
+          </div>
+        )}
+
+        <label htmlFor="thumbnail">Change Thumbnail</label>
         <input
           id="thumbnail"
           type="file"
           onChange={handleThumbnailChange}
-          required
+          required={!thumbnailPreview} // If there's no preview, make the field required
         />
 
-        <label htmlFor="videoFile">Video File</label>
+        {/* Video preview */}
+        {/* Displaying a video preview might require a player or a link since auto-playing videos can be intrusive */}
+        {videoPreview && (
+          <div className="video-preview">
+            <label>Current Video:</label>
+            <video width="320" height="240" controls>
+              <source src={videoPreview} type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+          </div>
+        )}
+
+        <label htmlFor="videoFile">Change Video File</label>
         <input
           id="videoFile"
           type="file"
           label="Video File"
           onChange={handleVideoChange}
-          required
+          required={!videoPreview} // If there's no preview, make the field required
         />
+
         <button className="video-submit" type="submit">
-          Submit Film
+          {contentToUpdate ? "Update Film" : "Submit Film"}
         </button>
+
+        {/* Delete button, shown only when editing an existing film */}
+        {contentToUpdate && (
+          <button type="button" onClick={handleDelete} className="delete-film-button">
+            Delete Film
+          </button>
+        )}
       </form>
     </div>
   );
-};
+}
 
 export default SubmitFilmPage;
