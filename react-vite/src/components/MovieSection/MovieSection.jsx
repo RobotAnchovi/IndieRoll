@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
-import MovieCard from "../MovieCard";
-import "./MovieSection.css";
+import { useState, useEffect } from 'react';
+import MovieCard from '../MovieCard';
+import './MovieSection.css';
 
 const CARD_WIDTH = 200; // Adjust this to the actual width of the MovieCard with margins
 

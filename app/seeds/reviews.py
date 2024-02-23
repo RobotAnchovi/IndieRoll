@@ -41,6 +41,30 @@ def seed_reviews():
             "rating": 1,
             "review_text": "Did not enjoy it at all.",
         },
+        {
+            "user_id": user_ids[1],
+            "video_id": video_ids[2],
+            "rating": 4,
+            "review_text": "Really enjoyed it, but it could be better.",
+        },
+        {
+            "user_id": user_ids[2],
+            "video_id": video_ids[2],
+            "rating": 3,
+            "review_text": "Average, not what I expected.",
+        },
+        {
+            "user_id": user_ids[3],
+            "video_id": video_ids[2],
+            "rating": 2,
+            "review_text": "Below average, quite disappointing.",
+        },
+        {
+            "user_id": user_ids[4],
+            "video_id": video_ids[2],
+            "rating": 1,
+            "review_text": "Did not enjoy it at all.",
+        },
     ]
     for review_info in reviews_data:
         review = Review(
