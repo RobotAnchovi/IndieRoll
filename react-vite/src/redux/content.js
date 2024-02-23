@@ -201,8 +201,6 @@ const contentReducer = (state = initialState, action) => {
       return { ...state, contents: action.payload };
     case FETCH_USER_CONTENTS:
       return { ...state, contents: action.payload };
-    case FETCH_USER_CONTENTS:
-      return { ...state, contents: action.payload };
     case FETCH_CONTENT_BY_GENRE:
       return {
         ...state,

@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { addNewContent } from '../../redux/content';
 import './SubmitFilm.css';
 const SubmitFilmPage = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [genre, setGenre] = useState('');
@@ -30,15 +32,17 @@ const SubmitFilmPage = () => {
     formData.append('description', description);
     formData.append(
       'genre',
-      genre.charAt(0).toUpperCase() +
-        genre.slice(1).charAt(0).toUpperCase() +
-        genre.slice(1)
+      genre.charAt(0).toUpperCase() + genre.slice(1).toLowerCase()
     );
     formData.append('thumbnail', thumbnail_url);
     formData.append('video', video_url);
 
     // Dispatch the thunk action to add new content
-    dispatch(addNewContent(formData));
+    dispatch(addNewContent(formData)).then((newMovie) => {
+      if (newMovie && newMovie.id) {
+        navigate(`/content/all/${newMovie.id}`);
+      }
+    });
   };
 
   return (
