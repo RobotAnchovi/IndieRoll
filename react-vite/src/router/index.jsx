@@ -35,6 +35,7 @@ export const router = createBrowserRouter([
         element: <UserProfilePage />,
       },
      {
+
         path:"submit-film",
         element: <SubmitFilmPage />,
       },

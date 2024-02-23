@@ -9,7 +9,6 @@ import sessionReducer from "./session";
 import contentReducer from "./content";
 import reviewsReducer from "./reviews";
 import watchlistReducer from "./watchList";
-import reviewsReducer from "./reviews";
 
 const rootReducer = combineReducers({
   session: sessionReducer,
