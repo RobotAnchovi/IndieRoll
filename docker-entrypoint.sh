@@ -6,10 +6,6 @@
 echo "Waiting for PostgreSQL to start..."
 # Wait for a few seconds or implement a loop checking db connection
 
-
-echo "Generating Database Tables..."
-flask db migrate
-
 # Run database migrations
 echo "Migrating Database..."
 flask db upgrade
