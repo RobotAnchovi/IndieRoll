@@ -1,50 +1,61 @@
 .featured-movie {
-    padding: 0px;
+  padding: 0px;
 }
 
 .background {
-    /* background-color:blue; */
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center center;
-    align-items: center;
-    padding: 10px;
-    display: flex;
-    justify-content: right;
-    height: 60vh;
-    min-height: 450px;
+  display: flex;
+  justify-content: flex-end; /* Aligns children to the right */
+  /* Aligns children to the top, consider 'center' for vertical centering if preferred */
+  padding: 10px;
+  height: 50vh;
+  min-height: 450px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  box-sizing: border-box;
 }
 
 .right-side {
-    padding: 10px;
-    flex-basis: 50%;
+  text-align: left;
+  font-weight: bolder;
+  display: flex;
+  flex-direction: column;
+  flex-basis: 50%;
+  text-shadow: 3px 2px 2px rgba(0, 0, 0, 0.25);
 }
-
+.right-side .description p {
+  margin: 0;
+}
 .title {
-    background-color:coral;
+  color: white;
 }
-
 
 .description {
-    background-color:gold;
+  color: white;
 }
-
 
 .info {
-    background-color:lightcoral;
+  color: white;
 }
-
 
 .buttons {
-    background-color:magenta;
+  display: flex;
+  justify-content: flex-start;
 }
-
 
 .button {
-    background-color:wheat;
-    padding: 10px;
+  background-color: #fae80b;
+  padding: 13px;
+  border: none;
+  margin-right: 10px;
+  border-radius: 4px;
+  font-weight: bolder;
+  display: flex;
+  gap: 5px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px,
+    rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
 }
 
-.list-button {
-    border: 1px solid #555;
+.button:hover {
+  cursor: pointer;
 }

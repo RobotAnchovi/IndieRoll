@@ -1,5 +1,6 @@
-import { Link } from 'react-router-dom';
-import './MovieCard.css';
+import { Link } from "react-router-dom";
+import { FaPlus } from "react-icons/fa";
+import "./MovieCard.css";
 
 const MovieCard = ({ movie, onAddToWatchlist }) => {
   // Function to handle adding to watchlist
@@ -10,14 +11,16 @@ const MovieCard = ({ movie, onAddToWatchlist }) => {
 
   return (
     <div className="movie-card-container">
-      <Link to={`/video/${encodeURIComponent(movie.video_url)}`} className="movie-card-link">
+      <Link
+        to={`/video/${encodeURIComponent(movie.video_url)}`}
+        className="movie-card-link">
         <div className="movie-card">
           <div className="movie-thumbnail">
             <img src={movie.thumbnail_url} alt={movie.title} />
             <div className="movie-title">{movie.title}</div>
             {/* Icon for adding to watchlist */}
             <button className="watchlist-icon" onClick={handleAddToWatchlist}>
-              Watch Icon Here
+              <FaPlus />
             </button>
           </div>
         </div>
