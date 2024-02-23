@@ -38,11 +38,10 @@ const SubmitFilmPage = () => {
     formData.append('video', video_url);
 
     // Dispatch the thunk action to add new content
-    dispatch(addNewContent(formData)).then((newMovie) => {
-      if (newMovie && newMovie.id) {
-        navigate(`/content/all/${newMovie.id}`);
-      }
-    });
+    const contentId = await dispatch(addNewContent(formData));
+    if (contentId) {
+      navigate(`/content/all/${contentId}`);
+    }
   };
 
   return (

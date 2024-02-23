@@ -28,4 +28,5 @@ class VideoContent(db.Model):
             "genre": self.genre,
             "thumbnail_url": self.thumbnail_url,
             "video_url": self.video_url,
+            "user_id": self.user_id,
         }
