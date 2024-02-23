@@ -1,38 +1,29 @@
 from flask_wtf import FlaskForm
-from flask_wtf.file import FileField, FileAllowed, FileRequired
-from wtforms import SelectField, StringField, SubmitField
+from wtforms import SelectField, StringField, FileField
 from wtforms.validators import DataRequired
-from app.api.AWS_helpers import ALLOWED_EXTENSIONS_IMAGE, ALLOWED_EXTENSIONS_VIDEO
-# from app.models import Genre
+from flask_wtf.file import FileRequired, FileAllowed
 
 GENRE_CHOICES = [
-        ('Action', 'Action'),
-        ('Comedy', 'Comedy'),
-        ('Drama', 'Drama'),
-        ('Fantasy', 'Fantasy'),
-        ('Horror', 'Horror'),
-    ]
+    ("Action", "Action"),
+    ("Comedy", "Comedy"),
+    ("Drama", "Drama"),
+    ("Fantasy", "Fantasy"),
+    ("Horror", "Horror"),
+]
+
 
 class VideoForm(FlaskForm):
-    title = StringField('Title', validators=[DataRequired()])
-    description = StringField('Description', validators=[DataRequired()])
-    genre = SelectField('Genre', choices=GENRE_CHOICES, validators=[DataRequired()])
+    title = StringField("Title", validators=[DataRequired()])
+    description = StringField("Description", validators=[DataRequired()])
+    genre = SelectField("Genre", choices=GENRE_CHOICES, validators=[DataRequired()])
     thumbnail = FileField(
-        'Thumbnail Image',
+        "Thumbnail",
         validators=[
             FileRequired(),
-            FileAllowed(ALLOWED_EXTENSIONS_IMAGE, 'png, jpg, jpeg, or gif files only!')
-        ]
+            FileAllowed(["png", "jpg", "jpeg", "gif"], "Images only!"),
+        ],
     )
     video = FileField(
-        'Video File',
-        validators=[
-            FileRequired(),
-            FileAllowed(ALLOWED_EXTENSIONS_VIDEO, 'Mov or mp4 files only!')
-        ]
+        "Video",
+        validators=[FileRequired(), FileAllowed(["mp4", "mov"], "Videos only!")],
     )
-    submit = SubmitField('Upload Movie')
-
-
-# * For template use, update encryption type:
-# * <form action="/posts/new" method="POST" enctype="multipart/form-data">

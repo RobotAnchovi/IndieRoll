@@ -7,8 +7,8 @@ const SubmitFilmPage = () => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [genre, setGenre] = useState('');
-  const [thumbnail, setThumbnail] = useState(null);
-  const [video, setVideo] = useState(null);
+  const [thumbnail_url, setThumbnail] = useState(null);
+  const [video_url, setVideo] = useState(null);
 
   const handleThumbnailChange = (e) => {
     // Implement file handling logic
@@ -28,22 +28,22 @@ const SubmitFilmPage = () => {
     const formData = new FormData();
     formData.append('title', title);
     formData.append('description', description);
-    formData.append('genre', genre);
-    formData.append('thumbnail', thumbnail);
-    formData.append('video', video);
+    formData.append('genre', genre.charAt(0).toUpperCase() + genre.slice(1));
+    formData.append('thumbnail', thumbnail_url);
+    formData.append('video', video_url);
 
     // Dispatch the thunk action to add new content
     dispatch(addNewContent(formData));
   };
 
   return (
-    <div className="submit-film-page">
+    <div className='submit-film-page'>
       <h1>Add a New Film</h1>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} encType='multipart/form-data'>
         <label>
           Title:
           <input
-            type="text"
+            type='text'
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             required
@@ -59,32 +59,28 @@ const SubmitFilmPage = () => {
         </label>
         <label>
           Genre:
-          <select value={genre} onChange={(e) => setGenre(e.target.value)} required>
-            <option value="">Select a genre</option>
+          <select
+            value={genre}
+            onChange={(e) => setGenre(e.target.value)}
+            required
+          >
+            <option value=''>Select a genre</option>
             {/* Add more genres as needed */}
-            <option value="action">Action</option>
-            <option value="drama">Drama</option>
-            <option value="comedy">Comedy</option>
-            <option value="horror">Horror</option>
+            <option value='action'>Action</option>
+            <option value='drama'>Drama</option>
+            <option value='comedy'>Comedy</option>
+            <option value='horror'>Horror</option>
           </select>
         </label>
         <label>
           Thumbnail:
-          <input
-            type="file"
-            onChange={handleThumbnailChange}
-            required
-          />
+          <input type='file' onChange={handleThumbnailChange} required />
         </label>
         <label>
           Video File:
-          <input
-            type="file"
-            onChange={handleVideoChange}
-            required
-          />
+          <input type='file' onChange={handleVideoChange} required />
         </label>
-        <button type="submit">Submit Film</button>
+        <button type='submit'>Submit Film</button>
       </form>
     </div>
   );
