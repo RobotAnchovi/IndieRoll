@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchUserWatchlist, addToWatchlist } from '../../redux/watchList'; // Note: Removed removeFromWatchlist import since it's no longer needed here
+import { fetchUserWatchlist, addToWatchlist, removeFromWatchlist } from '../../redux/watchList';
 import { useNavigate } from 'react-router-dom';
-import { FaPlus } from 'react-icons/fa'; // Note: Removed FaMinus since it's no longer needed
+import { FaPlus } from 'react-icons/fa';
 import './MovieCard.css';
 
 const MovieCard = ({ movie }) => {
@@ -14,7 +14,6 @@ const MovieCard = ({ movie }) => {
   }, [dispatch]);
 
   const watchlist = useSelector((state) => state.watchlist.watchlist);
-  // Check if the movie is already in the watchlist
   const isMovieInWatchlist = watchlist.some(item => item.video_id === movie.id);
 
   const addToWatchlistHandler = (event) => {
@@ -37,6 +36,7 @@ const MovieCard = ({ movie }) => {
           </div>
         </div>
       </div>
+
       {!isMovieInWatchlist && (
         <button className="watchlist-icon-2" onClick={addToWatchlistHandler}>
           <FaPlus /> Add to Watchlist
@@ -45,5 +45,7 @@ const MovieCard = ({ movie }) => {
     </div>
   );
 };
+
+
 
 export default MovieCard;
