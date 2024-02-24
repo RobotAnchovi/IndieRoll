@@ -4,8 +4,6 @@ import { useNavigate } from 'react-router-dom';
 import { addNewContent } from '../../redux/content';
 import './SubmitFilm.css';
 const SubmitFilmPage = () => {
-  const navigate = useNavigate();
-  const location = useLocation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [title, setTitle] = useState('');
@@ -13,26 +11,15 @@ const SubmitFilmPage = () => {
   const [genre, setGenre] = useState('');
   const [thumbnail_url, setThumbnail] = useState(null);
   const [video_url, setVideo] = useState(null);
-  const [thumbnailPreview, setThumbnailPreview] = useState(contentToUpdate?.thumbnail_url || '');
-  const [videoPreview, setVideoPreview] = useState(contentToUpdate?.video_url || '');
 
   const handleThumbnailChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      setThumbnail(file);
-      const previewUrl = URL.createObjectURL(file);
-      setThumbnailPreview(previewUrl);
-    }
+    // Implement file handling logic
+    setThumbnail(e.target.files[0]);
   };
 
-
   const handleVideoChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      setVideo(file);
-      const previewUrl = URL.createObjectURL(file);
-      setVideoPreview(previewUrl);
-    }
+    // Implement file handling logic
+    setVideo(e.target.files[0]);
   };
 
   const handleSubmit = async (e) => {
@@ -104,21 +91,14 @@ const SubmitFilmPage = () => {
           type='file'
           label='Video File'
           onChange={handleVideoChange}
-          required={!videoPreview} // If there's no preview, make the field required
+          required
         />
         <button className='video-submit' type='submit'>
           Submit Film
         </button>
-
-        {/* Delete button, shown only when editing an existing film */}
-        {contentToUpdate && (
-          <button type="button" onClick={handleDelete} className="delete-film-button">
-            Delete Film
-          </button>
-        )}
       </form>
     </div>
   );
-}
+};
 
 export default SubmitFilmPage;

@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchUserWatchlist, addToWatchlist, removeFromWatchlist } from '../../redux/watchList';
+import { fetchUserWatchlist, addToWatchlist } from '../../redux/watchList';
 import { useNavigate } from 'react-router-dom';
 import { FaPlus } from 'react-icons/fa';
 import './MovieCard.css';

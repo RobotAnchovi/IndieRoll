@@ -71,7 +71,6 @@ export const addNewContent = (formData) => async (dispatch) => {
     const data = await response.json();
     dispatch(addContentAction(data));
     return data.id;
-    return data.id;
   } else {
     // Handle errors or invalid responses. Consider enhancing error handling based on your app's needs.
     const error = await response.json();
