@@ -10,7 +10,7 @@ class Watchlist(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, ForeignKey(add_prefix_for_prod("users.id")), nullable=False)
-    video_id = db.Column(db.Integer, ForeignKey(add_prefix_for_prod("video_content.id")), nullable=False)
+    video_id = db.Column(db.Integer, ForeignKey(add_prefix_for_prod("video_content.id")), nullable=True)
 
     user_watchlists = db.relationship("User", backref=db.backref("watchlist_items", lazy=True))
     video_content = db.relationship("VideoContent", back_populates="watchlists")
