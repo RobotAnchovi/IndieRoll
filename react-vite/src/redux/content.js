@@ -1,4 +1,3 @@
-
 //*====> Action Types <====
 const ADD_CONTENT = 'content/addContent';
 const FETCH_CONTENT = 'content/fetchContent';
@@ -10,7 +9,6 @@ const FETCH_CONTENT_BY_ID = 'content/fetchContentById';
 const FETCH_CONTENT_REQUEST = 'FETCH_CONTENT_REQUEST';
 const FETCH_CONTENT_SUCCESS = 'FETCH_CONTENT_SUCCESS';
 const FETCH_CONTENT_FAILURE = 'FETCH_CONTENT_FAILURE';
-
 
 //*====> Action Creators <====
 const addContentAction = (content) => ({
@@ -61,7 +59,6 @@ const fetchContentFailure = (error) => ({
   payload: error,
 });
 
-
 //*====> Thunks <====
 export const addNewContent = (formData) => async (dispatch) => {
   const response = await fetch('/api/content', {
@@ -73,6 +70,7 @@ export const addNewContent = (formData) => async (dispatch) => {
   if (response.ok) {
     const data = await response.json();
     dispatch(addContentAction(data));
+    return data.id;
   } else {
     // Handle errors or invalid responses. Consider enhancing error handling based on your app's needs.
     const error = await response.json();
@@ -86,18 +84,23 @@ export const fetchVideoContent = () => async (dispatch) => {
     const data = await response.json();
     dispatch(fetchContentAction(data));
   }
-
 };
 
 export const fetchUserContents = (userId) => async (dispatch) => {
   const response = await fetch(`/api/content/user/${userId}`);
 
-    if (response.ok) {
-      const contents = await response.json();
-      dispatch(fetchUserContentsAction(contents));
-    } else {
-      throw response;
-    }
+  if (response.ok) {
+    const contents = await response.json();
+    dispatch(fetchUserContentsAction(contents));
+  } else {
+    throw response;
+  }
+  if (response.ok) {
+    const contents = await response.json();
+    dispatch(fetchUserContentsAction(contents));
+  } else {
+    throw response;
+  }
 };
 
 export const fetchContentByGenre = (genreName) => async (dispatch) => {
@@ -172,7 +175,7 @@ const initialState = {
 };
 
 const contentReducer = (state = initialState, action) => {
-    switch (action.type) {
+  switch (action.type) {
     case FETCH_CONTENT_REQUEST:
       return {
         ...state,
@@ -199,7 +202,7 @@ const contentReducer = (state = initialState, action) => {
       return { ...state, contents: action.payload };
     case FETCH_USER_CONTENTS:
       return { ...state, contents: action.payload };
-        case FETCH_CONTENT_BY_GENRE:
+    case FETCH_CONTENT_BY_GENRE:
       return {
         ...state,
         genreContents: {
