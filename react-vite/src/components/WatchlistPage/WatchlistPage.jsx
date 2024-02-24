@@ -31,25 +31,29 @@ const WatchlistPage = () => {
 
   return (
     <div className="watchlist-page">
-      <h1>Watchlist</h1>
-      {watchlist.length > 0 ? (
-        <ul>
-          {watchlist.map((item) => (
-            <li key={item.id}>
-              {/* <p>{item.watchlist_id}</p> */}
-              <Link to={`/content/${item.video_id}`}>{item.title}</Link>
-              <button onClick={() => handleRemoveFromWatchlist(item.watchlist_id)}>
-                Remove
-              </button>
-            </li>
-          ))}
-        </ul>
-      ) : (
-        <p>
-          Your watchlist is empty. Go <Link to="/content">here</Link> to add movies to your watchlist.
-        </p>
-      )}
+  <h1>Watchlist</h1>
+  {watchlist.length > 0 ? (
+    <div className="watchlist-grid">
+      {watchlist.map((item) => (
+        <div className="watchlist-item" key={item.id}>
+          <Link to={`/content/${item.video_id}`}>
+            <img src={item.thumbnail_url} alt={item.title} />
+          </Link>
+          <div className="watchlist-item-details">
+            <Link to={`/content/${item.video_id}`}>{item.title}</Link>
+            <button onClick={() => handleRemoveFromWatchlist(item.watchlist_id)}>
+              Remove
+            </button>
+          </div>
+        </div>
+      ))}
     </div>
+  ) : (
+    <p>
+      Your watchlist is empty. Go <Link to="/content">here</Link> to add movies to your watchlist.
+    </p>
+  )}
+</div>
   );
 };
 
