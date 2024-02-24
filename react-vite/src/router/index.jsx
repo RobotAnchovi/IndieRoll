@@ -1,56 +1,60 @@
-import { createBrowserRouter } from "react-router-dom";
-import Layout from "./Layout";
-import LoginFormPage from "../components/LoginFormPage";
-import SignupFormPage from "../components/SignupFormPage";
-import LandingPage from "../components/LandingPage";
-import HomePage from "../components/HomePage";
-import UserProfilePage from "../components/UserProfilePage";
-import ContentPage from "../components/ContentPage";
-import SubmitFilmPage from "../components/SubmitFilmPage";
-import WatchlistPage from "../components/WatchlistPage";
-import GenrePage from "../components/GenrePage";
+import { createBrowserRouter } from 'react-router-dom';
+import Layout from './Layout';
+import LoginFormPage from '../components/LoginFormPage';
+import SignupFormPage from '../components/SignupFormPage';
+import LandingPage from '../components/LandingPage';
+import HomePage from '../components/HomePage';
+import UserProfilePage from '../components/UserProfilePage';
+import ContentPage from '../components/ContentPage';
+import SubmitFilmPage from '../components/SubmitFilmPage';
+import WatchlistPage from '../components/WatchlistPage';
+import GenrePage from '../components/GenrePage';
+import EditFilm from '../components/EditFilm';
 
 export const router = createBrowserRouter([
   {
     element: <Layout />,
     children: [
       {
-        path: "/",
+        path: '/',
         element: <LandingPage />,
       },
       {
-        path: "content",
-        element: <HomePage />
+        path: 'content',
+        element: <HomePage />,
       },
       {
-        path: "content/all/:id",
+        path: 'content/all/:id',
         element: <ContentPage />,
       },
       {
-        path: "/content/:genreName",
+        path: '/content/:genreName',
         element: <GenrePage />,
       },
       {
-        path: "profile",
+        path: 'profile',
         element: <UserProfilePage />,
       },
-     {
-
-        path:"submit-film",
+      {
+        path: 'submit-film',
         element: <SubmitFilmPage />,
       },
       {
-        path: "login",
+        path: 'edit-film/:id',
+        element: <EditFilm />,
+      },
+      {
+        path: 'login',
         element: <LoginFormPage />,
       },
       {
-        path: "signup",
+        path: 'signup',
         element: <SignupFormPage />,
       },
       {
-        path: "watchlist",
+        path: 'watchlist',
         element: <WatchlistPage />,
-      }
+      },
     ],
   },
 ]);

@@ -1,0 +1,12 @@
+button.video-delete {
+  width: 105%;
+  padding: 1rem;
+  background-color: #fae80b;
+  color: #000000;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bolder;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
