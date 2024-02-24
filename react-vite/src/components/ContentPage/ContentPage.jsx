@@ -24,7 +24,7 @@ const ContentPage = () => {
   const isOwner = movie?.user_id === isAuthenticated?.id;
 
   const handleUpdateClick = () => {
-    navigate('/submit-film', { state: { content: movie } });
+    navigate(`/edit-film/${id}`, { state: { content: movie } });
   };
   useEffect(() => {
     if (isAuthenticated) {
