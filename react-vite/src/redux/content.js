@@ -20,10 +20,10 @@ const fetchContentAction = (contents) => ({
   type: FETCH_CONTENT,
   payload: contents,
 });
-const fetchUserContentsAction = (contents) => ({
-  type: FETCH_USER_CONTENTS,
-  payload: contents,
-});
+// const fetchUserContentsAction = (contents) => ({
+//   type: FETCH_USER_CONTENTS,
+//   payload: contents,
+// });
 
 const fetchContentByGenreAction = (genre, contents) => ({
   type: FETCH_CONTENT_BY_GENRE,
@@ -71,6 +71,7 @@ export const addNewContent = (formData) => async (dispatch) => {
     const data = await response.json();
     dispatch(addContentAction(data));
     return data.id;
+    return data.id;
   } else {
     // Handle errors or invalid responses. Consider enhancing error handling based on your app's needs.
     const error = await response.json();
@@ -86,26 +87,20 @@ export const fetchVideoContent = () => async (dispatch) => {
   }
 };
 
-export const fetchUserContents = (userId) => async (dispatch) => {
-  const response = await fetch(`/api/content/user/${userId}`);
+// export const fetchUserContents = (userId) => async (dispatch) => {
+//   const response = await fetch(`/api/content/user/${userId}`);
 
-  if (response.ok) {
-    const contents = await response.json();
-    dispatch(fetchUserContentsAction(contents));
-  } else {
-    throw response;
-  }
-  if (response.ok) {
-    const contents = await response.json();
-    dispatch(fetchUserContentsAction(contents));
-  } else {
-    throw response;
-  }
-};
+//     if (response.ok) {
+//       const contents = await response.json();
+//       dispatch(fetchUserContentsAction(contents));
+//     } else {
+//       throw response;
+//     }
+// };
 
 export const fetchContentByGenre = (genreName) => async (dispatch) => {
   try {
-    const response = await fetch(`/api/content/genres/${genreName}`);
+    const response = await fetch(`/api/content/${genreName}`);
     if (response.ok) {
       const contents = await response.json();
       dispatch(fetchContentByGenreAction(genreName, contents));

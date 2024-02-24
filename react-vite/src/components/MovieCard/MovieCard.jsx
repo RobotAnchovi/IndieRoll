@@ -23,7 +23,7 @@ const MovieCard = ({ movie }) => {
   };
 
   const handleDetailsClick = () => {
-    navigate(`/content/all/${movie.id}`, { state: { movie } });
+    navigate(`/content/${movie.id}`, { state: { movie } });
   };
 
   return (
