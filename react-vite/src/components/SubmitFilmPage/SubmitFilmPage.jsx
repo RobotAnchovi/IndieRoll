@@ -82,6 +82,7 @@ const SubmitFilmPage = () => {
           id='thumbnail'
           type='file'
           onChange={handleThumbnailChange}
+          accept='image/png, image/jpeg, image/gif. image/jpg'
           required
         />
 
@@ -91,6 +92,7 @@ const SubmitFilmPage = () => {
           type='file'
           label='Video File'
           onChange={handleVideoChange}
+          accept='video/mp4, video/mov'
           required
         />
         <button className='video-submit' type='submit'>
