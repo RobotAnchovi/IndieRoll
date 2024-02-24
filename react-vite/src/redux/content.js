@@ -103,7 +103,7 @@ export const fetchVideoContent = () => async (dispatch) => {
 
 export const fetchContentByGenre = (genreName) => async (dispatch) => {
   try {
-    const response = await fetch(`/api/content/genres/${genreName}`);
+    const response = await fetch(`/api/content/${genreName}`);
     if (response.ok) {
       const contents = await response.json();
       dispatch(fetchContentByGenreAction(genreName, contents));
