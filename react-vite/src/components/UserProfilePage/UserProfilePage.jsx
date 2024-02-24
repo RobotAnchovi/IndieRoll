@@ -35,7 +35,7 @@ const UserProfilePage = () => {
       {userOwnedContent.length > 0 ? (
         userOwnedContent.map((content) => (
           <div key={content.id} className="movie-item">
-          <NavLink to={`/content/${content.id}`}>
+          <NavLink to={`/content/all/${content.id}`}>
             <h3>{content.title}</h3>
             <img src={content.thumbnail_url} alt={`${content.title} thumbnail`} className="movie-thumbnail" />
             {/* You might want to display a thumbnail or other details here */}
