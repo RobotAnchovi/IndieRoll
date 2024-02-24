@@ -17,11 +17,16 @@ function Homepage() {
   console.log("🚀 ~ Homepage ~ content:", content)
 
 
+
   useEffect(() => {
     if (isAuthenticated) {
       dispatch(fetchVideoContent());
     }
   }, [dispatch, isAuthenticated]);
+
+  useEffect(() => {
+    dispatch(fetchVideoContent());
+  }, [dispatch]);
 
   const featured = content[0];
   const fantasyMovies = content.filter(movie => movie.genre === 'Fantasy');

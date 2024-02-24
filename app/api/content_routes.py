@@ -1,6 +1,6 @@
 from flask import Blueprint, request, jsonify
 from flask_login import login_required, current_user
-from app.models import db, VideoContent
+from app.models import db, VideoContent, Watchlist
 from sqlalchemy.exc import IntegrityError
 from .AWS_helpers import upload_file_to_s3, remove_file_from_s3, get_unique_filename
 from app.forms import VideoForm
@@ -9,17 +9,47 @@ content_routes = Blueprint("content", __name__)
 
 
 # *====> FETCH <====
+# @content_routes.route("", defaults={"contentId": None}, methods=["GET"])
+# @content_routes.route("/<int:contentId>", methods=["GET"])
+# def get_content(contentId):
+#     if contentId is None:
+#         videos = VideoContent.query.all()
+#         return jsonify([video.to_dict() for video in videos]), 200
+#     else:
+#         video = VideoContent.query.get(contentId)
+#         if video is None:
+#             return jsonify({"error": "Content not found"}), 404
+#         return jsonify(video.to_dict()), 200
+
+
+# Edited this to include watchlist info
 @content_routes.route("", defaults={"contentId": None}, methods=["GET"])
 @content_routes.route("/<int:contentId>", methods=["GET"])
+@login_required
 def get_content(contentId):
     if contentId is None:
         videos = VideoContent.query.all()
-        return jsonify([video.to_dict() for video in videos]), 200
+        videos_with_watchlist = []
+        for video in videos:
+            video_dict = video.to_dict()
+            watchlist_item = Watchlist.query.filter_by(user_id=current_user.id, video_id=video.id).first()
+            if watchlist_item:
+                video_dict['watchlist_id'] = watchlist_item.id
+            else:
+                video_dict['watchlist_id'] = None
+            videos_with_watchlist.append(video_dict)
+        return jsonify(videos_with_watchlist), 200
     else:
         video = VideoContent.query.get(contentId)
         if video is None:
             return jsonify({"error": "Content not found"}), 404
-        return jsonify(video.to_dict()), 200
+        video_dict = video.to_dict()
+        watchlist_item = Watchlist.query.filter_by(user_id=current_user.id, video_id=video.id).first()
+        if watchlist_item:
+            video_dict['watchlist_id'] = watchlist_item.id
+        else:
+            video_dict['watchlist_id'] = None
+        return jsonify(video_dict), 200
 
 
 # *====> CREATE <====

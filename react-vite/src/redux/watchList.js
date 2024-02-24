@@ -70,8 +70,9 @@ const watchlistReducer = (state = initialState, action) => {
     case REMOVE_WATCHLIST_ITEM:
       return {
         ...state,
-        watchlist: state.watchlist.filter((item) => item.id !== action.payload),
+        watchlist: state.watchlist.filter(item => item.watchlist_id !== action.payload),
       };
+
     default:
       return state;
   }

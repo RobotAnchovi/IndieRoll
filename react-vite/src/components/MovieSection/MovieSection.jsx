@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import MovieCard from '../MovieCard';
 import './MovieSection.css';
 
-const CARD_WIDTH = 200; // Adjust this to the actual width of the MovieCard with margins
+const CARD_WIDTH = 300; // Adjust this to the actual width of the MovieCard with margins
 
 const MovieSection = ({ title, movies }) => {
   const [viewportWidth, setViewportWidth] = useState(window.innerWidth);

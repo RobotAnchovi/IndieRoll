@@ -1,12 +1,20 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchUserWatchlist, removeFromWatchlist } from "../../redux/watchList"; // Adjust the import path according to your project structure
+import { fetchUserWatchlist, removeFromWatchlist } from "../../redux/watchList";
 import { Link } from "react-router-dom";
 import "./Watchlist.css";
+
 const WatchlistPage = () => {
+
+  const state = useSelector(state => state);
+  console.log("🚀 ~ Watchlistpage ~ state:", state)
+
   const dispatch = useDispatch();
   const watchlist = useSelector((state) => state.watchlist.watchlist);
   const user = useSelector((state) => state.session.user);
+
+  console.log("🚀 ~ WatchlistPage ~ watchlist:", watchlist);
+  console.log("🚀 ~ WatchlistPage ~ watchlist.id:", watchlist.user_id);
 
   useEffect(() => {
     if (user) {
@@ -14,9 +22,13 @@ const WatchlistPage = () => {
     }
   }, [dispatch, user]);
 
+
+  // Corrected remove function
   const handleRemoveFromWatchlist = (watchlistId) => {
+    console.log("🚀 ~ WatchlistPage ~ watchlistId:", watchlistId)
     dispatch(removeFromWatchlist(watchlistId));
   };
+
   return (
     <div className="watchlist-page">
       <h1>Watchlist</h1>
@@ -24,8 +36,9 @@ const WatchlistPage = () => {
         <ul>
           {watchlist.map((item) => (
             <li key={item.id}>
+              {/* <p>{item.watchlist_id}</p> */}
               <Link to={`/content/${item.video_id}`}>{item.title}</Link>
-              <button onClick={() => handleRemoveFromWatchlist(item.id)}>
+              <button onClick={() => handleRemoveFromWatchlist(item.watchlist_id)}>
                 Remove
               </button>
             </li>
@@ -33,8 +46,7 @@ const WatchlistPage = () => {
         </ul>
       ) : (
         <p>
-          Your watchlist is empty. Go <Link to="/content">here</Link> to add
-          movies to your watchlist.
+          Your watchlist is empty. Go <Link to="/content">here</Link> to add movies to your watchlist.
         </p>
       )}
     </div>

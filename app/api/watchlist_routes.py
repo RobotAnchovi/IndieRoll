@@ -32,6 +32,7 @@ def add_to_watchlist():
         db.session.rollback()
         return jsonify({"error": "Could not add video to watchlist"}), 500
 
+# Edited this to include watchlist_id
 @watchlist_routes.route('', methods=['GET'])
 @login_required
 def view_watchlist():
@@ -40,17 +41,25 @@ def view_watchlist():
     for item in watchlist_items:
         video = VideoContent.query.get(item.video_id)
         if video:
-            watchlist_videos.append(video.to_dict())
+            watchlist_videos.append({
+                "watchlist_id": item.id,
+                "video_id": video.id,
+                "title": video.title,
+                "description": video.description,
+                "genre": video.genre,
+                "thumbnail_url": video.thumbnail_url,
+            })
 
     return jsonify(watchlist_videos), 200
 
 @watchlist_routes.route('/<int:watchlist_id>', methods=['DELETE'])
 @login_required
 def remove_from_watchlist(watchlist_id):
+
     watchlist_item = Watchlist.query.get(watchlist_id)
+
     if not watchlist_item:
         return jsonify({"error": "Watchlist item not found"}), 404
-
 
     if watchlist_item.user_id != current_user.id:
         return jsonify({"error": "Unauthorized"}), 403
