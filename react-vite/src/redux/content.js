@@ -111,17 +111,35 @@ export const fetchContentByGenre = (genreName) => async (dispatch) => {
   }
 };
 
-export const updateContent = (contentId, updateData) => async (dispatch) => {
+export const updateContent = (contentId, updateData, newThumbnail, newVideo, thumbnailPreview, videoPreview) => async (dispatch) => {
+  const formData = new FormData();
+
+  formData.append('title', updateData.title);
+  formData.append('description', updateData.description);
+  formData.append('genre', updateData.genre);
+
+  if (!newThumbnail) {
+    formData.append('thumbnail_url', thumbnailPreview);
+} else {
+    formData.append('thumbnail', newThumbnail);
+}
+
+if (!newVideo) {
+    formData.append('video_url', videoPreview);
+} else {
+    formData.append('video', newVideo);
+}
+
   const response = await fetch(`/api/content/${contentId}`, {
     method: 'PUT',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(updateData),
+    body: formData,
   });
 
   if (response.ok) {
-    const data = await response.json();
-    dispatch(updateContentAction({ contentId, ...data }));
-  }
+    const updatedContent = await response.json();
+    dispatch(updateContentAction({ contentId, ...updatedContent }));
+    return { success: true };
+}
 };
 
 export const deleteContent = (contentId) => async (dispatch) => {
@@ -210,7 +228,7 @@ const contentReducer = (state = initialState, action) => {
       return {
         ...state,
         contents: state.contents.map((content) =>
-          content.id === action.payload.contentId ? action.payload : content
+          content.id === action.payload.contentId ? { ...content, ...action.payload } : content
         ),
       };
     case DELETE_CONTENT:
