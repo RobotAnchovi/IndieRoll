@@ -4,6 +4,7 @@ from app.models import db, VideoContent, Watchlist
 from sqlalchemy.exc import IntegrityError
 from .AWS_helpers import upload_file_to_s3, remove_file_from_s3, get_unique_filename
 from app.forms import VideoForm
+from werkzeug.utils import secure_filename
 
 content_routes = Blueprint("content", __name__)
 
@@ -126,30 +127,40 @@ def update_content(contentId):
     if not video or video.user_id != current_user.id:
         return jsonify({"error": "Content not found or unauthorized"}), 404
 
-    form = VideoForm()
-    if form.validate_on_submit():
-        if form.thumbnail.data:
-            thumbnail = form.thumbnail.data
-            thumbnail_file = get_unique_filename(thumbnail.filename)
-            thumbnail_url = upload_file_to_s3(thumbnail, thumbnail_file)
-            if "errors" in thumbnail_url:
-                return jsonify({"errors": "Could not upload thumbnail"}), 500
-            video.thumbnail_url = thumbnail_url["url"]
 
-        if form.video.data:
-            video_file = form.video.data
-            video_filename = get_unique_filename(video_file.filename)
-            video_url = upload_file_to_s3(video_file, video_filename)
-            if "errors" in video_url:
-                return jsonify({"errors": "Could not upload video"}), 500
-            video.video_url = video_url["url"]
+    title = request.form.get('title')
+    description = request.form.get('description')
+    genre = request.form.get('genre')
+    thumbnail_url = request.form.get('thumbnail_url')
+    video_url = request.form.get('video_url')
 
-        video.title = form.title.data if form.title.data else video.title
-        video.description = (
-            form.description.data if form.description.data else video.description
-        )
-        video.genre = form.genre.data if form.genre.data else video.genre
+    # Update text fields
+    if title:
+        video.title = title
+    if description:
+        video.description = description
+    if genre:
+        video.genre = genre
 
+    # Handle thumbnail
+    thumbnail_file = request.files.get('thumbnail')
+    if thumbnail_file:
+        filename = secure_filename(thumbnail_file.filename)
+        upload_result = upload_file_to_s3(thumbnail_file, filename)
+        if upload_result.get('url'):
+            video.thumbnail_url = upload_result['url']
+    elif thumbnail_url:
+        video.thumbnail_url = thumbnail_url
+
+    # Handle video
+    video_file = request.files.get('video')
+    if video_file:
+        filename = secure_filename(video_file.filename)
+        upload_result = upload_file_to_s3(video_file, filename)
+        if upload_result.get('url'):
+            video.video_url = upload_result['url']
+    elif video_url:
+        video.video_url = video_url
         try:
             db.session.commit()
             return jsonify(video.to_dict()), 200
