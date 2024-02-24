@@ -9,7 +9,7 @@ def seed_videos():
             description="The story of how reggae icon Bob Marley overcame adversity, and the journey behind his revolutionary music.",
             genre="Drama",
             thumbnail_url="https://indieroll-bucket.s3.us-east-2.amazonaws.com/bob-marley-thumbnail.jpeg",
-            video_url="https://indieroll-bucket.s3.us-east-2.amazonaws.com/bob-marley-thumbnail.jpeg",
+            video_url="https://indieroll-bucket.s3.us-east-2.amazonaws.com/bob+marley.mp4",
             user_id=1,
         ),
         VideoContent(
