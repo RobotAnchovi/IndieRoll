@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect ,useState } from 'react';
 import { useParams, Navigate, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchContentById } from '../../redux/content';
@@ -10,22 +10,29 @@ const ContentPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+
   const isAuthenticated = useSelector(state => state.session.user);
   const loading = useSelector(state => state.content.loading);
   const movie = useSelector(state => state.content.currentContent);
+  console.log("🚀 ~ ContentPage ~ movie:", movie)
+
+  const [triggerFetch, setTriggerFetch] = useState(false);
+
 
   useEffect(() => {
+
     if (isAuthenticated) {
-      if (!movie || movie.id.toString() !== id) {
-        dispatch(fetchContentById(id));
-      }
+      dispatch(fetchContentById(id));
     }
-  }, [id, movie, dispatch, isAuthenticated]);
+  }, [id, isAuthenticated, dispatch, triggerFetch]);
+
+
+  useEffect(() => {
+    return () => setTriggerFetch(false);
+  }, [id]);
+
   const isOwner = movie?.user_id === isAuthenticated?.id;
 
-  const handleUpdateClick = () => {
-    navigate(`/edit-film/${id}`, { state: { content: movie } });
-  };
   useEffect(() => {
     if (isAuthenticated) {
         if (!movie || movie.id.toString() !== id) {
@@ -51,9 +58,6 @@ const ContentPage = () => {
   return (
     <div>
       <FeaturedMovie movie={movie} />
-      {isOwner && (
-        <button onClick={handleUpdateClick}>Update</button>
-      )}
       <ReviewsSection movie={movie} />
     </div>
   );

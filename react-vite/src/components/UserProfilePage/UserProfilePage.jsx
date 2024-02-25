@@ -8,6 +8,8 @@ const UserProfilePage = () => {
   const dispatch = useDispatch();
   const contents = useSelector((state) => state.content.contents);
   const user  = useSelector((state) => state.session.user);
+  console.log("🚀 ~ UserProfilePage ~ user:", user)
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -22,29 +24,41 @@ const UserProfilePage = () => {
     navigate('/submit-film');
   };
 
+  const handleUpdateProfile = () => {
+    navigate('/profile/update');
+  };
+
   return (
     <div className='profile-page'>
       {/* Display user information */}
+      <img className="profile-photo" src={user?.profile_picture} alt={user?.username} />
       <h1>{user?.username}</h1>
       <p>{user?.user_intro}</p>
       {/* Button to add a new film */}
-      <button onClick={handleAddNewFilm}>Add a new Film</button>
+      <div className="button-box">
+      <button className="button" onClick={handleUpdateProfile}>Update My Profile</button>
+      <button className="button" onClick={handleAddNewFilm}>Add a new Film</button>
+      </div>
 
       {/* List of current user's films */}
       <h2>My Films</h2>
+      <div className="profile-grid">
       {userOwnedContent.length > 0 ? (
         userOwnedContent.map((content) => (
           <div key={content.id} className="movie-item">
           <NavLink to={`/content/all/${content.id}`}>
-            <h3>{content.title}</h3>
             <img src={content.thumbnail_url} alt={`${content.title} thumbnail`} className="movie-thumbnail" />
+            <div className="movie-item-details">
+            <h3>{content.title}</h3>
+            </div>
             {/* You might want to display a thumbnail or other details here */}
           </NavLink>
         </div>
         ))
-      ) : (
-        <p>You have not uploaded any films.</p>
-      )}
+        ) : (
+          <p>You have not uploaded any films.</p>
+          )}
+          </div>
     </div>
   );
 };

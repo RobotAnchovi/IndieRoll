@@ -17,6 +17,7 @@ class User(db.Model, UserMixin):
     name = db.Column(db.String(255), nullable=True)
     is_creator = db.Column(db.Boolean, default=False)
     user_intro = db.Column(db.Text)
+    profile_picture = db.Column(db.String(500), nullable=True)
 
     @property
     def password(self):
@@ -37,4 +38,5 @@ class User(db.Model, UserMixin):
             "name": self.name,
             "is_creator": self.is_creator,
             "user_intro": self.user_intro,
+            "profile_picture": self.profile_picture,
         }

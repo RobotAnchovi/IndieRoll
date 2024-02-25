@@ -19,29 +19,29 @@ function SignupFormPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    setErrors({});
+
     if (password !== confirmPassword) {
       setErrors({
         ...errors,
-        confirmPassword:
-          "Confirm Password field must be the same as the Password field",
+        confirmPassword: "Confirm Password field must be the same as the Password field",
       });
       return;
     }
 
-    const serverResponse = await dispatch(
-      thunkSignup({
-        email,
-        username,
-        password,
-      })
-    );
+    const serverResponse = await dispatch(thunkSignup({
+      email,
+      username,
+      password,
+    }));
 
-    if (serverResponse) {
-      setErrors(serverResponse);
-    } else {
-      navigate("/");
+    if (serverResponse && serverResponse.errors) {
+      setErrors(serverResponse.errors);
+    } else if (serverResponse) {
+      navigate("/content");
     }
   };
+
 
   return (
     <div className="signup-form-page">
@@ -101,6 +101,9 @@ function SignupFormPage() {
             onChange={(e) => setIsCreator(e.target.checked)}
           />
         </label>
+        {errors.user && (
+            <p className="error">{errors.user}</p>
+          )}
         <button type="submit" className="signup-button">
           Sign Up
         </button>

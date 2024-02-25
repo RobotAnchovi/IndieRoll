@@ -13,6 +13,17 @@ const EditFilmPage = () => {
   const contentToUpdate = location.state?.content;
   const [thumbnailPreview] = useState(contentToUpdate?.thumbnail_url || '');
   const [videoPreview] = useState(contentToUpdate?.video_url || '');
+  const [newThumbnail] = useState(null);
+const [newVideo] = useState(null);
+
+// Event handlers for file inputs
+// const handleThumbnailChange = (event) => {
+//     setNewThumbnail(event.target.files[0]);
+// };
+
+// const handleVideoChange = (event) => {
+//     setNewVideo(event.target.files[0]);
+// };
   // Assume the Redux state has a structure where contents are under `state.content.contents`
   const filmDetails = useSelector((state) =>
     state.content.contents.find((content) => content.id === parseInt(id))
@@ -29,10 +40,24 @@ const EditFilmPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Implement the submit logic for updating, excluding thumbnail and video uploads
-    await dispatch(updateContent(id, { title, description, genre: genre.charAt(0).toUpperCase() + genre.slice(1) }));
-    navigate(`/content/all/${id}`); // Redirect to the updated film's detail page
-  };
+    // Prepare the data, including any new thumbnail or video selected by the user
+    const updateData = {
+      title: title, // Assuming 'title' comes from component state
+      description: description, // Assuming 'description' comes from component state
+      genre: genre.charAt(0).toUpperCase() + genre.slice(1), // Capitalize genre
+    };
+
+    // Dispatch the update action, passing the content ID, update data, and any new files
+    const result = await dispatch(updateContent(id, updateData, newThumbnail, newVideo, thumbnailPreview, videoPreview));
+
+    // Handle the response
+    if (result?.success) {
+      navigate(`/content/all/${id}`, { state: { updated:true }});
+    } else {
+      // Handle error
+      console.error('Update failed');
+    }
+};
 
   const handleDelete = async () => {
     // Implement the delete logic
@@ -76,6 +101,15 @@ const EditFilmPage = () => {
             </div>
           )}
         </div>
+        {/* <div className="thumbnail-upload">
+    <label htmlFor="thumbnail">Update Thumbnail:</label>
+    <input
+        type="file"
+        id="thumbnail"
+        onChange={handleThumbnailChange}
+        accept="image/png, image/jpeg, image/gif"
+    />
+</div> */}
         <div className="video-preview">
           {videoPreview && (
             <div>
@@ -86,7 +120,15 @@ const EditFilmPage = () => {
             </div>
           )}
         </div>
-
+        {/* <div className="video-upload">
+    <label htmlFor="video">Update Video:</label>
+    <input
+        type="file"
+        id="video"
+        onChange={handleVideoChange}
+        accept="video/mp4, video/mov"
+    />
+</div> */}
         <button className='video-submit' type='submit'>
           Update Film
         </button>
