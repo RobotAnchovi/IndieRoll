@@ -11,6 +11,10 @@ body {
 .homepage {
   background-color: #fae80b;
 }
+
+.homepage h2 {
+  color: black;
+}
 button.viewall {
   background-color: black;
   border: none;
