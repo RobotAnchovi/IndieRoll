@@ -14,6 +14,7 @@ const ContentPage = () => {
   const isAuthenticated = useSelector(state => state.session.user);
   const loading = useSelector(state => state.content.loading);
   const movie = useSelector(state => state.content.currentContent);
+  console.log("🚀 ~ ContentPage ~ movie:", movie)
 
   const [triggerFetch, setTriggerFetch] = useState(false);
 

@@ -51,6 +51,10 @@ const FeaturedMovie = ({ movie }) => {
                         <Link to={movie.video_url} className="movie-card-link">
                             <button className='button'><FaPlay />Play</button>
                         </Link>
+                        <button className='button' onClick={() => navigate(`/content/all/${movie.id}/play`, { state: { src: movie.video_url } })}>
+                            <FaPlay />Play2
+                        </button>
+
                         {!isMovieInWatchlist && (
                             <button className='button list-button' onClick={handleAddToWatchlist}><FaList />Add to Watchlist</button>
                         )}
