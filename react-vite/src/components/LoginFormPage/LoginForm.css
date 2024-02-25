@@ -48,6 +48,17 @@
   cursor: pointer;
 }
 
+.demo-login-button {
+  margin-top: 10px;
+  width: 101%;
+  padding: 0.9rem;
+  background-color: #fae80b;
+  color: #000000;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
 .error {
   color: red;
 }

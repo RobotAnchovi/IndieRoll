@@ -36,11 +36,11 @@ const WatchlistPage = () => {
     <div className="watchlist-grid">
       {watchlist.map((item) => (
         <div className="watchlist-item" key={item.id}>
-          <Link to={`/content/${item.video_id}`}>
+          <Link to={`/content/all/${item.video_id}`}>
             <img src={item.thumbnail_url} alt={item.title} />
           </Link>
           <div className="watchlist-item-details">
-            <Link to={`/content/${item.video_id}`}>{item.title}</Link>
+            <Link to={`/content/all/${item.video_id}`}>{item.title}</Link>
             <button onClick={() => handleRemoveFromWatchlist(item.watchlist_id)}>
               Remove
             </button>

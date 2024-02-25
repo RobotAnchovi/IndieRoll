@@ -16,7 +16,14 @@ function LoginFormPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    login(email, password);
+  };
 
+  const loginAsDemoUser = async () => {
+    login('demo@aa.io', 'password');
+  };
+
+  const login = async (email, password) => {
     const serverResponse = await dispatch(
       thunkLogin({
         email,
@@ -61,12 +68,12 @@ function LoginFormPage() {
           <button type="submit" className="login-button">
             Log In
           </button>
+          <button type="button" onClick={loginAsDemoUser} className="demo-login-button">
+            Login as Demo User
+          </button>
         </form>
         <div className="sign-up-link">
-          New to IndieRoll?{" "}
-          <a className="sign-up-here" href="/signup">
-            Sign up now.
-          </a>
+          New to IndieRoll? <a className="sign-up-here" href="/signup">Sign up now.</a>
         </div>
       </div>
     </div>
