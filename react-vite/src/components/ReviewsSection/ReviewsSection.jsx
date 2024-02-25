@@ -20,11 +20,16 @@ const ReviewsSection = () => {
   const [reviewText, setReviewText] = useState("");
   const [editingReviewId, setEditingReviewId] = useState(null);
 
+  // useEffect(() => {
+  //   if (reviews.length === 0) {
+  //     dispatch(fetchReviews(id));
+  //   }
+  // }, [id, reviews.length, dispatch]);
+
   useEffect(() => {
-    if (reviews.length === 0) {
-      dispatch(fetchReviews(id));
-    }
-  }, [id, reviews.length, dispatch]);
+    dispatch(fetchReviews(id));
+  }, [id, dispatch]);
+
 
   const handleSubmit = async (event) => {
     event.preventDefault();

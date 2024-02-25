@@ -17,7 +17,7 @@ class User(db.Model, UserMixin):
     name = db.Column(db.String(255), nullable=True)
     is_creator = db.Column(db.Boolean, default=False)
     user_intro = db.Column(db.Text)
-    profile_picture = db.Column(db.String(500), nullable=True)
+    profile_picture = db.Column(db.String(500), nullable=True, default="https://t4.ftcdn.net/jpg/00/64/67/63/360_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg")
 
     @property
     def password(self):
