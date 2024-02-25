@@ -46,10 +46,13 @@
   border: none;
   border-radius: 6px;
   cursor: pointer;
+  font-weight: bolder;
+  font-size: 15px;
 }
 
 .demo-login-button {
   margin-top: 10px;
+  font-weight: bolder;
   width: 101%;
   padding: 0.9rem;
   background-color: #fae80b;
@@ -57,6 +60,7 @@
   border: none;
   border-radius: 6px;
   cursor: pointer;
+  font-size: 15px;
 }
 
 .error {

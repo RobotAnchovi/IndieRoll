@@ -1,7 +1,35 @@
 .profile-page {
   color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 200px;
 }
-
+.my-movies {
+  max-width: 800px; /* Increased from 600px */
+  margin-top: 200px;
+  height: 600px; /* Increased from 400px */
+  margin: auto;
+  color: white;
+  padding: 3rem; /* Increased padding for more space inside */
+  border-radius: 8px;
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent black background */
+  font-family: Arial, Helvetica, sans-serif;
+}
+.user-infos {
+  max-width: 700px; /* Increased from 500px */
+  display: flex;
+  flex-direction: column;
+  height: 500px; /* Increased from 400px */
+  margin: auto;
+  color: white;
+  padding: 3rem; /* Increased padding for more space inside */
+  border-radius: 8px;
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent black background */
+  font-family: Arial, Helvetica, sans-serif;
+}
 .profile-photo {
   width: 100px;
   height: 100px;
@@ -17,13 +45,13 @@
 }
 
 .profile-page h1 {
-  color: #fae80b;
+  color: #ffffff;
   margin-bottom: 20px;
 }
 
 .profile-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap: 20px;
 }
 
@@ -54,7 +82,7 @@
 }
 
 .movie-item-details button {
-  background-color:  #fae80b; /* Remove button color */
+  background-color: #fae80b; /* Remove button color */
   color: black;
   font-style: bold;
   font-size: 14px;

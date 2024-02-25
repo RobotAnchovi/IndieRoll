@@ -35,23 +35,36 @@
 }
 
 .watchlist-icon {
-  position: absolute;
-  top: 10px; /* Adjust as needed */
-  right: 10px; /* Adjust as needed */
-  background: none; /* Remove default button background */
-  border: solid black; /* Remove default button border */
-  cursor: pointer;
-  opacity: 0; /* Icon is initially invisible */
-  transition: opacity 0.3s ease;
-  background-color: #fae80b;
-  padding-left: 10px;
-  padding-right: 10px;
-  padding-top: 10px;
-  padding-bottom: 5px;
   border-radius: 5px;
-  font-size: larger;
-}
+  border: 4px solid black;
+  font-size: 15px;
+  padding-top: 3px;
 
+  background-color: #fae80b;
+  position: absolute;
+  right: 30px;
+  top: 40px;
+  z-index: 40;
+}
+.tooltip-container {
+  position: absolute;
+  right: 30px;
+  top: 10px;
+  z-index: 40;
+  font-weight: bolder;
+  color: white;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+}
+.watchlist-elements {
+  display: flex;
+  flex-direction: column;
+}
+.watchlist-elements .tooltip-container {
+  opacity: 0;
+}
+.watchlist-elements:hover .tooltip-container {
+  opacity: 80%;
+}
 .movie-card:hover .movie-title,
 .movie-card:hover .watchlist-icon {
   opacity: 1; /* Show the title and icon on hover */

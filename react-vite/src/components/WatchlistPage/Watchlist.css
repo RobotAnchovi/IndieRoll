@@ -30,13 +30,13 @@
 }
 
 .watchlist-item-details a {
-  color: #fae80b;
+  color: #ffffff;
   text-decoration: none;
   display: block; /* Make the link take the full width */
 }
 
 .watchlist-item-details button {
-  background-color:  #fae80b; /* Remove button color */
+  background-color: #fae80b; /* Remove button color */
   color: black;
   font-style: bold;
   font-size: 14px;
