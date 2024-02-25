@@ -1,1 +1,9 @@
 /* TODO: Add sitewide styles */
+button:hover {
+    cursor: pointer;
+  }
+
+
+.movie-thumbnail:hover {
+    cursor: pointer;
+  }
