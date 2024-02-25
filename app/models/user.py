@@ -18,6 +18,8 @@ class User(db.Model, UserMixin):
     is_creator = db.Column(db.Boolean, default=False)
     user_intro = db.Column(db.Text)
 
+    watchlist_items = db.relationship('Watchlist', back_populates='user_watchlists', cascade="all, delete-orphan")
+
     @property
     def password(self):
         raise AttributeError("password is not a readable attribute")

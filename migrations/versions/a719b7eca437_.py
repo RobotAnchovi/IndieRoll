@@ -59,8 +59,8 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=False),
     sa.Column('video_id', sa.Integer(), nullable=False),
-    sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
-    sa.ForeignKeyConstraint(['video_id'], ['video_content.id'], ),
+    sa.ForeignKeyConstraint(['user_id'], ['users.id'], name='watchlist_user_id_fkey'),
+    sa.ForeignKeyConstraint(['video_id'], ['video_content.id'], name='watchlist_video_id_fkey', ondelete='CASCADE'),
     sa.PrimaryKeyConstraint('id')
     )
     if environment == "production":

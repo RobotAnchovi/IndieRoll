@@ -12,8 +12,8 @@ class Watchlist(db.Model):
     user_id = db.Column(db.Integer, ForeignKey(add_prefix_for_prod("users.id")), nullable=False)
     video_id = db.Column(db.Integer, ForeignKey(add_prefix_for_prod("video_content.id")), nullable=True)
 
-    user_watchlists = db.relationship("User", backref=db.backref("watchlist_items", lazy=True))
-    video_content = db.relationship("VideoContent", single_parent=True)
+    user_watchlists = db.relationship("User", back_populates="watchlist_items")
+    video_content = db.relationship("VideoContent", back_populates="watchlists")
 
     def to_dict(self):
         return {"id": self.id, "user_id": self.user_id, "video_id": self.video_id}
