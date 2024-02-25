@@ -1,15 +1,26 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { fetchUserWatchlist, addToWatchlist } from '../../redux/watchList';
 import { FaPlay, FaList } from "react-icons/fa";
 import "./FeaturedMovie.css";
 
 const FeaturedMovie = ({ movie }) => {
+    let { id } = useParams();
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const watchlist = useSelector((state) => state.watchlist.watchlist);
     const isMovieInWatchlist = watchlist.some(item => item.video_id === movie.id);
+    const currentUser = useSelector(state => state.session.user);
+
+    const isOwner = movie?.user_id === currentUser?.id;
+
+    const isOnPage = id === movie.id.toString();
+    console.log("🚀 ~ FeaturedMovie ~ isOnPage:", isOnPage)
+
+    const handleUpdateClick = () => {
+        navigate(`/edit-film/${movie.id}`, { state: { content: movie } });
+    };
 
     useEffect(() => {
         dispatch(fetchUserWatchlist());
@@ -43,7 +54,12 @@ const FeaturedMovie = ({ movie }) => {
                         {!isMovieInWatchlist && (
                             <button className='button list-button' onClick={handleAddToWatchlist}><FaList />Add to Watchlist</button>
                         )}
-                        <button className='button details-button' onClick={handleDetailsClick}>Details</button>
+                        {!isOnPage && (
+                            <button className='button details-button' onClick={handleDetailsClick}>Details</button>
+                        )}
+                        {isOwner && (
+                            <button className='button' onClick={handleUpdateClick}>Update</button>
+                        )}
                     </div>
                 </div>
             </div>

@@ -32,9 +32,6 @@ const ContentPage = () => {
 
   const isOwner = movie?.user_id === isAuthenticated?.id;
 
-  const handleUpdateClick = () => {
-    navigate(`/edit-film/${id}`, { state: { content: movie } });
-  };
   useEffect(() => {
     if (isAuthenticated) {
         if (!movie || movie.id.toString() !== id) {
@@ -60,9 +57,6 @@ const ContentPage = () => {
   return (
     <div>
       <FeaturedMovie movie={movie} />
-      {isOwner && (
-        <button onClick={handleUpdateClick}>Update</button>
-      )}
       <ReviewsSection movie={movie} />
     </div>
   );
