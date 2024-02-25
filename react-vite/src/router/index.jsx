@@ -10,6 +10,7 @@ import SubmitFilmPage from '../components/SubmitFilmPage';
 import WatchlistPage from '../components/WatchlistPage';
 import GenrePage from '../components/GenrePage';
 import EditFilm from '../components/EditFilm';
+import UpdateUserProfileForm from '../components/UpdateUserProfileForm';
 
 export const router = createBrowserRouter([
   {
@@ -34,6 +35,10 @@ export const router = createBrowserRouter([
       {
         path: 'profile',
         element: <UserProfilePage />,
+      },
+      {
+        path: 'profile/update',
+        element: <UpdateUserProfileForm />,
       },
       {
         path: 'submit-film',

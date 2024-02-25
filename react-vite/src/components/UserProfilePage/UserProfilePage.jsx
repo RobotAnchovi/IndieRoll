@@ -8,6 +8,8 @@ const UserProfilePage = () => {
   const dispatch = useDispatch();
   const contents = useSelector((state) => state.content.contents);
   const user  = useSelector((state) => state.session.user);
+  console.log("🚀 ~ UserProfilePage ~ user:", user)
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -22,12 +24,18 @@ const UserProfilePage = () => {
     navigate('/submit-film');
   };
 
+  const handleUpdateProfile = () => {
+    navigate('/profile/update');
+  };
+
   return (
     <div className='profile-page'>
       {/* Display user information */}
+      <img className="profile-photo" src={user?.profile_picture} alt={user?.username} />
       <h1>{user?.username}</h1>
       <p>{user?.user_intro}</p>
       {/* Button to add a new film */}
+      <button onClick={handleUpdateProfile}>Update My Profile</button>
       <button onClick={handleAddNewFilm}>Add a new Film</button>
 
       {/* List of current user's films */}

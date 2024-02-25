@@ -3,6 +3,9 @@ from flask_login import login_required, current_user, login_user, logout_user
 from app.models import User, db
 from werkzeug.security import check_password_hash
 import re
+from sqlalchemy.exc import IntegrityError
+from werkzeug.utils import secure_filename
+from .AWS_helpers import upload_file_to_s3, get_unique_filename
 
 user_routes = Blueprint("users", __name__)
 
@@ -65,6 +68,7 @@ def signup():
         name=data.get("name", ""),
         is_creator=data.get("is_creator", False),
         user_intro=data.get("user_intro", ""),
+        profile_picture=data.get("profile_picture", ""),
     )
 
     db.session.add(new_user)
@@ -143,3 +147,40 @@ def delete_profile():
             return jsonify({"errors": str(e)}), 500
     else:
         return jsonify({"errors": "User not found"}), 404
+
+
+@user_routes.route('/update', methods=['PUT'])
+@login_required
+def update_user():
+    user = User.query.get(current_user.id)
+    if not user:
+        return jsonify({"error": "User not found"}), 404
+
+    username = request.form.get('username')
+    user_intro = request.form.get('user_intro')
+    profile_picture_file = request.files.get('profile_picture')
+
+    # Check if username is unique
+    if username and username != user.username:
+        existing_user = User.query.filter_by(username=username).first()
+        if existing_user:
+            return jsonify({"error": "This username is already taken"}), 400
+        user.username = username
+
+    if user_intro:
+        user.user_intro = user_intro
+
+    # Handle profile picture upload
+    if profile_picture_file:
+        filename = secure_filename(profile_picture_file.filename)
+        unique_filename = get_unique_filename(filename)
+        upload_result = upload_file_to_s3(profile_picture_file, unique_filename)
+        if upload_result.get('url'):
+            user.profile_picture = upload_result['url']
+
+    try:
+        db.session.commit()
+        return jsonify(user.to_dict()), 200
+    except IntegrityError:
+        db.session.rollback()
+        return jsonify({"error": "Could not update user information"}), 500
