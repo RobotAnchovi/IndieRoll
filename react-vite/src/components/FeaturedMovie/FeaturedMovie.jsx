@@ -48,11 +48,11 @@ const FeaturedMovie = ({ movie }) => {
                         <p>{movie.genre}</p>
                     </div>
                     <div className='buttons'>
-                        <Link to={movie.video_url} className="movie-card-link">
+                        {/* <Link to={movie.video_url} className="movie-card-link">
                             <button className='button'><FaPlay />Play</button>
-                        </Link>
+                        </Link> */}
                         <button className='button' onClick={() => navigate(`/content/all/${movie.id}/play`, { state: { src: movie.video_url } })}>
-                            <FaPlay />Play2
+                            <FaPlay />Play
                         </button>
 
                         {!isMovieInWatchlist && (

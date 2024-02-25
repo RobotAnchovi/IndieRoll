@@ -9,3 +9,98 @@
   margin: 0 auto;
   margin-bottom: 20px;
 }
+
+.profile-page {
+  color: white;
+  padding: 20px;
+  text-decoration: none;
+}
+
+.profile-page h1 {
+  color: #fae80b;
+  margin-bottom: 20px;
+}
+
+.profile-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.movie-item {
+  padding: 10px;
+  border-radius: 8px; /* Rounded corners for each item */
+  text-decoration: none;
+}
+
+.movie-item img {
+  width: 100%; /* Make image take full width of the item */
+  height: 200px;
+  border-radius: 8px; /* Rounded corners for the image */
+}
+
+.movie-item a {
+  text-decoration: none;
+}
+
+.movie-item-details {
+  margin-top: 10px;
+}
+
+.movie-item-details h3 {
+  color: #fae80b;
+  text-decoration: none;
+  display: block; /* Make the link take the full width */
+}
+
+.movie-item-details button {
+  background-color:  #fae80b; /* Remove button color */
+  color: black;
+  font-style: bold;
+  font-size: 14px;
+  border: none;
+  padding: 5px 10px;
+  margin-top: 5px;
+  cursor: pointer;
+  border-radius: 4px; /* Rounded corners for button */
+}
+
+.movie-item-details button:hover {
+  opacity: 0.8;
+}
+
+.profile-page a:hover {
+  text-decoration: underline;
+}
+
+.profile-page p {
+  color: #aaaaaa;
+}
+
+.buttons {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.button {
+  background-color: #fae80b;
+  padding: 13px;
+  border: none;
+  margin-right: 10px;
+  border-radius: 4px;
+  font-weight: bolder;
+  display: flex;
+  gap: 5px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px,
+    rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+}
+
+.button:hover {
+  cursor: pointer;
+}
+
+.button-box {
+  display: flex;
+  justify-content: flex-start;
+  margin-top: 20px;
+}
