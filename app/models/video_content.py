@@ -18,7 +18,7 @@ class VideoContent(db.Model):
     thumbnail_url = db.Column(db.String(500), nullable=False)
     # rating to be talked about more? to compute average rating
     reviews = db.relationship("Review", backref="video", lazy=True)
-    watchlists = db.relationship('Watchlist', back_populates='video_content', cascade="all, delete orphan", passive_deletes=True)
+    watchlists = db.relationship('Watchlist', back_populates='video_content', cascade="all, delete-orphan", passive_deletes=True)
 
     def to_dict(self):
         return {
