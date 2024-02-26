@@ -1,0 +1,68 @@
+Copy code
+.genre-page {
+  color: white;
+  padding: 20px;
+}
+
+.genre-page h2 {
+    display: flex;
+  color: #fae80b;
+  margin-bottom: 20px;
+ justify-content: center;
+}
+
+/* This will style the container of the MovieCard components */
+.genre-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center; /* Center the items if they don't fill the full width */
+}
+
+  .genre-item {
+    padding: 10px;
+    border-radius: 8px; /* Rounded corners for each item */
+  }
+
+  .genre-item img {
+    width: 85%; /* Make image take full width of the item */
+    height: 250px;
+    border-radius: 8px; /* Rounded corners for the image */
+  }
+
+  .genre-item {
+    margin-top: 10px;
+  }
+
+  .genre-item a {
+    color: #ffffff;
+    text-decoration: none;
+    display: block; /* Make the link take the full width */
+  }
+
+  .genre-item button {
+    background-color: #fae80b; /* Button color */
+    color: black;
+    font-style: bold;
+    font-size: 14px;
+    border: none;
+    padding: 5px 10px;
+    margin-top: 5px;
+    cursor: pointer;
+    border-radius: 4px;
+    position: absolute;
+    right: 60px; /* Decrease this value to move the button to the left */
+    top: 25px; /* Rounded corners for button */
+  }
+
+  .genre-item button:hover {
+    opacity: 0.8;
+  }
+
+  .genre-page a:hover {
+    text-decoration: underline;
+  }
+
+  .genre-page p {
+    color: #aaaaaa;
+  }

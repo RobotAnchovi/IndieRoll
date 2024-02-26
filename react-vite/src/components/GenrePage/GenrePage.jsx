@@ -17,11 +17,13 @@ const GenrePage = () => {
     const displayGenreName = capitalizeFirstLetter(genreName.replace(/-/g, ' '));
 
     return (
-      <div>
+      <div className="genre-page">
           <h2>{displayGenreName} Movies</h2>
-         <div>
+         <div className="genre-grid">
           {movies.map(movie => (
-            <MovieCard key={movie.id} movie={movie} />
+            <div className="genre-item" key={movie.id}>
+              <MovieCard movie={movie} />
+            </div>
           ))}
         </div>
       </div>
