@@ -11,23 +11,23 @@ Copy code
  justify-content: center;
 }
 
-/* This will style the container of the MovieCard components */
+
 .genre-grid {
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
-  justify-content: center; /* Center the items if they don't fill the full width */
+  justify-content: center;
 }
 
   .genre-item {
     padding: 10px;
-    border-radius: 8px; /* Rounded corners for each item */
+    border-radius: 8px;
   }
 
   .genre-item img {
-    width: 85%; /* Make image take full width of the item */
+    width: 85%;
     height: 250px;
-    border-radius: 8px; /* Rounded corners for the image */
+    border-radius: 8px;
   }
 
   .genre-item {
@@ -37,11 +37,11 @@ Copy code
   .genre-item a {
     color: #ffffff;
     text-decoration: none;
-    display: block; /* Make the link take the full width */
+    display: block;
   }
 
   .genre-item button {
-    background-color: #fae80b; /* Button color */
+    background-color: #fae80b;
     color: black;
     font-style: bold;
     font-size: 14px;
@@ -51,8 +51,8 @@ Copy code
     cursor: pointer;
     border-radius: 4px;
     position: absolute;
-    right: 60px; /* Decrease this value to move the button to the left */
-    top: 25px; /* Rounded corners for button */
+    right: 60px;
+    top: 25px;
   }
 
   .genre-item button:hover {
