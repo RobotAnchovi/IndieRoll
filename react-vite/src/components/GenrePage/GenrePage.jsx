@@ -6,9 +6,9 @@ import { fetchContentByGenre } from '../../redux/content';
 import "./GenrePage.css"
 
 const GenrePage = () => {
-    const { genreName } = useParams();
+  const genreName = useParams().genreName.replace(/-/g, ' ').toLowerCase();
     const dispatch = useDispatch();
-    const movies = useSelector(state => state.content.contents);
+    const movies = useSelector(state => state.content.genreContents[genreName] || []);
 
     useEffect(() => {
       dispatch(fetchContentByGenre(genreName));

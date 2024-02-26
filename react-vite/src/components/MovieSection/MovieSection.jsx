@@ -40,16 +40,16 @@ const MovieSection = ({ title, movies }) => {
   const isRightArrowDisabled = offset >= maxOffset;
 
   // view all button link
-  //   const handleViewAllClick = () => {
-  //     navigate(`/content/${title.toLowerCase().replace(/\s+/g, '-')}`);
-  // };
+    const handleViewAllClick = () => {
+      navigate(`/content/${title.toLowerCase().replace(/\s+/g, '-')}`);
+  };
 
   return (
     <section>
       <h2>{title}</h2>
-      {/* <button onClick={handleViewAllClick} className='viewall'>
+      <button onClick={handleViewAllClick} className='viewall'>
         View All
-      </button> */}
+      </button>
       <div className="movie-section">
         <button
           onClick={handlePrevClick}
