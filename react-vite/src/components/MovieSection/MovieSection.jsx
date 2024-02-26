@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import MovieCard from '../MovieCard';
-import './MovieSection.css';
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import MovieCard from "../MovieCard";
+import "./MovieSection.css";
 
 const CARD_WIDTH = 300; // Adjust this to the actual width of the MovieCard with margins
 
@@ -40,17 +40,17 @@ const MovieSection = ({ title, movies }) => {
   const isRightArrowDisabled = offset >= maxOffset;
 
   // view all button link
-  const handleViewAllClick = () => {
-    navigate(`/content/${title.toLowerCase().replace(/\s+/g, '-')}`);
-};
+  //   const handleViewAllClick = () => {
+  //     navigate(`/content/${title.toLowerCase().replace(/\s+/g, '-')}`);
+  // };
 
   return (
     <section>
       <h2>{title}</h2>
-      <button onClick={handleViewAllClick} className='viewall'>
+      {/* <button onClick={handleViewAllClick} className='viewall'>
         View All
-      </button>
-      <div className='movie-section'>
+      </button> */}
+      <div className="movie-section">
         <button
           onClick={handlePrevClick}
           className="arrow left"
