@@ -6,28 +6,27 @@
   margin-top: 200px;
 }
 .my-movies {
-  max-width: 800px; /* Increased from 600px */
+  max-width: 800px;
   margin-top: 200px;
-  height: 600px; /* Increased from 400px */
+  height: 600px;
   margin: auto;
   color: white;
-  padding: 3rem; /* Increased padding for more space inside */
-  border-radius: 8px;
+  padding: 3rem;
   text-align: center;
-  background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent black background */
+  background-color: rgba(0, 0, 0, 0.7);
   font-family: Arial, Helvetica, sans-serif;
 }
 .user-infos {
-  max-width: 700px; /* Increased from 500px */
+  max-width: 700px;
   display: flex;
   flex-direction: column;
-  height: 500px; /* Increased from 400px */
+  height: 500px;
   margin: auto;
   color: white;
-  padding: 3rem; /* Increased padding for more space inside */
+  padding: 3rem;
   border-radius: 8px;
   text-align: center;
-  background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent black background */
+  background-color: rgba(0, 0, 0, 0.7);
   font-family: Arial, Helvetica, sans-serif;
 }
 .profile-photo {
@@ -57,14 +56,14 @@
 
 .movie-item {
   padding: 10px;
-  border-radius: 8px; /* Rounded corners for each item */
+  border-radius: 8px;
   text-decoration: none;
 }
 
 .movie-item img {
-  width: 100%; /* Make image take full width of the item */
+  width: 100%;
   height: 200px;
-  border-radius: 8px; /* Rounded corners for the image */
+  border-radius: 8px;
 }
 
 .movie-item a {
@@ -78,11 +77,11 @@
 .movie-item-details h3 {
   color: #fae80b;
   text-decoration: none;
-  display: block; /* Make the link take the full width */
+  display: block;
 }
 
 .movie-item-details button {
-  background-color: #fae80b; /* Remove button color */
+  background-color: #fae80b;
   color: black;
   font-style: bold;
   font-size: 14px;
@@ -90,7 +89,7 @@
   padding: 5px 10px;
   margin-top: 5px;
   cursor: pointer;
-  border-radius: 4px; /* Rounded corners for button */
+  border-radius: 4px;
 }
 
 .movie-item-details button:hover {
@@ -135,20 +134,16 @@
 
 @media (max-width: 768px) {
   .profile-page {
-    flex-direction: column; /* Stack flex items vertically */
-    align-items: center; /* Align items in the center horizontally */
-    justify-content: flex-start; /* Align items to the start of the flex container */
-    margin-top: 100px; /* Adjust top margin as needed */
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    margin-top: 100px;
   }
 
   .my-movies,
   .user-infos {
-    max-width: 100%; /* Allow each section to take full width of the screen */
-    margin-top: 20px; /* Adjust space between sections */
-    height: auto; /* Adjust height to fit content */
+    max-width: 100%;
+    margin-top: 20px;
+    height: auto;
   }
-
-  /* If .profile-page is not a direct parent of .my-movies and .user-infos,
-     you might not need to adjust .profile-page styles. Instead, focus on 
-     setting max-width and margin-top for .my-movies and .user-infos as shown. */
 }

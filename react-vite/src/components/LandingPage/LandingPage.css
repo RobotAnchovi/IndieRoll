@@ -7,6 +7,9 @@ body {
   background-size: cover;
 }
 
+.root {
+  height: 100%;
+}
 /* Ensure this class is correctly named as 'body' if it's meant to be an element class,
 but it seems like it might be intended to target the <body> element itself.
 If so, the '.body' selector should be removed, and the styles applied directly to 'body' as done above. */
@@ -15,13 +18,10 @@ If so, the '.body' selector should be removed, and the styles applied directly t
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-around;
-  width: 100%; /* Ensure it takes full width */
-  height: 100vh; /* Viewport height: makes the div take up the whole viewport height */
-}
-
-.root {
-  height: 100%;
+  justify-content: flex-start; /* Adjusted from space-around */
+  width: 100%;
+  height: 100vh;
+  padding-top: 20px; /* Added padding at the top for spacing */
 }
 
 .heading-box {
@@ -30,6 +30,8 @@ If so, the '.body' selector should be removed, and the styles applied directly t
   font-family: Arial, Helvetica, sans-serif;
   color: white;
   margin: auto;
+  padding-top: 300px;
+  padding-bottom: 500px;
 }
 .landing-header {
   font-size: 60px;
@@ -92,4 +94,38 @@ If so, the '.body' selector should be removed, and the styles applied directly t
   text-decoration: none;
   font-family: Arial, Helvetica, sans-serif;
   white-space: nowrap; /* Prevents text from wrapping */
+}
+
+.feature {
+  display: flex;
+  flex-direction: row;
+  justify-content: center; /* Center the content inside the feature */
+  align-items: center;
+  width: 100%; /* Make the feature take full width */
+  background-color: black; /* Ensure the background is black */
+  color: white; /* Assuming you want white text */
+  padding: 20px 0; /* Add some vertical padding */
+}
+
+.feature-image {
+  width: auto; /* Adjusted to auto to maintain aspect ratio */
+  max-width: 500px; /* Ensure it doesn't exceed 500px */
+  height: auto; /* Adjust height to auto to maintain aspect ratio */
+}
+
+.feature-info p {
+  color: white; /* Assuming you want to keep the white text */
+
+  padding-left: 200px; /* Adds space inside the box */
+  padding-right: 200px;
+  border-radius: 8px; /* Optional: adds rounded corners */
+  margin: 20px 0; /* Adds space outside the box, vertically */
+}
+
+.feature-info h2 {
+  color: white;
+  font-size: 30px;
+  margin: 20px 0;
+  padding-left: 200px; /* Adds space inside the box */
+  padding-right: 200px;
 }
