@@ -25,9 +25,9 @@ const fetchContentAction = (contents) => ({
 //   payload: contents,
 // });
 
-const fetchContentByGenreAction = (genre, contents) => ({
+const fetchContentByGenreAction = (genreName, contents) => ({
   type: FETCH_CONTENT_BY_GENRE,
-  payload: { genre, contents },
+  payload: { genreName, contents },
 });
 
 const updateContentAction = (content) => ({
@@ -97,18 +97,18 @@ export const fetchVideoContent = () => async (dispatch) => {
 //     }
 // };
 
-export const fetchContentByGenre = (genreName) => async (dispatch) => {
-  try {
-    const response = await fetch(`/api/content/${genreName}`);
-    if (response.ok) {
-      const contents = await response.json();
-      dispatch(fetchContentByGenreAction(genreName, contents));
-    } else {
-      throw new Error('Failed to fetch genre-specific content');
-    }
-  } catch (error) {
-    console.error('Error fetching content by genre:', error);
+export const fetchContentByGenre = (genreName) => async (dispatch, getState) => {
+
+  if (getState().content.contents.length === 0) {
+    await dispatch(fetchVideoContent());
   }
+
+  const allContents = getState().content.contents;
+  const filteredContents = allContents.filter(content =>
+    content.genre.toLowerCase() === genreName.toLowerCase().replace(/-/g, ' ')
+  );
+
+  dispatch(fetchContentByGenreAction(genreName, filteredContents));
 };
 
 export const updateContent = (contentId, updateData, newThumbnail, newVideo, thumbnailPreview, videoPreview) => async (dispatch) => {
@@ -184,6 +184,7 @@ const initialState = {
   currentContent: null,
   error: '',
   contents: [],
+  genreContents: {},
 };
 
 const contentReducer = (state = initialState, action) => {
@@ -219,7 +220,7 @@ const contentReducer = (state = initialState, action) => {
         ...state,
         genreContents: {
           ...state.genreContents,
-          [action.payload.genre]: action.payload.contents,
+          [action.payload.genreName]: action.payload.contents,
         },
       };
     case FETCH_CONTENT_BY_ID:

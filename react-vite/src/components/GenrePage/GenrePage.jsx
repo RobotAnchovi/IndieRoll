@@ -6,17 +6,19 @@ import { fetchContentByGenre } from '../../redux/content';
 import "./GenrePage.css"
 
 const GenrePage = () => {
-    const { genreName } = useParams();
+  const genreName = useParams().genreName.replace(/-/g, ' ').toLowerCase();
     const dispatch = useDispatch();
-    const movies = useSelector(state => state.content.contents);
+    const movies = useSelector(state => state.content.genreContents[genreName] || []);
 
     useEffect(() => {
       dispatch(fetchContentByGenre(genreName));
     }, [dispatch, genreName]);
 
+    const displayGenreName = capitalizeFirstLetter(genreName.replace(/-/g, ' '));
+
     return (
       <div>
-         <h2>{genreName.replace(/-/g, ' ')} Movies</h2>
+          <h2>{displayGenreName} Movies</h2>
          <div>
           {movies.map(movie => (
             <MovieCard key={movie.id} movie={movie} />
@@ -25,5 +27,9 @@ const GenrePage = () => {
       </div>
     );
   };
+
+  function capitalizeFirstLetter(string) {
+    return string.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+  }
 
   export default GenrePage;
