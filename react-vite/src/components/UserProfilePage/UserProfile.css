@@ -132,3 +132,23 @@
   justify-content: flex-start;
   margin-top: 20px;
 }
+
+@media (max-width: 768px) {
+  .profile-page {
+    flex-direction: column; /* Stack flex items vertically */
+    align-items: center; /* Align items in the center horizontally */
+    justify-content: flex-start; /* Align items to the start of the flex container */
+    margin-top: 100px; /* Adjust top margin as needed */
+  }
+
+  .my-movies,
+  .user-infos {
+    max-width: 100%; /* Allow each section to take full width of the screen */
+    margin-top: 20px; /* Adjust space between sections */
+    height: auto; /* Adjust height to fit content */
+  }
+
+  /* If .profile-page is not a direct parent of .my-movies and .user-infos,
+     you might not need to adjust .profile-page styles. Instead, focus on 
+     setting max-width and margin-top for .my-movies and .user-infos as shown. */
+}
