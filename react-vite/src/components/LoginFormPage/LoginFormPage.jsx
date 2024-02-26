@@ -16,7 +16,14 @@ function LoginFormPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    login(email, password);
+  };
 
+  const loginAsDemoUser = async () => {
+    login('demo@aa.io', 'password');
+  };
+
+  const login = async (email, password) => {
     const serverResponse = await dispatch(
       thunkLogin({
         email,
@@ -27,39 +34,49 @@ function LoginFormPage() {
     if (serverResponse) {
       setErrors(serverResponse);
     } else {
-      navigate("/");
+      navigate("/content");
     }
   };
 
   return (
-    <>
-      <h1>Log In</h1>
-      {errors.length > 0 &&
-        errors.map((message) => <p key={message}>{message}</p>)}
-      <form onSubmit={handleSubmit}>
-        <label>
-          Email
-          <input
-            type="text"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </label>
-        {errors.email && <p>{errors.email}</p>}
-        <label>
-          Password
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </label>
-        {errors.password && <p>{errors.password}</p>}
-        <button type="submit">Log In</button>
-      </form>
-    </>
+    <div className="center-wrapper">
+      <div className="login-form-container">
+        <h1>Log In</h1>
+        {errors.length > 0 &&
+          errors.map((message) => <p key={message}>{message}</p>)}
+        <form onSubmit={handleSubmit} className="login-form">
+          <div className="input-container">
+            <input
+              type="text"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Email"
+              required
+            />
+            {errors.email && <p className="error">{errors.email}</p>}
+          </div>
+          <div className="input-container">
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Password"
+              required
+            />
+            {errors.password && <p className="error">{errors.password}</p>}
+          </div>
+          <button type="submit" className="login-button">
+            Log In
+          </button>
+          <button type="button" onClick={loginAsDemoUser} className="demo-login-button">
+            Login as Demo User
+          </button>
+        </form>
+        <div className="sign-up-link">
+          New to IndieRoll? <a className="sign-up-here" href="/signup">Sign up now.</a>
+        </div>
+      </div>
+    </div>
   );
 }
 

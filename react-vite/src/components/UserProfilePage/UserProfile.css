@@ -1,0 +1,149 @@
+.profile-page {
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 200px;
+}
+.my-movies {
+  max-width: 800px;
+  margin-top: 200px;
+  height: 600px;
+  margin: auto;
+  color: white;
+  padding: 3rem;
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.7);
+  font-family: Arial, Helvetica, sans-serif;
+}
+.user-infos {
+  max-width: 700px;
+  display: flex;
+  flex-direction: column;
+  height: 500px;
+  margin: auto;
+  color: white;
+  padding: 3rem;
+  border-radius: 8px;
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.7);
+  font-family: Arial, Helvetica, sans-serif;
+}
+.profile-photo {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin: 0 auto;
+  margin-bottom: 20px;
+}
+
+.profile-page {
+  color: white;
+  padding: 20px;
+  text-decoration: none;
+}
+
+.profile-page h1 {
+  color: #ffffff;
+  margin-bottom: 20px;
+}
+
+.profile-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.movie-item {
+  padding: 10px;
+  border-radius: 8px;
+  text-decoration: none;
+}
+
+.movie-item img {
+  width: 100%;
+  height: 200px;
+  border-radius: 8px;
+}
+
+.movie-item a {
+  text-decoration: none;
+}
+
+.movie-item-details {
+  margin-top: 10px;
+}
+
+.movie-item-details h3 {
+  color: #fae80b;
+  text-decoration: none;
+  display: block;
+}
+
+.movie-item-details button {
+  background-color: #fae80b;
+  color: black;
+  font-style: bold;
+  font-size: 14px;
+  border: none;
+  padding: 5px 10px;
+  margin-top: 5px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.movie-item-details button:hover {
+  opacity: 0.8;
+}
+
+.profile-page a:hover {
+  text-decoration: underline;
+}
+
+.profile-page p {
+  color: #aaaaaa;
+}
+
+.buttons {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.button {
+  background-color: #fae80b;
+  padding: 13px;
+  border: none;
+  margin-right: 10px;
+  border-radius: 4px;
+  font-weight: bolder;
+  display: flex;
+  gap: 5px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px,
+    rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+}
+
+.button:hover {
+  cursor: pointer;
+}
+
+.button-box {
+  display: flex;
+  justify-content: flex-start;
+  margin-top: 20px;
+}
+
+@media (max-width: 768px) {
+  .profile-page {
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    margin-top: 100px;
+  }
+
+  .my-movies,
+  .user-infos {
+    max-width: 100%;
+    margin-top: 20px;
+    height: auto;
+  }
+}

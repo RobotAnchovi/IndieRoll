@@ -1,0 +1,41 @@
+.login-form-modal {
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+  margin-right: 20px;
+}
+
+.login-form label {
+  display: block;
+  margin-bottom: 10px;
+  color: white;
+}
+
+.login-form input {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  color: white;
+}
+
+.login-button {
+  width: 105%;
+  padding: 1rem;
+  background-color: #fae80b;
+  color: #000000;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bolder;
+}
+
+.close-modal-button {
+  margin-top: 10px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.error {
+  color: red;
+  font-size: 0.8rem;
+}

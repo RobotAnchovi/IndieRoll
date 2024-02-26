@@ -1,0 +1,122 @@
+/* Style for the review form */
+.review-form {
+  max-width: 300px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  height: 400px;
+  margin-top: 100px;
+  margin-left: auto;
+  margin-right: auto;
+  color: white;
+  padding: 2rem;
+  border-radius: 8px;
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.review-form input {
+  background-color: #3f3f3f;
+  color: white;
+  width: 90%;
+}
+/* Style for form elements */
+.review-form label,
+.review-form input,
+.review-form textarea,
+.review-form button {
+  margin-bottom: 10px;
+  border-radius: 5px;
+  padding: 10px;
+  border: none;
+}
+
+/* Style for the submit button */
+.review-form button {
+  background-color: #fae80b; /* Yellow background */
+  color: #000; /* Black text */
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bolder;
+  font-size: 15px;
+  width: 250px;
+}
+
+/* Hover effect for the button */
+.review-form button:hover {
+  opacity: 0.9;
+}
+
+/* Styles for the rating input (you might need to adjust if using a custom star rating component) */
+.review-form .rating {
+  display: flex;
+  justify-content: center; /* Center the stars if they are individual elements */
+}
+
+/* Style for review text area */
+.review-form textarea {
+  height: 100px; /* Adjust height as needed */
+  background-color: #3f3f3f;
+  min-width: 270px;
+}
+/* Style for the reviews list */
+.reviews-list {
+  list-style-type: none; /* Remove default list styling */
+  padding: 0;
+}
+
+/* Style for individual review items */
+.review-item {
+  background-color: white;
+  border-color: #fae80b; /* Adjust color as needed */
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  border: solid;
+}
+
+/* Style for the review text */
+.review-item p {
+  color: black; /* White text */
+  margin-bottom: 5px;
+}
+
+/* Styles for review actions (edit/delete) */
+.review-item .review-actions {
+  display: flex;
+  justify-content: flex-end; /* Align buttons to the right */
+}
+
+.review-item .review-actions button {
+  background-color: #fae80b; /* Yellow background */
+  color: #000; /* Black text */
+  border: none;
+  padding: 5px 10px;
+  margin-left: 5px; /* Space between buttons */
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.review-item .review-actions button:hover {
+  opacity: 0.8;
+}
+h2 {
+  color: #fae80b;
+}
+.reviews-container {
+  display: flex;
+  justify-content: center;
+  background-color: rgba(
+    0,
+    0,
+    0,
+    0.5
+  ); /* Or whatever your background color is */
+  padding: 20px 0; /* Top and bottom padding */
+}
+.rating-stars {
+  color: #fae80b;
+}

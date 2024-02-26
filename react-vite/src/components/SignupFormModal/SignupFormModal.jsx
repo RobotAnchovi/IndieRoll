@@ -12,6 +12,7 @@ function SignupFormModal() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errors, setErrors] = useState({});
   const { closeModal } = useModal();
+  const [isCreator, setIsCreator] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -28,6 +29,7 @@ function SignupFormModal() {
         email,
         username,
         password,
+        is_creator: isCreator,
       })
     );
 
@@ -39,53 +41,72 @@ function SignupFormModal() {
   };
 
   return (
-    <>
+    <div className="signup-form-modal">
       <h1>Sign Up</h1>
-      {errors.server && <p>{errors.server}</p>}
-      <form onSubmit={handleSubmit}>
-        <label>
-          Email
+      {errors.server && <p className="error">{errors.server}</p>}
+      <form onSubmit={handleSubmit} className="signup-form">
+        <div>
+          <label>Email</label>
           <input
-            type="text"
+            type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
           />
-        </label>
-        {errors.email && <p>{errors.email}</p>}
-        <label>
-          Username
+        </div>
+        <div>
+          <label>Username</label>
           <input
             type="text"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             required
           />
-        </label>
-        {errors.username && <p>{errors.username}</p>}
-        <label>
-          Password
+        </div>
+        <div>
+          <label>Password</label>
           <input
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
           />
-        </label>
-        {errors.password && <p>{errors.password}</p>}
-        <label>
-          Confirm Password
+        </div>
+        <div>
+          <label>Confirm Password</label>
           <input
             type="password"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
             required
           />
+        </div>
+        <label>
+          Are you a creator?
+          <input
+            className="is-creator"
+            type="checkbox"
+            checked={isCreator}
+            onChange={(e) => setIsCreator(e.target.checked)}
+          />
         </label>
-        {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
-        <button type="submit">Sign Up</button>
+        <button type="submit" className="signup-button">
+          Sign Up
+        </button>
       </form>
-    </>
+      <button onClick={closeModal} className="close-modal-button">
+        Close
+      </button>
+      <div className="login-link">
+        Already have an account?{" "}
+        <a
+          onClick={() => {
+            /* Handle opening login modal here */
+          }}>
+          Log in
+        </a>
+      </div>
+    </div>
   );
 }
 

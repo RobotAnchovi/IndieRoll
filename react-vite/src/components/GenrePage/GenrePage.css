@@ -1,0 +1,68 @@
+Copy code
+.genre-page {
+  color: white;
+  padding: 20px;
+}
+
+.genre-page h2 {
+    display: flex;
+  color: #fae80b;
+  margin-bottom: 20px;
+ justify-content: center;
+}
+
+
+.genre-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+  .genre-item {
+    padding: 10px;
+    border-radius: 8px;
+  }
+
+  .genre-item img {
+    width: 85%;
+    height: 250px;
+    border-radius: 8px;
+  }
+
+  .genre-item {
+    margin-top: 10px;
+  }
+
+  .genre-item a {
+    color: #ffffff;
+    text-decoration: none;
+    display: block;
+  }
+
+  .genre-item button {
+    background-color: #fae80b;
+    color: black;
+    font-style: bold;
+    font-size: 14px;
+    border: none;
+    padding: 5px 10px;
+    margin-top: 5px;
+    cursor: pointer;
+    border-radius: 4px;
+    position: absolute;
+    right: 60px;
+    top: 25px;
+  }
+
+  .genre-item button:hover {
+    opacity: 0.8;
+  }
+
+  .genre-page a:hover {
+    text-decoration: underline;
+  }
+
+  .genre-page p {
+    color: #aaaaaa;
+  }

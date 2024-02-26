@@ -1,0 +1,41 @@
+html,
+body {
+  height: 100%;
+  margin: 0; /* Removes default margin */
+  padding: 0; /* Removes default padding */
+  font-family: Arial, Helvetica, sans-serif;
+  color: rgb(0, 0, 0);
+
+  /* background-image: url(../../../public/background.jpg); */
+}
+.homepage {
+  background-color: #fae80b;
+}
+
+.homepage h2 {
+  color: black;
+}
+button.viewall {
+  background-color: black;
+  border: none;
+  color: #fae80b;
+  height: 50px;
+  padding-left: 15px;
+  padding-right: 15px;
+  border-radius: 5px;
+  font-weight: bolder;
+}
+
+.title-button {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+  align-items: center;
+}
+.title-button h2 {
+  margin-left: 50px;
+}
+
+.title-button button {
+  margin-right: 50px;
+}

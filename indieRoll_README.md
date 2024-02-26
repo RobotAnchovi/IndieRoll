@@ -117,7 +117,7 @@
 - **Body**:
   ```json
   {
-    "movie_id": 1,
+    "video_id": 1,
     "rating": 5,
     "review_text": "Great movie!"
   }
@@ -145,7 +145,7 @@
 - **Body**:
   ```json
   {
-    "movie_id": 1
+    "video_id": 1
   }
   ```
 - **Success Response**: `201 Created`

@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { thunkLogin } from "../../redux/session";
 import { useDispatch } from "react-redux";
+import { thunkLogin } from "../../redux/session";
 import { useModal } from "../../context/Modal";
 import "./LoginForm.css";
 
@@ -13,14 +13,7 @@ function LoginFormModal() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    const serverResponse = await dispatch(
-      thunkLogin({
-        email,
-        password,
-      })
-    );
-
+    const serverResponse = await dispatch(thunkLogin({ email, password }));
     if (serverResponse) {
       setErrors(serverResponse);
     } else {
@@ -29,10 +22,10 @@ function LoginFormModal() {
   };
 
   return (
-    <>
+    <div className="login-form-modal">
       <h1>Log In</h1>
-      <form onSubmit={handleSubmit}>
-        <label>
+      <form onSubmit={handleSubmit} className="login-form">
+        <label className="login-email">
           Email
           <input
             type="text"
@@ -41,8 +34,8 @@ function LoginFormModal() {
             required
           />
         </label>
-        {errors.email && <p>{errors.email}</p>}
-        <label>
+        {errors.email && <p className="error">{errors.email}</p>}
+        <label className="login-password">
           Password
           <input
             type="password"
@@ -51,10 +44,15 @@ function LoginFormModal() {
             required
           />
         </label>
-        {errors.password && <p>{errors.password}</p>}
-        <button type="submit">Log In</button>
+        {errors.password && <p className="error">{errors.password}</p>}
+        <button type="submit" className="login-button">
+          Log In
+        </button>
       </form>
-    </>
+      <button onClick={closeModal} className="close-modal-button">
+        Close
+      </button>
+    </div>
   );
 }
 

@@ -1,0 +1,62 @@
+.watchlist-page {
+  color: white;
+  padding: 20px;
+}
+
+.watchlist-page h1 {
+  color: #fae80b;
+  margin-bottom: 20px;
+}
+
+.watchlist-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.watchlist-item {
+  padding: 10px;
+  border-radius: 8px; /* Rounded corners for each item */
+}
+
+.watchlist-item img {
+  width: 100%; /* Make image take full width of the item */
+  height: 200px;
+  border-radius: 8px; /* Rounded corners for the image */
+}
+
+.watchlist-item-details {
+  margin-top: 10px;
+}
+
+.watchlist-item-details a {
+  color: #ffffff;
+  text-decoration: none;
+  display: block; /* Make the link take the full width */
+}
+
+.watchlist-item-details button {
+  background-color: #fae80b; /* Remove button color */
+  color: black;
+  font-style: bold;
+  font-size: 14px;
+  border: none;
+  padding: 5px 10px;
+  margin-top: 5px;
+  cursor: pointer;
+  border-radius: 4px; /* Rounded corners for button */
+}
+
+.watchlist-item-details button:hover {
+  opacity: 0.8;
+}
+
+.watchlist-page a:hover {
+  text-decoration: underline;
+}
+
+.watchlist-page p {
+  color: #aaaaaa;
+}
+
+/* Responsive adjustments can be made with media queries if necessary */
