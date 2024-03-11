@@ -12,6 +12,7 @@ import GenrePage from '../components/GenrePage';
 import EditFilm from '../components/EditFilm';
 import UpdateUserProfileForm from '../components/UpdateUserProfileForm';
 import VideoPlayerWrapper from '../components/VideoPlayerWrapper';
+import AboutPage from '../components/About/About';
 
 export const router = createBrowserRouter([
   {
@@ -64,6 +65,10 @@ export const router = createBrowserRouter([
       {
         path: 'watchlist',
         element: <WatchlistPage />,
+      },
+      {
+        path: '/about',
+        element: <AboutPage />,
       },
     ],
   },
