@@ -10,7 +10,7 @@ def seed_videos():
             genre="Drama",
             thumbnail_url="https://indieroll-bucket.s3.us-east-2.amazonaws.com/bob-marley-thumbnail.jpeg",
             video_url="https://indieroll-bucket.s3.us-east-2.amazonaws.com/bob+marley.mp4",
-            user_id=1,
+            user_id=2,
         ),
         VideoContent(
             title="Godzilla and Kong",
