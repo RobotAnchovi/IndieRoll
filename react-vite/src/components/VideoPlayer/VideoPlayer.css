@@ -1,6 +1,22 @@
-/* VideoPlayer.css */
 .video-player {
-    width: 100vw; /* Full width of the viewport */
-    height: 100vh; /* Full height of the viewport */
-    background-color: black; /* Background color for the video player */
+    width: 100vw;
+    height: 100vh;
+    background-color: black;
+  }
+  .video-player-container {
+    position: relative;
+  }
+
+  .back-button {
+    position: absolute;
+    top: 40px;
+    left: 20px;
+    z-index: 10;
+    padding: 10px;
+    background-color: #fae80b;
+    color: #000000;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    font-weight: bolder;
   }

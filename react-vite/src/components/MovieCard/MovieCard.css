@@ -1,73 +1,81 @@
 .movie-card-container {
-  position: relative; /* Container to position the watchlist icon */
+	position: relative; /* Container to position the watchlist icon */
+	margin-bottom: 20px;
 }
 
 .movie-card-link {
-  display: block;
-  text-decoration: none;
-  color: inherit;
+	display: block;
+	text-decoration: none;
+	color: inherit;
 }
 
 .movie-card {
-  width: 300px;
-  overflow: hidden;
-  position: relative; /* Position relative for the overlay */
-  /* border-radius: 5px; */
-  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+	width: 300px;
+	overflow: hidden;
+	position: relative; /* Position relative for the overlay */
+	/* border-radius: 5px; */
+	/* box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px; */
+	box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+	transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* Smooth transition for transform and box-shadow */
+}
+
+.movie-card:hover {
+	transform: scale(1.05); /* Increase size by 5% */
+	box-shadow: rgba(0, 0, 0, 0.3) 0px 20px 40px, rgba(0, 0, 0, 0.24) 0px 8px 8px; /* Optional: Increase box-shadow for more depth */
 }
 
 .movie-thumbnail img {
-  width: 100%;
-  display: block;
-  height: 300px;
+	width: 100%;
+	display: block;
+	height: 300px;
 }
 
 .movie-title {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
-  color: white;
-  padding: 10px;
-  box-sizing: border-box;
-  opacity: 0;
-  transition: opacity 0.3s ease;
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+	color: white;
+	padding: 10px;
+	box-sizing: border-box;
+	opacity: 0;
+	transition: opacity 0.3s ease;
 }
 
 .watchlist-icon {
-  border-radius: 5px;
-  border: 4px solid black;
-  font-size: 15px;
-  padding-top: 3px;
+	border-radius: 5px;
+	border: 4px solid black;
+	font-size: 15px;
+	padding-top: 3px;
 
-  background-color: #fae80b;
-  position: absolute;
-  right: 30px;
-  top: 40px;
-  z-index: 40;
+	background-color: #fae80b;
+	position: absolute;
+	right: 30px;
+	top: 40px;
+	z-index: 40;
 }
 .tooltip-container {
-  position: absolute;
-  right: 30px;
-  top: 10px;
-  z-index: 40;
-  font-weight: bolder;
-  color: white;
-  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+	position: absolute;
+	right: 30px;
+	top: 10px;
+	z-index: 40;
+	font-weight: bolder;
+	color: white;
+	text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
 }
 .watchlist-elements {
-  display: flex;
-  flex-direction: column;
+	display: flex;
+	flex-direction: column;
 }
 .watchlist-elements .tooltip-container {
-  opacity: 0;
+	opacity: 0;
 }
 .watchlist-elements:hover .tooltip-container {
-  opacity: 80%;
+	opacity: 80%;
 }
 .movie-card:hover .movie-title,
 .movie-card:hover .watchlist-icon {
-  opacity: 1; /* Show the title and icon on hover */
+	opacity: 1; /* Show the title and icon on hover */
 }
 
 /* Add additional styles for the AddIcon if needed */

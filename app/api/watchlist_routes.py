@@ -12,11 +12,9 @@ def add_to_watchlist():
     data = request.get_json()
     video_id = data.get('video_id')
 
-
     video = VideoContent.query.get(video_id)
     if not video:
         return jsonify({"error": "Video not found"}), 404
-
 
     existing_watchlist_item = Watchlist.query.filter_by(user_id=user_id, video_id=video_id).first()
     if existing_watchlist_item:
