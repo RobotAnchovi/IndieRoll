@@ -1,6 +1,11 @@
 import './VideoPlayer.css';
 
 const VideoPlayer = ({ src }) => {
+
+  const handleBackClick = () => {
+    window.history.back();
+  };
+
   // Function to request full-screen mode
   const goFullScreen = (event) => {
     const videoElement = event.target;
@@ -19,6 +24,10 @@ const VideoPlayer = ({ src }) => {
   };
 
   return (
+    <div className="video-player-container">
+    <button className="back-button" onClick={handleBackClick}>
+      Back
+    </button>
     <video
       className="video-player"
       controls
@@ -38,6 +47,7 @@ const VideoPlayer = ({ src }) => {
       <source src={src} type="video/mp4" />
       Your browser does not support the video tag.
     </video>
+  </div>
   );
 };
 
