@@ -1,0 +1,92 @@
+body {
+	margin: 0;
+	padding: 10px;
+	/* Adjust the gradient to give more space to the black color */
+	background: linear-gradient(
+		0deg,
+		rgba(250, 232, 11, 0.9) 50%,
+		rgba(0, 0, 0, 0.7) 70%
+	);
+
+	min-height: 100vh; /* Ensure at least full viewport height */
+	height: auto; /* Allow body to extend based on content */
+}
+
+.about-title,
+.about-description {
+	color: white;
+	width: 400px;
+}
+
+.about {
+	display: flex;
+	flex-direction: column;
+	align-items: start;
+	margin-left: 150px;
+	margin-top: 75px;
+}
+
+.technologies {
+	display: flex;
+	flex-direction: column;
+	align-items: start;
+	margin-left: 150px;
+	margin-top: 75px;
+}
+
+.technology-title {
+	color: black;
+}
+
+.tech-list {
+	display: flex;
+	gap: 30px;
+	overflow: auto;
+	flex-wrap: wrap; /* Add this line to allow the items to wrap into a new row */
+}
+
+.tech-list li {
+	/* border: solid black 3px; */
+	list-style: none;
+	width: 80px;
+	padding: 5px;
+
+	text-align: center;
+	background-color: white;
+	font-weight: bolder;
+}
+
+.contributor-title {
+	margin-left: 150px;
+	color: black;
+}
+
+.contributor-container {
+	margin-left: 150px;
+	display: grid;
+	grid-template-columns: repeat(2, 1fr); /* Create two columns of equal width */
+	gap: 20px;
+}
+.contributor-name {
+	font-size: large;
+	font-weight: bolder;
+}
+.contributor {
+	display: flex;
+	flex-direction: column;
+	font-weight: bolder;
+	gap: 20px;
+	padding: 10px;
+}
+.socials {
+	display: flex;
+	gap: 10px;
+}
+.socials a {
+	border: solid black 3px;
+	background-color: black;
+	color: rgba(250, 232, 11, 1);
+	padding: 5px;
+	border-radius: 4px;
+	text-decoration: none;
+}
